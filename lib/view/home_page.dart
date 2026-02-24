@@ -26,6 +26,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final todayStr = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    final isCompletedKey = 'todays_words_completed_$todayStr';
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -76,12 +79,9 @@ class _HomePageState extends State<HomePage> {
 
                 // 2. 메인 배너 (오늘의 학습)
                 ValueListenableBuilder(
-                  valueListenable: Hive.box(DatabaseService.sessionBoxName).listenable(keys: [
-                    'todays_words_completed_${DateFormat('yyyy-MM-dd').format(DateTime.now())}'
-                  ]),
+                  valueListenable: Hive.box(DatabaseService.sessionBoxName).listenable(keys: [isCompletedKey]),
                   builder: (context, box, child) {
-                    final todayStr = DateFormat('yyyy-MM-dd').format(DateTime.now());
-                    final bool isCompleted = box.get('todays_words_completed_$todayStr', defaultValue: false);
+                    final bool isCompleted = box.get(isCompletedKey, defaultValue: false);
 
                     return GestureDetector(
                       onTap: () async {
@@ -93,8 +93,8 @@ class _HomePageState extends State<HomePage> {
                             MaterialPageRoute(
                               builder: (context) => WordListPage(
                                 level: isCompleted ? '오늘의 단어 복습' : '오늘의 단어',
-                                day: 0,
-                                words: todaysWords,
+                                initialDayIndex: 0,
+                                allDayChunks: [todaysWords],
                               ),
                             ),
                           );

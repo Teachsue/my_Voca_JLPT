@@ -15,7 +15,9 @@ class StudyViewModel extends ChangeNotifier {
   String? _currentSessionKey;
 
   // Getters
-  Word? get currentWord => (_words.isNotEmpty && _currentIndex < _words.length) ? _words[_currentIndex] : null;
+  Word? get currentWord => (_words.isNotEmpty && _currentIndex < _words.length)
+      ? _words[_currentIndex]
+      : null;
   List<Word> get currentOptionWords => _currentOptionWords;
   List<String?> get userAnswers => _userAnswers;
   List<Word> get sessionWords => _words;
@@ -35,13 +37,19 @@ class StudyViewModel extends ChangeNotifier {
     final box = Hive.box(DatabaseService.sessionBoxName);
     final key = _generateSessionKey(level, day);
     final data = box.get(key);
-    if (data != null && data['currentIndex'] > 0) return Map<String, dynamic>.from(data);
+    if (data != null && data['currentIndex'] > 0)
+      return Map<String, dynamic>.from(data);
     return null;
   }
 
-  Future<void> loadWords(int level, {int? questionCount, int? day, List<Word>? initialWords}) async {
+  Future<void> loadWords(
+    int level, {
+    int? questionCount,
+    int? day,
+    List<Word>? initialWords,
+  }) async {
     _currentSessionKey = _generateSessionKey(level, day);
-    
+
     if (initialWords != null) {
       _words = List<Word>.from(initialWords)..shuffle();
     } else {
@@ -50,7 +58,7 @@ class StudyViewModel extends ChangeNotifier {
       int count = questionCount ?? 10;
       _words = allWords.take(count).toList();
     }
-    
+
     _currentIndex = 0;
     _score = 0;
     _isAnswered = false;
@@ -64,7 +72,7 @@ class StudyViewModel extends ChangeNotifier {
     final box = Hive.box(DatabaseService.sessionBoxName);
     final today = DateTime.now().toString().split(' ')[0];
     final sessionKey = 'todays_words_$today';
-    
+
     final savedIds = box.get(sessionKey);
     final wordsBox = Hive.box<Word>(DatabaseService.boxName);
     List<Word> todaysWords = [];
@@ -92,7 +100,7 @@ class StudyViewModel extends ChangeNotifier {
   void resumeSession(Map<String, dynamic> sessionData) {
     final wordIds = List<int>.from(sessionData['wordIds']);
     final box = Hive.box<Word>(DatabaseService.boxName);
-    
+
     _words = [];
     final allWords = box.values.toList();
     for (var id in wordIds) {
@@ -104,7 +112,7 @@ class StudyViewModel extends ChangeNotifier {
     _currentIndex = sessionData['currentIndex'];
     _score = sessionData['score'];
     _currentSessionKey = sessionData['sessionKey'];
-    
+
     // 저장된 답변 이력이 있으면 복구, 없으면 새로 생성
     if (sessionData['userAnswers'] != null) {
       _userAnswers = List<String?>.from(sessionData['userAnswers']);
@@ -114,7 +122,7 @@ class StudyViewModel extends ChangeNotifier {
 
     _isAnswered = false;
     _selectedAnswer = null;
-    
+
     if (_words.isNotEmpty && !isFinished) _generateOptions();
     notifyListeners();
   }
@@ -122,7 +130,7 @@ class StudyViewModel extends ChangeNotifier {
   void _generateOptions() {
     if (currentWord == null) return;
     final correctWord = currentWord!;
-    
+
     // 레벨이 0(오늘의 단어)이면 전체에서, 아니면 해당 레벨에서 보기를 가져옴
     List<Word> allWords;
     if (correctWord.level == 0 || correctWord.level < 1) {
@@ -132,7 +140,9 @@ class StudyViewModel extends ChangeNotifier {
     }
 
     final distractors = allWords
-        .where((w) => w.id != correctWord.id && w.meaning != correctWord.meaning)
+        .where(
+          (w) => w.id != correctWord.id && w.meaning != correctWord.meaning,
+        )
         .toList();
     distractors.shuffle();
 
@@ -193,7 +203,8 @@ class StudyViewModel extends ChangeNotifier {
   }
 
   void _clearSession() {
-    if (_currentSessionKey != null) Hive.box(DatabaseService.sessionBoxName).delete(_currentSessionKey);
+    if (_currentSessionKey != null)
+      Hive.box(DatabaseService.sessionBoxName).delete(_currentSessionKey);
   }
 
   // 오늘의 단어 학습 완료 기록

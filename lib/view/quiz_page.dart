@@ -54,6 +54,12 @@ class _QuizPageState extends State<QuizPage> {
         ),
       );
 
+      if (resume == null) {
+        // 팝업 바깥을 눌러서 닫은 경우 이전 화면으로 돌아감
+        if (mounted) Navigator.pop(context);
+        return;
+      }
+
       if (resume == true) {
         _viewModel.resumeSession(savedSession);
       } else {
@@ -298,11 +304,13 @@ class _QuizPageState extends State<QuizPage> {
                         style: const TextStyle(fontSize: 44, fontWeight: FontWeight.bold, color: Color(0xFF2D3142)),
                       ),
                       const SizedBox(height: 8),
-                      Opacity(
-                        opacity: viewModel.isAnswered ? 1.0 : 0.0,
-                        child: Text(
-                          '[ ${viewModel.currentWord!.koreanPronunciation} ]',
-                          style: const TextStyle(fontSize: 16, color: Color(0xFF5B86E5), fontWeight: FontWeight.w600),
+                      // 한국어 발음을 상시 노출하도록 수정 (정답 확인 후에도 위치 유지)
+                      Text(
+                        '[ ${viewModel.currentWord!.koreanPronunciation} ]',
+                        style: TextStyle(
+                          fontSize: 16, 
+                          color: viewModel.isAnswered ? const Color(0xFF5B86E5) : Colors.blueGrey.withValues(alpha: 0.6), 
+                          fontWeight: FontWeight.w600
                         ),
                       ),
                     ],

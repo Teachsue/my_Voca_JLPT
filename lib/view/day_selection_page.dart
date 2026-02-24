@@ -28,6 +28,9 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
     final int levelInt = int.parse(widget.level.replaceAll(RegExp(r'[^0-9]'), ''));
     final List<Word> allWords = DatabaseService.getWordsByLevel(levelInt);
 
+    // 단어들을 랜덤하게 섞음
+    allWords.shuffle();
+
     final List<List<Word>> chunks = [];
     for (int i = 0; i < allWords.length; i += 20) {
       int end = (i + 20 < allWords.length) ? i + 20 : allWords.length;
@@ -118,8 +121,8 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
           MaterialPageRoute(
             builder: (context) => WordListPage(
               level: widget.level,
-              day: day,
-              words: words,
+              initialDayIndex: day - 1,
+              allDayChunks: _allDayChunks,
             ),
           ),
         );
