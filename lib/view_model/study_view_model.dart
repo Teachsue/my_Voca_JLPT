@@ -10,14 +10,12 @@ class StudyViewModel extends ChangeNotifier {
   bool _isAnswered = false;
   bool _isCorrect = false;
   String? _selectedAnswer;
-  List<String> _currentOptions = [];
+  List<Word> _currentOptionWords = []; // String 대신 Word 객체 리스트로 변경
   String? _currentSessionKey;
 
   // Getters
-  Word? get currentWord => (_words.isNotEmpty && _currentIndex < _words.length)
-      ? _words[_currentIndex]
-      : null;
-  List<String> get currentOptions => _currentOptions;
+  Word? get currentWord => (_words.isNotEmpty && _currentIndex < _words.length) ? _words[_currentIndex] : null;
+  List<Word> get currentOptionWords => _currentOptionWords;
   bool get isAnswered => _isAnswered;
   bool get isCorrect => _isCorrect;
   String? get selectedAnswer => _selectedAnswer;
@@ -26,19 +24,15 @@ class StudyViewModel extends ChangeNotifier {
   int get currentIndex => _currentIndex;
   bool get isFinished => _words.isNotEmpty && _currentIndex >= _words.length;
 
-  // 세션 키 생성 (레벨 + DAY 혹은 레벨 전용)
   String _generateSessionKey(int level, int? day) {
     return day == null ? 'quiz_level_$level' : 'quiz_level_${level}_day_$day';
   }
 
-  // 저장된 세션이 있는지 확인 (1문제 초과로 풀었을 때만)
   Map<String, dynamic>? getSavedSession(int level, int? day) {
     final box = Hive.box(DatabaseService.sessionBoxName);
     final key = _generateSessionKey(level, day);
     final data = box.get(key);
-    if (data != null && data['currentIndex'] > 0) {
-      return Map<String, dynamic>.from(data);
-    }
+    if (data != null && data['currentIndex'] > 0) return Map<String, dynamic>.from(data);
     return null;
   }
 
@@ -46,10 +40,8 @@ class StudyViewModel extends ChangeNotifier {
     _currentSessionKey = _generateSessionKey(level, day);
     
     if (initialWords != null) {
-      // 특정 DAY 단어들로 퀴즈 (랜덤 섞기)
       _words = List<Word>.from(initialWords)..shuffle();
     } else {
-      // 레벨 전체 단어들 중 랜덤 추출
       final allWords = DatabaseService.getWordsByLevel(level);
       allWords.shuffle();
       int count = questionCount ?? 10;
@@ -63,12 +55,40 @@ class StudyViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // 세션 복구
+  // 오늘의 단어 로드 (전체 레벨 랜덤 10개)
+  Future<List<Word>> loadTodaysWords() async {
+    final box = Hive.box(DatabaseService.sessionBoxName);
+    final today = DateTime.now().toString().split(' ')[0];
+    final sessionKey = 'todays_words_$today';
+    
+    final savedIds = box.get(sessionKey);
+    final wordsBox = Hive.box<Word>(DatabaseService.boxName);
+    List<Word> todaysWords = [];
+
+    if (savedIds != null) {
+      final List<int> ids = List<int>.from(savedIds);
+      final allWords = wordsBox.values.toList();
+      for (var id in ids) {
+        try {
+          todaysWords.add(allWords.firstWhere((w) => w.id == id));
+        } catch (e) {}
+      }
+    }
+
+    if (todaysWords.isEmpty) {
+      final allWords = wordsBox.values.toList();
+      allWords.shuffle();
+      todaysWords = allWords.take(10).toList();
+      box.put(sessionKey, todaysWords.map((w) => w.id).toList());
+    }
+
+    return todaysWords;
+  }
+
   void resumeSession(Map<String, dynamic> sessionData) {
     final wordIds = List<int>.from(sessionData['wordIds']);
     final box = Hive.box<Word>(DatabaseService.boxName);
     
-    // ID로 단어 복구
     _words = [];
     final allWords = box.values.toList();
     for (var id in wordIds) {
@@ -83,27 +103,29 @@ class StudyViewModel extends ChangeNotifier {
     _isAnswered = false;
     _selectedAnswer = null;
     
-    if (_words.isNotEmpty && !isFinished) {
-      _generateOptions();
-    }
+    if (_words.isNotEmpty && !isFinished) _generateOptions();
     notifyListeners();
   }
 
   void _generateOptions() {
     if (currentWord == null) return;
-    final correct = currentWord!.meaning;
-    // 오답 보기는 해당 레벨 전체에서 가져옴
-    final allWords = DatabaseService.getWordsByLevel(currentWord!.level);
+    final correctWord = currentWord!;
+    
+    // 레벨이 0(오늘의 단어)이면 전체에서, 아니면 해당 레벨에서 보기를 가져옴
+    List<Word> allWords;
+    if (correctWord.level == 0 || correctWord.level < 1) {
+      allWords = Hive.box<Word>(DatabaseService.boxName).values.toList();
+    } else {
+      allWords = DatabaseService.getWordsByLevel(correctWord.level);
+    }
 
     final distractors = allWords
-        .where((w) => w.meaning != correct)
-        .map((w) => w.meaning)
-        .toSet() // 중복 제거
+        .where((w) => w.id != correctWord.id && w.meaning != correctWord.meaning)
         .toList();
     distractors.shuffle();
 
-    _currentOptions = [correct, ...distractors.take(3)];
-    _currentOptions.shuffle();
+    _currentOptionWords = [correctWord, ...distractors.take(3)];
+    _currentOptionWords.shuffle();
   }
 
   void submitAnswer(String answer) {
@@ -120,11 +142,16 @@ class StudyViewModel extends ChangeNotifier {
       currentWord!.incorrectCount++;
     }
     currentWord!.save();
-    
-    // 퀴즈 진행 상황 저장 (1문제 이상 풀었을 때)
+    _updateDailyStudyCount();
     _saveCurrentSession();
-    
     notifyListeners();
+  }
+
+  void _updateDailyStudyCount() {
+    final box = Hive.box(DatabaseService.sessionBoxName);
+    final today = DateTime.now().toString().split(' ')[0];
+    final currentCount = box.get('study_count_$today', defaultValue: 0);
+    box.put('study_count_$today', currentCount + 1);
   }
 
   void _saveCurrentSession() {
@@ -142,21 +169,24 @@ class StudyViewModel extends ChangeNotifier {
     _currentIndex++;
     _isAnswered = false;
     _selectedAnswer = null;
-    
     if (!isFinished) {
       _generateOptions();
-      _saveCurrentSession(); // 다음 문제로 넘어갈 때 인덱스 업데이트
+      _saveCurrentSession();
     } else {
-      // 퀴즈 종료 시 세션 삭제
       _clearSession();
     }
     notifyListeners();
   }
 
   void _clearSession() {
-    if (_currentSessionKey != null) {
-      Hive.box(DatabaseService.sessionBoxName).delete(_currentSessionKey);
-    }
+    if (_currentSessionKey != null) Hive.box(DatabaseService.sessionBoxName).delete(_currentSessionKey);
+  }
+
+  // 오늘의 단어 학습 완료 기록
+  void markTodaysWordsAsCompleted() {
+    final box = Hive.box(DatabaseService.sessionBoxName);
+    final today = DateTime.now().toString().split(' ')[0];
+    box.put('todays_words_completed_$today', true);
   }
 
   void restart() {

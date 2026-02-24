@@ -94,7 +94,7 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
       body: filteredDays.isEmpty
           ? const Center(child: Text('검색 결과가 없습니다.'))
           : GridView.builder(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 60), // 하단 패딩 60으로 증설
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
                 crossAxisSpacing: 12,
