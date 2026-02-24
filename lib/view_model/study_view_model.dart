@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'dart:math';
 import '../model/word.dart';
 import '../service/database_service.dart';
 
+enum QuizType { kanjiToMeaning, meaningToKanji, meaningToKana }
+
 class StudyViewModel extends ChangeNotifier {
   List<Word> _words = [];
+  List<QuizType> _quizTypes = []; // 각 문제의 유형 저장
   int _currentIndex = 0;
   int _score = 0;
   bool _isAnswered = false;
   bool _isCorrect = false;
   String? _selectedAnswer;
   List<Word> _currentOptionWords = [];
-  List<String?> _userAnswers = []; // 사용자가 선택한 답변 이력 저장
+  List<String?> _userAnswers = [];
   String? _currentSessionKey;
 
   // Getters
-  Word? get currentWord => (_words.isNotEmpty && _currentIndex < _words.length)
-      ? _words[_currentIndex]
-      : null;
+  Word? get currentWord => (_words.isNotEmpty && _currentIndex < _words.length) ? _words[_currentIndex] : null;
+  QuizType? get currentQuizType => (_quizTypes.isNotEmpty && _currentIndex < _quizTypes.length) ? _quizTypes[_currentIndex] : null;
   List<Word> get currentOptionWords => _currentOptionWords;
   List<String?> get userAnswers => _userAnswers;
   List<Word> get sessionWords => _words;
@@ -37,19 +40,16 @@ class StudyViewModel extends ChangeNotifier {
     final box = Hive.box(DatabaseService.sessionBoxName);
     final key = _generateSessionKey(level, day);
     final data = box.get(key);
-    if (data != null && data['currentIndex'] > 0)
-      return Map<String, dynamic>.from(data);
+    if (data != null && data['currentIndex'] > 0) return Map<String, dynamic>.from(data);
     return null;
   }
 
-  Future<void> loadWords(
-    int level, {
-    int? questionCount,
-    int? day,
-    List<Word>? initialWords,
-  }) async {
+  Future<void> loadWords(int level, {int? questionCount, int? day, List<Word>? initialWords}) async {
     _currentSessionKey = _generateSessionKey(level, day);
-
+    
+    // 새로 시작하므로 기존에 저장된 해당 세션 기록을 삭제
+    _clearSession();
+    
     if (initialWords != null) {
       _words = List<Word>.from(initialWords)..shuffle();
     } else {
@@ -58,21 +58,24 @@ class StudyViewModel extends ChangeNotifier {
       int count = questionCount ?? 10;
       _words = allWords.take(count).toList();
     }
-
+    
+    // 문제 유형 랜덤 배정
+    _quizTypes = List.generate(_words.length, (_) => QuizType.values[Random().nextInt(QuizType.values.length)]);
+    
     _currentIndex = 0;
     _score = 0;
     _isAnswered = false;
-    _userAnswers = List.filled(_words.length, null); // 이력 초기화
+    _userAnswers = List.filled(_words.length, null);
     if (_words.isNotEmpty) _generateOptions();
     notifyListeners();
   }
 
-  // 오늘의 단어 로드 (전체 레벨 랜덤 10개)
+  // 오늘의 단어 로드
   Future<List<Word>> loadTodaysWords() async {
     final box = Hive.box(DatabaseService.sessionBoxName);
     final today = DateTime.now().toString().split(' ')[0];
     final sessionKey = 'todays_words_$today';
-
+    
     final savedIds = box.get(sessionKey);
     final wordsBox = Hive.box<Word>(DatabaseService.boxName);
     List<Word> todaysWords = [];
@@ -100,7 +103,7 @@ class StudyViewModel extends ChangeNotifier {
   void resumeSession(Map<String, dynamic> sessionData) {
     final wordIds = List<int>.from(sessionData['wordIds']);
     final box = Hive.box<Word>(DatabaseService.boxName);
-
+    
     _words = [];
     final allWords = box.values.toList();
     for (var id in wordIds) {
@@ -109,11 +112,17 @@ class StudyViewModel extends ChangeNotifier {
       } catch (e) {}
     }
 
+    // 유형 복구 (없으면 랜덤 생성)
+    if (sessionData['quizTypes'] != null) {
+      _quizTypes = (sessionData['quizTypes'] as List).map((e) => QuizType.values[e]).toList();
+    } else {
+      _quizTypes = List.generate(_words.length, (_) => QuizType.values[Random().nextInt(QuizType.values.length)]);
+    }
+
     _currentIndex = sessionData['currentIndex'];
     _score = sessionData['score'];
     _currentSessionKey = sessionData['sessionKey'];
-
-    // 저장된 답변 이력이 있으면 복구, 없으면 새로 생성
+    
     if (sessionData['userAnswers'] != null) {
       _userAnswers = List<String?>.from(sessionData['userAnswers']);
     } else {
@@ -122,16 +131,16 @@ class StudyViewModel extends ChangeNotifier {
 
     _isAnswered = false;
     _selectedAnswer = null;
-
+    
     if (_words.isNotEmpty && !isFinished) _generateOptions();
     notifyListeners();
   }
 
   void _generateOptions() {
-    if (currentWord == null) return;
+    if (currentWord == null || currentQuizType == null) return;
     final correctWord = currentWord!;
-
-    // 레벨이 0(오늘의 단어)이면 전체에서, 아니면 해당 레벨에서 보기를 가져옴
+    final type = currentQuizType!;
+    
     List<Word> allWords;
     if (correctWord.level == 0 || correctWord.level < 1) {
       allWords = Hive.box<Word>(DatabaseService.boxName).values.toList();
@@ -139,13 +148,17 @@ class StudyViewModel extends ChangeNotifier {
       allWords = DatabaseService.getWordsByLevel(correctWord.level);
     }
 
-    final distractors = allWords
-        .where(
-          (w) => w.id != correctWord.id && w.meaning != correctWord.meaning,
-        )
-        .toList();
+    // 유형별로 중복되지 않는 보기 추출 로직
+    final distractors = allWords.where((w) {
+      if (w.id == correctWord.id) return false;
+      switch (type) {
+        case QuizType.kanjiToMeaning: return w.meaning != correctWord.meaning;
+        case QuizType.meaningToKanji: return w.kanji != correctWord.kanji;
+        case QuizType.meaningToKana: return w.kana != correctWord.kana;
+      }
+    }).toList();
+    
     distractors.shuffle();
-
     _currentOptionWords = [correctWord, ...distractors.take(3)];
     _currentOptionWords.shuffle();
   }
@@ -154,9 +167,17 @@ class StudyViewModel extends ChangeNotifier {
     if (_isAnswered || currentWord == null) return;
     _isAnswered = true;
     _selectedAnswer = answer;
-    _userAnswers[_currentIndex] = answer; // 답변 저장
+    _userAnswers[_currentIndex] = answer;
 
-    if (answer == currentWord!.meaning) {
+    // 유형에 따른 정답 체크
+    bool correct = false;
+    switch (currentQuizType!) {
+      case QuizType.kanjiToMeaning: correct = answer == currentWord!.meaning; break;
+      case QuizType.meaningToKanji: correct = answer == currentWord!.kanji; break;
+      case QuizType.meaningToKana: correct = answer == currentWord!.kana; break;
+    }
+
+    if (correct) {
       _isCorrect = true;
       _score++;
       currentWord!.correctCount++;
@@ -183,9 +204,10 @@ class StudyViewModel extends ChangeNotifier {
     box.put(_currentSessionKey, {
       'sessionKey': _currentSessionKey,
       'wordIds': _words.map((w) => w.id).toList(),
+      'quizTypes': _quizTypes.map((e) => e.index).toList(), // 유형 인덱스 저장
       'currentIndex': _currentIndex,
       'score': _score,
-      'userAnswers': _userAnswers, // 선택 이력 추가 저장
+      'userAnswers': _userAnswers,
     });
   }
 
@@ -203,11 +225,9 @@ class StudyViewModel extends ChangeNotifier {
   }
 
   void _clearSession() {
-    if (_currentSessionKey != null)
-      Hive.box(DatabaseService.sessionBoxName).delete(_currentSessionKey);
+    if (_currentSessionKey != null) Hive.box(DatabaseService.sessionBoxName).delete(_currentSessionKey);
   }
 
-  // 오늘의 단어 학습 완료 기록
   void markTodaysWordsAsCompleted() {
     final box = Hive.box(DatabaseService.sessionBoxName);
     final today = DateTime.now().toString().split(' ')[0];
@@ -217,6 +237,8 @@ class StudyViewModel extends ChangeNotifier {
   void restart() {
     _clearSession();
     _words.shuffle();
+    // 다시 시작할 때 유형도 랜덤 재배정
+    _quizTypes = List.generate(_words.length, (_) => QuizType.values[Random().nextInt(QuizType.values.length)]);
     _currentIndex = 0;
     _score = 0;
     _isAnswered = false;

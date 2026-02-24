@@ -55,7 +55,6 @@ class _QuizPageState extends State<QuizPage> {
       );
 
       if (resume == null) {
-        // 팝업 바깥을 눌러서 닫은 경우 이전 화면으로 돌아감
         if (mounted) Navigator.pop(context);
         return;
       }
@@ -121,7 +120,7 @@ class _QuizPageState extends State<QuizPage> {
                 const SizedBox(height: 10),
                 Icon(
                   isPerfect ? Icons.workspace_premium_rounded : Icons.fitness_center_rounded,
-                  size: 80, // 아이콘 사이즈 축소
+                  size: 80,
                   color: isPerfect ? Colors.orange : Colors.blueGrey,
                 ),
                 const SizedBox(height: 20),
@@ -131,15 +130,11 @@ class _QuizPageState extends State<QuizPage> {
                   style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 12),
-                // 맞춘 개수 빨간색으로 강조
                 RichText(
                   text: TextSpan(
                     style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.grey),
                     children: [
-                      TextSpan(
-                        text: '${viewModel.score}',
-                        style: const TextStyle(color: Colors.redAccent),
-                      ),
+                      TextSpan(text: '${viewModel.score}', style: const TextStyle(color: Colors.redAccent)),
                       TextSpan(text: ' / ${viewModel.total}'),
                     ],
                   ),
@@ -162,11 +157,12 @@ class _QuizPageState extends State<QuizPage> {
                     ],
                   ),
                   const SizedBox(height: 16),
-                  // 오답 리스트
                   ...List.generate(viewModel.sessionWords.length, (index) {
                     final word = viewModel.sessionWords[index];
                     final userAnswer = viewModel.userAnswers[index];
-                    final isCorrect = userAnswer == word.meaning;
+                    
+                    // 정답 체크 (유형에 상관없이 뜻으로 일단 표시)
+                    final isCorrect = userAnswer == word.meaning || userAnswer == word.kanji || userAnswer == word.kana;
 
                     if (isCorrect) return const SizedBox.shrink();
 
@@ -176,8 +172,8 @@ class _QuizPageState extends State<QuizPage> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: Colors.redAccent.withOpacity(0.1), width: 1),
-                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8, offset: const Offset(0, 2))],
+                        border: Border.all(color: Colors.redAccent.withValues(alpha: 0.1), width: 1),
+                        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8, offset: const Offset(0, 2))],
                       ),
                       child: Row(
                         children: [
@@ -187,12 +183,11 @@ class _QuizPageState extends State<QuizPage> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // 단어 정보 (한글 발음 추가)
                                 Row(
                                   children: [
                                     Text('${word.kanji} (${word.kana})', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                                     const SizedBox(width: 8),
-                                    Text('[${word.koreanPronunciation}]', style: TextStyle(fontSize: 13, color: Colors.indigo.withOpacity(0.6))),
+                                    Text('[${word.koreanPronunciation}]', style: TextStyle(fontSize: 13, color: Colors.indigo.withValues(alpha: 0.6))),
                                   ],
                                 ),
                                 const SizedBox(height: 6),
@@ -248,6 +243,8 @@ class _QuizPageState extends State<QuizPage> {
 
   Widget _buildQuizView(BuildContext context, StudyViewModel viewModel) {
     final bool isLast = viewModel.currentIndex == viewModel.total - 1;
+    final word = viewModel.currentWord!;
+    final type = viewModel.currentQuizType!;
 
     return Column(
       children: [
@@ -282,6 +279,7 @@ class _QuizPageState extends State<QuizPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 10),
+                // 문제 카드 UI (유형별 분기)
                 Container(
                   height: 160,
                   alignment: Alignment.center,
@@ -289,35 +287,32 @@ class _QuizPageState extends State<QuizPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 12, offset: const Offset(0, 4))],
+                    boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 12, offset: const Offset(0, 4))],
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        viewModel.isAnswered ? viewModel.currentWord!.kana : ' ',
-                        style: TextStyle(fontSize: 16, color: Colors.grey[500], letterSpacing: 1.5),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        viewModel.currentWord!.kanji,
-                        style: const TextStyle(fontSize: 44, fontWeight: FontWeight.bold, color: Color(0xFF2D3142)),
-                      ),
-                      const SizedBox(height: 8),
-                      // 한국어 발음을 상시 노출하도록 수정 (정답 확인 후에도 위치 유지)
-                      Text(
-                        '[ ${viewModel.currentWord!.koreanPronunciation} ]',
-                        style: TextStyle(
-                          fontSize: 16, 
-                          color: viewModel.isAnswered ? const Color(0xFF5B86E5) : Colors.blueGrey.withValues(alpha: 0.6), 
-                          fontWeight: FontWeight.w600
-                        ),
-                      ),
+                      if (type == QuizType.kanjiToMeaning) ...[
+                        Text(viewModel.isAnswered ? word.kana : ' ', style: TextStyle(fontSize: 16, color: Colors.grey[500], letterSpacing: 1.5)),
+                        const SizedBox(height: 4),
+                        Text(word.kanji, style: const TextStyle(fontSize: 44, fontWeight: FontWeight.bold, color: Color(0xFF2D3142))),
+                        const SizedBox(height: 8),
+                        Text('[ ${word.koreanPronunciation} ]', style: TextStyle(fontSize: 16, color: viewModel.isAnswered ? const Color(0xFF5B86E5) : Colors.blueGrey.withValues(alpha: 0.6), fontWeight: FontWeight.w600)),
+                      ] else ...[
+                        // 뜻을 보여주고 한자나 히라가나를 맞히는 유형
+                        const Text('다음 뜻에 맞는 단어는?', style: TextStyle(fontSize: 14, color: Colors.blueGrey, fontWeight: FontWeight.w500)),
+                        const SizedBox(height: 12),
+                        Text(word.meaning, textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Color(0xFF2D3142))),
+                        if (viewModel.isAnswered) ...[
+                          const SizedBox(height: 8),
+                          Text('${word.kanji} (${word.kana})', style: const TextStyle(fontSize: 16, color: Color(0xFF5B86E5), fontWeight: FontWeight.w600)),
+                        ],
+                      ],
                     ],
                   ),
                 ),
                 const SizedBox(height: 20),
-                ...viewModel.currentOptionWords.map((word) => _buildOptionButton(viewModel, word)),
+                ...viewModel.currentOptionWords.map((optionWord) => _buildOptionButton(viewModel, optionWord)),
                 const SizedBox(height: 20),
               ],
             ),
@@ -348,8 +343,28 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Widget _buildOptionButton(StudyViewModel viewModel, Word optionWord) {
-    bool isCorrect = optionWord.meaning == viewModel.currentWord!.meaning;
-    bool isSelected = optionWord.meaning == viewModel.selectedAnswer;
+    final type = viewModel.currentQuizType!;
+    
+    // 유형별로 버튼에 표시할 텍스트 결정
+    String buttonDisplayLabel = "";
+    bool isCorrect = false;
+    
+    switch (type) {
+      case QuizType.kanjiToMeaning:
+        buttonDisplayLabel = optionWord.meaning;
+        isCorrect = optionWord.meaning == viewModel.currentWord!.meaning;
+        break;
+      case QuizType.meaningToKanji:
+        buttonDisplayLabel = optionWord.kanji;
+        isCorrect = optionWord.kanji == viewModel.currentWord!.kanji;
+        break;
+      case QuizType.meaningToKana:
+        buttonDisplayLabel = optionWord.kana;
+        isCorrect = optionWord.kana == viewModel.currentWord!.kana;
+        break;
+    }
+
+    bool isSelected = buttonDisplayLabel == viewModel.selectedAnswer;
     bool isAnswered = viewModel.isAnswered;
 
     Color backgroundColor = Colors.white;
@@ -375,7 +390,7 @@ class _QuizPageState extends State<QuizPage> {
       child: SizedBox(
         height: 72,
         child: OutlinedButton(
-          onPressed: isAnswered ? null : () => viewModel.submitAnswer(optionWord.meaning),
+          onPressed: isAnswered ? null : () => viewModel.submitAnswer(buttonDisplayLabel),
           style: OutlinedButton.styleFrom(
             backgroundColor: backgroundColor,
             side: BorderSide(color: borderColor, width: 2),
@@ -386,7 +401,7 @@ class _QuizPageState extends State<QuizPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                optionWord.meaning,
+                buttonDisplayLabel,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -398,8 +413,10 @@ class _QuizPageState extends State<QuizPage> {
               Opacity(
                 opacity: isAnswered ? 1.0 : 0.0,
                 child: Text(
-                  '${optionWord.kanji} (${optionWord.kana}) - ${optionWord.koreanPronunciation}',
-                  style: TextStyle(fontSize: 11, color: textColor.withOpacity(0.7)),
+                  type == QuizType.kanjiToMeaning 
+                      ? '${optionWord.kanji} (${optionWord.kana}) - ${optionWord.koreanPronunciation}'
+                      : optionWord.meaning,
+                  style: TextStyle(fontSize: 11, color: textColor.withValues(alpha: 0.7)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
