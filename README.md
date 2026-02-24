@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="assets/icon.png" width="120" height="120" alt="냥냥일본어 아이콘">
+</p>
+
 # 냥냥일본어 (Nyang Nyang Japanese) - JLPT 단어장 🐾
 
 **냥냥일본어**는 JLPT(일본어 능력 시험) 합격을 위해 N1부터 N5까지의 핵심 단어를 쉽고 재미있게 학습할 수 있도록 도와주는 Flutter 기반 모바일 애플리케이션입니다.
