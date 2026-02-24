@@ -70,32 +70,53 @@ class StudyViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  // 오늘의 단어 로드
+  // 오늘의 단어 로드 (에빙하우스 망각곡선 적용)
   Future<List<Word>> loadTodaysWords() async {
     final box = Hive.box(DatabaseService.sessionBoxName);
     final today = DateTime.now().toString().split(' ')[0];
     final sessionKey = 'todays_words_$today';
     
+    // 이미 오늘 생성된 세션이 있다면 해당 단어들 반환
     final savedIds = box.get(sessionKey);
     final wordsBox = Hive.box<Word>(DatabaseService.boxName);
     List<Word> todaysWords = [];
 
     if (savedIds != null) {
-      final List<int> ids = List<int>.from(savedIds);
+      final List<dynamic> ids = List.from(savedIds);
       final allWords = wordsBox.values.toList();
       for (var id in ids) {
         try {
           todaysWords.add(allWords.firstWhere((w) => w.id == id));
         } catch (e) {}
       }
+      if (todaysWords.isNotEmpty) return todaysWords;
     }
 
-    if (todaysWords.isEmpty) {
-      final allWords = wordsBox.values.toList();
-      allWords.shuffle();
-      todaysWords = allWords.take(10).toList();
-      box.put(sessionKey, todaysWords.map((w) => w.id).toList());
+    // 1. 복습이 필요한 단어들 추출 (nextReviewDate가 오늘이거나 과거인 단어)
+    final now = DateTime.now();
+    final todayDate = DateTime(now.year, now.month, now.day);
+    
+    List<Word> reviewDueWords = wordsBox.values.where((w) {
+      if (w.nextReviewDate == null) return false;
+      // 시간 제외하고 날짜만 비교
+      final nextDate = DateTime(w.nextReviewDate!.year, w.nextReviewDate!.month, w.nextReviewDate!.day);
+      return nextDate.isBefore(todayDate) || nextDate.isAtSameMomentAs(todayDate);
+    }).toList();
+
+    // 2. 복습 단어를 최대 10개까지 선택
+    reviewDueWords.shuffle();
+    todaysWords = reviewDueWords.take(10).toList();
+
+    // 3. 10개가 안 채워졌다면 신규 단어(srsStage == 0)로 채움
+    if (todaysWords.length < 10) {
+      final newWords = wordsBox.values.where((w) => (w.srsStage == 0 || w.srsStage == null) && !todaysWords.contains(w)).toList();
+      newWords.shuffle();
+      final neededCount = 10 - todaysWords.length;
+      todaysWords.addAll(newWords.take(neededCount));
     }
+
+    // 4. 세션 저장 (오늘 하루 동안은 동일한 단어 구성 유지)
+    box.put(sessionKey, todaysWords.map((w) => w.id).toList());
 
     return todaysWords;
   }
@@ -181,14 +202,45 @@ class StudyViewModel extends ChangeNotifier {
       _isCorrect = true;
       _score++;
       currentWord!.correctCount++;
+      
+      // SRS 단계 상승 로직 (복습 주기 업데이트)
+      _advanceSRSStage(currentWord!);
     } else {
       _isCorrect = false;
       currentWord!.incorrectCount++;
+      
+      // SRS 단계 초기화 (틀리면 처음부터 다시)
+      _resetSRSStage(currentWord!);
     }
     currentWord!.save();
     _updateDailyStudyCount();
     _saveCurrentSession();
     notifyListeners();
+  }
+
+  void _advanceSRSStage(Word word) {
+    word.srsStage = (word.srsStage ?? 0) + 1;
+    final now = DateTime.now();
+    final today = DateTime(now.year, now.month, now.day);
+    
+    // 단계별 복습 주기 (일 단위)
+    int interval = 0;
+    switch (word.srsStage) {
+      case 1: interval = 1; break;  // 1단계: 1일 후 복습
+      case 2: interval = 2; break;  // 2단계: 2일 후
+      case 3: interval = 4; break;  // 3단계: 4일 후
+      case 4: interval = 7; break;  // 4단계: 7일 후
+      case 5: interval = 14; break; // 5단계: 14일 후
+      case 6: interval = 30; break; // 6단계: 30일 후 (마스터 단계)
+      default: interval = 30;
+    }
+    
+    word.nextReviewDate = today.add(Duration(days: interval));
+  }
+
+  void _resetSRSStage(Word word) {
+    word.srsStage = 0;
+    word.nextReviewDate = null; // 신규 단어로 다시 분류
   }
 
   void _updateDailyStudyCount() {

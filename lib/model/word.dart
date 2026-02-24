@@ -27,6 +27,11 @@ class Word extends HiveObject {
   @HiveField(9)
   bool isBookmarked;
 
+  @HiveField(10)
+  int srsStage; // 0: 신규, 1~6: 복습 단계
+  @HiveField(11)
+  DateTime? nextReviewDate;
+
   Word({
     required this.id,
     required this.kanji,
@@ -38,6 +43,8 @@ class Word extends HiveObject {
     this.incorrectCount = 0,
     this.isMemorized = false,
     this.isBookmarked = false,
+    this.srsStage = 0,
+    this.nextReviewDate,
   });
 
   factory Word.fromJson(Map<String, dynamic> json) {
@@ -54,6 +61,7 @@ class Word extends HiveObject {
       meaning: (json['meaning'] as String?) ?? '',
       level: levelInt,
       isBookmarked: false,
+      srsStage: 0,
     );
   }
 }

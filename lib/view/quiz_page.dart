@@ -297,15 +297,19 @@ class _QuizPageState extends State<QuizPage> {
                         const SizedBox(height: 4),
                         Text(word.kanji, style: const TextStyle(fontSize: 44, fontWeight: FontWeight.bold, color: Color(0xFF2D3142))),
                         const SizedBox(height: 8),
-                        Text('[ ${word.koreanPronunciation} ]', style: TextStyle(fontSize: 16, color: viewModel.isAnswered ? const Color(0xFF5B86E5) : Colors.blueGrey.withValues(alpha: 0.6), fontWeight: FontWeight.w600)),
+                        Text('[ ${word.koreanPronunciation} ]', style: TextStyle(fontSize: 16, color: viewModel.isAnswered ? const Color(0xFF5B86E5) : Colors.blueGrey.withOpacity(0.6), fontWeight: FontWeight.w600)),
                       ] else ...[
                         // 뜻을 보여주고 한자나 히라가나를 맞히는 유형
                         const Text('다음 뜻에 맞는 단어는?', style: TextStyle(fontSize: 14, color: Colors.blueGrey, fontWeight: FontWeight.w500)),
                         const SizedBox(height: 12),
                         Text(word.meaning, textAlign: TextAlign.center, style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Color(0xFF2D3142))),
+                        const SizedBox(height: 8),
                         if (viewModel.isAnswered) ...[
-                          const SizedBox(height: 8),
-                          Text('${word.kanji} (${word.kana})', style: const TextStyle(fontSize: 16, color: Color(0xFF5B86E5), fontWeight: FontWeight.w600)),
+                          Text('${word.kanji} (${word.kana}) [${word.koreanPronunciation}]', style: const TextStyle(fontSize: 16, color: Color(0xFF5B86E5), fontWeight: FontWeight.w600)),
+                        ] else ...[
+                          // 문제를 푸는 중에도 힌트가 너무 많지 않게 발음은 살짝 보여줄 수 있음 (선택 사항)
+                          // 사용자의 요청에 따라 발음 표기 추가
+                          Text('[ ${word.koreanPronunciation} ]', style: TextStyle(fontSize: 14, color: Colors.blueGrey.withOpacity(0.4))),
                         ],
                       ],
                     ],
@@ -411,11 +415,13 @@ class _QuizPageState extends State<QuizPage> {
               ),
               const SizedBox(height: 2),
               Opacity(
-                opacity: isAnswered ? 1.0 : 0.0,
+                opacity: isAnswered ? 1.0 : 0.0, // 답변 후에만 보이도록 수정
                 child: Text(
                   type == QuizType.kanjiToMeaning 
                       ? '${optionWord.kanji} (${optionWord.kana}) - ${optionWord.koreanPronunciation}'
-                      : optionWord.meaning,
+                      : (type == QuizType.meaningToKanji 
+                          ? '${optionWord.kana} [${optionWord.koreanPronunciation}]' 
+                          : '${optionWord.kanji} [${optionWord.koreanPronunciation}]'),
                   style: TextStyle(fontSize: 11, color: textColor.withOpacity(0.7)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
