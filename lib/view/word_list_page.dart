@@ -161,14 +161,13 @@ class _WordListPageState extends State<WordListPage> {
                       children: [
                         Text(word.kanji, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                         Text(word.kana, style: TextStyle(fontSize: 13, color: Colors.grey[500])),
-                                                  Text(
-                                                    '[${word.koreanPronunciation}]', 
-                                                    style: TextStyle(
-                                                      fontSize: 12, 
-                                                      color: (isCompleted ? Colors.lightGreen.shade700 : const Color(0xFF5B86E5)).withOpacity(0.7)
-                                                    )
-                                                  ),
-                        
+                        Text(
+                          '[${word.koreanPronunciation}]', 
+                          style: TextStyle(
+                            fontSize: 12, 
+                            color: (isCompleted ? Colors.lightGreen.shade700 : const Color(0xFF5B86E5)).withOpacity(0.7)
+                          )
+                        ),
                       ],
                     ),
                     const SizedBox(height: 6),

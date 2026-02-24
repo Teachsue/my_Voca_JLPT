@@ -11,6 +11,16 @@
 - **❌ 오답 노트**: 퀴즈에서 틀린 단어들만 모아 다시 공부
 - **📈 레벨 테스트**: 현재 나의 일본어 실력을 테스트하고 적합한 급수 확인
 
+## 📸 Screenshots
+
+| 홈 화면 | 단어 리스트 | 퀴즈 화면 |
+| :---: | :---: | :---: |
+| <img src="screenshots/home.png" width="200"> | <img src="screenshots/list.png" width="200"> | <img src="screenshots/quiz.png" width="200"> |
+
+| 통계 화면 | 오답 노트 | 레벨 테스트 |
+| :---: | :---: | :---: |
+| <img src="screenshots/stats.png" width="200"> | <img src="screenshots/wrong.png" width="200"> | <img src="screenshots/test.png" width="200"> |
+
 ## 🛠 Tech Stack
 
 - **Framework**: [Flutter](https://flutter.dev/) (Material 3)

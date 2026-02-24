@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import '../model/word.dart';
 import '../service/database_service.dart';
 import 'word_list_page.dart';
@@ -28,8 +29,10 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
     final int levelInt = int.parse(widget.level.replaceAll(RegExp(r'[^0-9]'), ''));
     final List<Word> allWords = DatabaseService.getWordsByLevel(levelInt);
 
-    // 단어들을 랜덤하게 섞음
-    allWords.shuffle();
+    if (allWords.isEmpty) return;
+
+    // 단어들을 ID 순으로 정렬하여 일관성 유지 (shuffle 대신 sort 사용)
+    allWords.sort((a, b) => a.id.compareTo(b.id));
 
     final List<List<Word>> chunks = [];
     for (int i = 0; i < allWords.length; i += 20) {
@@ -47,14 +50,6 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    // 검색 쿼리에 따른 필터링 (DAY 번호 기준)
-    final filteredDays = _searchQuery.isEmpty
-        ? List.generate(_allDayChunks.length, (i) => i)
-        : List.generate(_allDayChunks.length, (i) => i).where((index) {
-            final dayNum = (index + 1).toString();
-            return dayNum.contains(_searchQuery);
-          }).toList();
-
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       appBar: AppBar(
@@ -94,22 +89,52 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
           ),
         ],
       ),
-      body: filteredDays.isEmpty
-          ? const Center(child: Text('검색 결과가 없습니다.'))
-          : GridView.builder(
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 60), // 하단 패딩 60으로 증설
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-                childAspectRatio: 0.85,
+      body: ValueListenableBuilder(
+        valueListenable: Hive.box<Word>(DatabaseService.boxName).listenable(),
+        builder: (context, Box<Word> box, _) {
+          _calculateDayChunks(); // 데이터가 변경되면 다시 청크 계산
+
+          if (_allDayChunks.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const CircularProgressIndicator(),
+                  const SizedBox(height: 20),
+                  Text('${widget.level} 데이터를 불러오는 중입니다...', style: const TextStyle(color: Colors.grey)),
+                ],
               ),
-              itemCount: filteredDays.length,
-              itemBuilder: (context, index) {
-                final dayIndex = filteredDays[index];
-                return _buildDayGridItem(context, dayIndex + 1, _allDayChunks[dayIndex]);
-              },
+            );
+          }
+
+          // 검색 쿼리에 따른 필터링 (DAY 번호 기준)
+          final filteredDays = _searchQuery.isEmpty
+              ? List.generate(_allDayChunks.length, (i) => i)
+              : List.generate(_allDayChunks.length, (i) => i).where((index) {
+                  final dayNum = (index + 1).toString();
+                  return dayNum.contains(_searchQuery);
+                }).toList();
+
+          if (filteredDays.isEmpty) {
+            return const Center(child: Text('검색 결과가 없습니다.'));
+          }
+
+          return GridView.builder(
+            padding: const EdgeInsets.fromLTRB(20, 20, 20, 60),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              childAspectRatio: 0.85,
             ),
+            itemCount: filteredDays.length,
+            itemBuilder: (context, index) {
+              final dayIndex = filteredDays[index];
+              return _buildDayGridItem(context, dayIndex + 1, _allDayChunks[dayIndex]);
+            },
+          );
+        },
+      ),
     );
   }
 

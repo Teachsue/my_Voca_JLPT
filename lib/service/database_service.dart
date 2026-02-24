@@ -20,9 +20,14 @@ class DatabaseService {
   static Future<void> loadJsonToHive(int level) async {
     var box = Hive.box<Word>(boxName);
 
-    // 해당 레벨 데이터가 이미 있으면 중복 로드 방지
-    if (box.values.any((w) => w.level == level)) return;
+    // 해당 레벨의 단어 개수를 확인 (문자열 변환 후 비교하여 타입 불일치 방지)
+    int existingCount = box.values.where((w) => w.level.toString() == level.toString()).length;
+    if (existingCount > 100) {
+      print("✅ N$level 데이터가 이미 존재합니다. (개수: $existingCount)");
+      return;
+    }
 
+    print("⏳ N$level 데이터를 로드 중...");
     try {
       final String response = await rootBundle.loadString(
         'assets/data/n$level.json',
@@ -32,11 +37,21 @@ class DatabaseService {
 
       Map<String, Word> wordMap = {};
       for (var item in vocabulary) {
+        // JSON 데이터의 level 필드를 무시하고 호출 시 인자로 받은 level을 강제 적용
         final word = Word.fromJson(item);
-        wordMap['${level}_${word.id}'] = word;
+        final fixedWord = Word(
+          id: word.id,
+          kanji: word.kanji,
+          kana: word.kana,
+          meaning: word.meaning,
+          level: level, // 여기서 level 강제 지정
+          koreanPronunciation: word.koreanPronunciation,
+        );
+        wordMap['${level}_${fixedWord.id}'] = fixedWord;
       }
       
-      await box.putAll(wordMap); // 대량 저장은 putAll이 훨씬 빠름
+      await box.putAll(wordMap);
+      print("✅ N$level 로드 완료! (총 ${wordMap.length}단어)");
     } catch (e) {
       print("❌ 데이터 로드 에러 (N$level): $e");
     }
@@ -49,6 +64,7 @@ class DatabaseService {
 
   static List<Word> getWordsByLevel(int level) {
     var box = Hive.box<Word>(boxName);
-    return box.values.where((w) => w.level == level).toList();
+    // 타입 불일치 방지를 위해 문자열로 변환하여 비교
+    return box.values.where((w) => w.level.toString() == level.toString()).toList();
   }
 }

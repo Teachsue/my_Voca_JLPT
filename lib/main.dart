@@ -22,14 +22,12 @@ void main() async {
 
   runApp(const MyApp());
 
-  // 2. 초기 데이터가 필요하다면 백그라운드에서 로드
-  if (DatabaseService.needsInitialLoading()) {
-    Future.microtask(() async {
-      for (int i = 1; i <= 5; i++) {
-        await DatabaseService.loadJsonToHive(i);
-      }
-    });
-  }
+  // 2. 초기 데이터 로드 (이미 있으면 건너뜀)
+  Future.microtask(() async {
+    for (int i = 1; i <= 5; i++) {
+      await DatabaseService.loadJsonToHive(i);
+    }
+  });
 }
 
 class MyApp extends StatelessWidget {

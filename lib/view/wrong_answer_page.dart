@@ -69,16 +69,16 @@ class WrongAnswerPage extends StatelessWidget {
                           const SizedBox(width: 12),
                           // 2. 단어 정보
                           Expanded(
-                            child: Column(
+                              child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.end,
+                                  spacing: 8,
+                                  runSpacing: 4,
                                   children: [
                                     Text(word.kanji, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                                    const SizedBox(width: 8),
                                     Text(word.kana, style: TextStyle(fontSize: 13, color: Colors.grey[500])),
-                                    const SizedBox(width: 6),
                                     Text('[${word.koreanPronunciation}]', style: TextStyle(fontSize: 12, color: const Color(0xFF5B86E5).withOpacity(0.7))),
                                   ],
                                 ),
@@ -87,7 +87,7 @@ class WrongAnswerPage extends StatelessWidget {
                               ],
                             ),
                           ),
-                          // 3. 틀린 횟수 뱃지 및 북마크
+                          // 3. 틀린 횟수 뱃지 및 삭제 버튼
                           Column(
                             children: [
                               Container(
@@ -96,9 +96,9 @@ class WrongAnswerPage extends StatelessWidget {
                                 child: Text('틀림 ${word.incorrectCount}', style: TextStyle(color: Colors.red[700], fontSize: 10, fontWeight: FontWeight.bold)),
                               ),
                               IconButton(
-                                icon: Icon(word.isBookmarked ? Icons.star_rounded : Icons.star_border_rounded, color: word.isBookmarked ? Colors.amber : Colors.grey[300], size: 22),
+                                icon: Icon(Icons.delete_outline_rounded, color: Colors.red[200], size: 22),
                                 onPressed: () {
-                                  word.isBookmarked = !word.isBookmarked;
+                                  word.incorrectCount = 0;
                                   word.save();
                                 },
                                 constraints: const BoxConstraints(),

@@ -63,13 +63,13 @@ class BookmarkPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                            Wrap(
+                              crossAxisAlignment: WrapCrossAlignment.end,
+                              spacing: 8,
+                              runSpacing: 4,
                               children: [
                                 Text(word.kanji, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                                const SizedBox(width: 8),
                                 Text(word.kana, style: TextStyle(fontSize: 13, color: Colors.grey[500])),
-                                const SizedBox(width: 6),
                                 Text('[${word.koreanPronunciation}]', style: TextStyle(fontSize: 12, color: const Color(0xFF5B86E5).withOpacity(0.7))),
                               ],
                             ),
