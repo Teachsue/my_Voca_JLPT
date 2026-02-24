@@ -32,6 +32,12 @@ class _WordListPageState extends State<WordListPage> {
     _currentDayIndex = widget.initialDayIndex;
     _pageController = PageController(initialPage: widget.initialDayIndex);
     _isTodaysWords = widget.level == '오늘의 단어' || widget.level == '오늘의 단어 복습';
+
+    // 마지막으로 공부한 DAY 저장 (레벨별로 관리)
+    if (!_isTodaysWords) {
+      final sessionBox = Hive.box(DatabaseService.sessionBoxName);
+      sessionBox.put('last_day_${widget.level}', _currentDayIndex + 1);
+    }
   }
 
   @override
@@ -66,6 +72,10 @@ class _WordListPageState extends State<WordListPage> {
           setState(() {
             _currentDayIndex = index;
           });
+          // 페이지 이동 시에도 마지막 공부한 DAY 업데이트
+          if (!_isTodaysWords) {
+            Hive.box(DatabaseService.sessionBoxName).put('last_day_${widget.level}', index + 1);
+          }
         },
         itemCount: widget.allDayChunks.length,
         itemBuilder: (context, chunkIndex) {
