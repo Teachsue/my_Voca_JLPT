@@ -26,13 +26,14 @@ class WordAdapter extends TypeAdapter<Word> {
       correctCount: fields[6] as int,
       incorrectCount: fields[7] as int,
       isMemorized: fields[8] as bool,
+      isBookmarked: fields[9] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, Word obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -50,7 +51,9 @@ class WordAdapter extends TypeAdapter<Word> {
       ..writeByte(7)
       ..write(obj.incorrectCount)
       ..writeByte(8)
-      ..write(obj.isMemorized);
+      ..write(obj.isMemorized)
+      ..writeByte(9)
+      ..write(obj.isBookmarked);
   }
 
   @override

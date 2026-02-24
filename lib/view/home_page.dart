@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'study_page.dart';
+import 'level_summary_page.dart';
+import 'bookmark_page.dart';
+import 'wrong_answer_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,7 +15,7 @@ class HomePage extends StatelessWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 20.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -58,25 +60,20 @@ class HomePage extends StatelessWidget {
                       ),
                       child: IconButton(
                         icon: const Icon(Icons.calendar_month_rounded, color: Color(0xFF5B86E5)),
-                        onPressed: () {
-                          // TODO: 캘린더 연동
-                        },
+                        onPressed: () {},
                       ),
                     ),
                   ],
                 ),
 
-                const SizedBox(height: 30),
+                const SizedBox(height: 25),
 
                 // 2. 메인 배너 (오늘의 학습)
                 GestureDetector(
                   onTap: () {
-                    // 기본적으로 가장 낮은 레벨인 N5로 바로 시작하거나 추천 레벨로 이동
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const StudyPage(level: 'N5'),
-                      ),
+                      MaterialPageRoute(builder: (context) => const LevelSummaryPage(level: 'N5')),
                     );
                   },
                   child: Container(
@@ -84,10 +81,7 @@ class HomePage extends StatelessWidget {
                     padding: const EdgeInsets.all(24),
                     decoration: BoxDecoration(
                       gradient: const LinearGradient(
-                        colors: [
-                          Color(0xFF5B86E5),
-                          Color(0xFF36D1DC),
-                        ],
+                        colors: [Color(0xFF5B86E5), Color(0xFF36D1DC)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
@@ -110,65 +104,97 @@ class HomePage extends StatelessWidget {
                                 '$todayStr 학습',
                                 style: const TextStyle(
                                   color: Colors.white,
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              const SizedBox(height: 8),
+                              const SizedBox(height: 6),
                               const Text(
-                                "오늘 정해진 단어 10개를\n완벽하게 마스터해보세요!",
+                                "오늘의 단어를 마스터하세요!",
                                 style: TextStyle(
                                   color: Colors.white70,
-                                  fontSize: 14,
-                                  height: 1.5,
+                                  fontSize: 13,
                                 ),
                               ),
                             ],
                           ),
                         ),
-                        Container(
-                          padding: const EdgeInsets.all(12),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.2),
-                            shape: BoxShape.circle,
-                          ),
-                          child: const Icon(
-                            Icons.play_arrow_rounded,
-                            color: Colors.white,
-                            size: 30,
-                          ),
-                        ),
+                        const Icon(Icons.play_circle_fill_rounded, color: Colors.white, size: 40),
                       ],
                     ),
                   ),
                 ),
 
-                const SizedBox(height: 35),
+                const SizedBox(height: 30),
 
-                // 3. 스터디 카테고리 (JLPT 레벨)
-                const Text(
-                  "JLPT 레벨별 학습",
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black87,
-                  ),
-                ),
-                const SizedBox(height: 16),
-
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 1.1,
+                // 3. 레벨별 학습 (초급, 중급, 고급 - 한 줄 배치)
+                const Text("레벨별 학습", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 12),
+                Row(
                   children: [
-                    _buildMenuCard(context, 'N1', '최상급 과정', Icons.workspace_premium_rounded, Colors.purple),
-                    _buildMenuCard(context, 'N2', '상급 과정', Icons.auto_awesome_rounded, Colors.indigo),
-                    _buildMenuCard(context, 'N3', '중급 과정', Icons.menu_book_rounded, Colors.blue),
-                    _buildMenuCard(context, 'N4', '초급 과정', Icons.school_rounded, Colors.teal),
-                    _buildMenuCard(context, 'N5', '입문 과정', Icons.child_care_rounded, Colors.green),
+                    Expanded(
+                      child: _buildCategoryCard(
+                        context,
+                        '초급',
+                        'N4~N5',
+                        Icons.child_care_rounded,
+                        Colors.green,
+                        () => _showLevelDialog(context, '초급 학습', ['N5', 'N4']),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: _buildCategoryCard(
+                        context,
+                        '중급',
+                        'N2~N3',
+                        Icons.menu_book_rounded,
+                        Colors.blue,
+                        () => _showLevelDialog(context, '중급 학습', ['N3', 'N2']),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: _buildCategoryCard(
+                        context,
+                        '고급',
+                        'N1',
+                        Icons.workspace_premium_rounded,
+                        Colors.purple,
+                        () => Navigator.push(context, MaterialPageRoute(builder: (context) => const LevelSummaryPage(level: 'N1'))),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 20),
+
+                // 4. 나의 관리 (북마크, 오답노트 - 한 줄 배치)
+                const Text("나의 관리", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildCategoryCard(
+                        context,
+                        '북마크',
+                        '중요 단어',
+                        Icons.star_rounded,
+                        Colors.amber,
+                        () => Navigator.push(context, MaterialPageRoute(builder: (context) => const BookmarkPage())),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _buildCategoryCard(
+                        context,
+                        '오답노트',
+                        '틀린 단어',
+                        Icons.error_outline_rounded,
+                        Colors.redAccent,
+                        () => Navigator.push(context, MaterialPageRoute(builder: (context) => const WrongAnswerPage())),
+                      ),
+                    ),
                   ],
                 ),
               ],
@@ -179,25 +205,18 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildMenuCard(BuildContext context, String level, String subtitle, IconData icon, Color color) {
+  Widget _buildCategoryCard(BuildContext context, String title, String subtitle, IconData icon, Color color, VoidCallback onTap) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => StudyPage(level: level),
-          ),
-        );
-      },
+      onTap: onTap,
       child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.08),
               blurRadius: 10,
-              spreadRadius: 2,
               offset: const Offset(0, 4),
             ),
           ],
@@ -205,30 +224,58 @@ class HomePage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
-                shape: BoxShape.circle,
-              ),
-              child: Icon(icon, color: color, size: 28),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              level,
-              style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              subtitle,
-              style: TextStyle(fontSize: 13, color: Colors.grey[500]),
-            ),
+            Icon(icon, color: color, size: 30),
+            const SizedBox(height: 10),
+            Text(title, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+            const SizedBox(height: 2),
+            Text(subtitle, style: TextStyle(fontSize: 12, color: Colors.grey[500])),
           ],
         ),
+      ),
+    );
+  }
+
+  void _showLevelDialog(BuildContext context, String title, List<String> levels) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        title: Center(
+          child: Text(
+            title,
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Divider(),
+            ...levels.map((level) => ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                  leading: const Icon(Icons.stars_rounded, color: Color(0xFF5B86E5)),
+                  title: Text(
+                    level,
+                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  trailing: const Icon(Icons.chevron_right_rounded, color: Colors.grey),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => LevelSummaryPage(level: level),
+                      ),
+                    );
+                  },
+                )),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Text('닫기', style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
+          ),
+        ],
       ),
     );
   }

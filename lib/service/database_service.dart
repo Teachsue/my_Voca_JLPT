@@ -5,6 +5,7 @@ import '../model/word.dart';
 
 class DatabaseService {
   static const String boxName = 'wordsBox';
+  static const String sessionBoxName = 'sessionBox';
 
   static Future<void> init() async {
     await Hive.initFlutter();
@@ -12,6 +13,7 @@ class DatabaseService {
       Hive.registerAdapter(WordAdapter());
     }
     await Hive.openBox<Word>(boxName);
+    await Hive.openBox(sessionBoxName);
   }
 
   // 앱 최초 실행 시 JSON 데이터를 Hive DB로 옮기는 함수

@@ -24,6 +24,9 @@ class Word extends HiveObject {
   @HiveField(8)
   bool isMemorized;
 
+  @HiveField(9)
+  bool isBookmarked;
+
   Word({
     required this.id,
     required this.kanji,
@@ -34,6 +37,7 @@ class Word extends HiveObject {
     this.correctCount = 0,
     this.incorrectCount = 0,
     this.isMemorized = false,
+    this.isBookmarked = false,
   });
 
   factory Word.fromJson(Map<String, dynamic> json) {
@@ -45,6 +49,7 @@ class Word extends HiveObject {
       koreanPronunciation: json['korean_pronunciation'] as String,
       meaning: json['meaning'] as String,
       level: int.parse(json['level'].toString()),
+      isBookmarked: false,
     );
   }
 }
