@@ -1,0 +1,5348 @@
+{
+    "vocabulary": [
+        {
+            "kanji": "踏む",
+            "kana": "ふむ",
+            "meaning": "밟다, 짓밟다",
+            "korean_pronunciation": "후무",
+            "level": "4",
+            "id": 6742
+        },
+        {
+            "kanji": "～区",
+            "kana": "～く",
+            "meaning": "~구, ~구역, ~벌",
+            "korean_pronunciation": "쿠",
+            "level": "4",
+            "id": 6743
+        },
+        {
+            "kanji": "すっと",
+            "kana": "すっと",
+            "meaning": "곧장, 빠르게",
+            "korean_pronunciation": "슷토",
+            "level": "4",
+            "id": 6744
+        },
+        {
+            "kanji": "盗む",
+            "kana": "ぬすむ",
+            "meaning": "훔치다, 도둑질하다",
+            "korean_pronunciation": "누스무",
+            "level": "4",
+            "id": 6745
+        },
+        {
+            "kanji": "大抵",
+            "kana": "たいてい",
+            "meaning": "대개, 보통",
+            "korean_pronunciation": "타이테-",
+            "level": "4",
+            "id": 6746
+        },
+        {
+            "kanji": "とうとう",
+            "kana": "とうとう",
+            "meaning": "드디어, 마침내",
+            "korean_pronunciation": "토-토-",
+            "level": "4",
+            "id": 6747
+        },
+        {
+            "kanji": "ガソリン",
+            "kana": "ガソリン",
+            "meaning": "가솔린, 석유",
+            "korean_pronunciation": "가소린",
+            "level": "4",
+            "id": 6748
+        },
+        {
+            "kanji": "鳴る",
+            "kana": "なる",
+            "meaning": "울리다, 울리다 (자동사)",
+            "korean_pronunciation": "나루",
+            "level": "4",
+            "id": 6749
+        },
+        {
+            "kanji": "しっかり",
+            "kana": "しっかり",
+            "meaning": "단단히, 굳건히",
+            "korean_pronunciation": "싯카리",
+            "level": "4",
+            "id": 6750
+        },
+        {
+            "kanji": "生きる",
+            "kana": "いきる",
+            "meaning": "살다",
+            "korean_pronunciation": "이키루",
+            "level": "4",
+            "id": 6751
+        },
+        {
+            "kanji": "苦い",
+            "kana": "にがい",
+            "meaning": "쓴",
+            "korean_pronunciation": "니가이",
+            "level": "4",
+            "id": 6752
+        },
+        {
+            "kanji": "沸く",
+            "kana": "わく",
+            "meaning": "끓다, 뜨거워지다",
+            "korean_pronunciation": "와쿠",
+            "level": "4",
+            "id": 6753
+        },
+        {
+            "kanji": "意見",
+            "kana": "いけん",
+            "meaning": "의견, 견해, 생각",
+            "korean_pronunciation": "이켄",
+            "level": "4",
+            "id": 6754
+        },
+        {
+            "kanji": "やはり; やっぱり",
+            "kana": "やはり; やっぱり",
+            "meaning": "역시, 예상대로, 절대적으로",
+            "korean_pronunciation": "야하리; 얏빠리",
+            "level": "4",
+            "id": 6755
+        },
+        {
+            "kanji": "漫画",
+            "kana": "まんが",
+            "meaning": "만화 (책), 카툰",
+            "korean_pronunciation": "망가",
+            "level": "4",
+            "id": 6756
+        },
+        {
+            "kanji": "ステレオ",
+            "kana": "ステレオ",
+            "meaning": "스테레오",
+            "korean_pronunciation": "스테레오",
+            "level": "4",
+            "id": 6757
+        },
+        {
+            "kanji": "医学",
+            "kana": "いがく",
+            "meaning": "의학",
+            "korean_pronunciation": "이가쿠",
+            "level": "4",
+            "id": 6758
+        },
+        {
+            "kanji": "テキスト",
+            "kana": "テキスト",
+            "meaning": "텍스트; 교재",
+            "korean_pronunciation": "테키스토",
+            "level": "4",
+            "id": 6759
+        },
+        {
+            "kanji": "～月",
+            "kana": "～つき",
+            "meaning": "달 (월)",
+            "korean_pronunciation": "츠키",
+            "level": "4",
+            "id": 6760
+        },
+        {
+            "kanji": "折る",
+            "kana": "おる",
+            "meaning": "부러뜨리다, 꺾다; 구부리다",
+            "korean_pronunciation": "오루",
+            "level": "4",
+            "id": 6761
+        },
+        {
+            "kanji": "～会",
+            "kana": "～かい",
+            "meaning": "~ 회의",
+            "korean_pronunciation": "카이",
+            "level": "4",
+            "id": 6762
+        },
+        {
+            "kanji": "うかがう",
+            "kana": "うかがう",
+            "meaning": "묻다",
+            "korean_pronunciation": "우카가우",
+            "level": "4",
+            "id": 6763
+        },
+        {
+            "kanji": "聞こえる",
+            "kana": "きこえる",
+            "meaning": "들리다, 청취 가능하다",
+            "korean_pronunciation": "키코에루",
+            "level": "4",
+            "id": 6764
+        },
+        {
+            "kanji": "僕",
+            "kana": "ぼく",
+            "meaning": "나 (남성이 동등하거나 아랫사람에게 사용)",
+            "korean_pronunciation": "보쿠",
+            "level": "4",
+            "id": 6765
+        },
+        {
+            "kanji": "必ず",
+            "kana": "かならず",
+            "meaning": "반드시, 확실히",
+            "korean_pronunciation": "카나라즈",
+            "level": "4",
+            "id": 6766
+        },
+        {
+            "kanji": "壊す",
+            "kana": "こわす",
+            "meaning": "부수다, 망가뜨리다",
+            "korean_pronunciation": "코와스",
+            "level": "4",
+            "id": 6767
+        },
+        {
+            "kanji": "怒る",
+            "kana": "おこる",
+            "meaning": "화나다; 성내다",
+            "korean_pronunciation": "오코루",
+            "level": "4",
+            "id": 6768
+        },
+        {
+            "kanji": "床屋",
+            "kana": "とこや",
+            "meaning": "이발소",
+            "korean_pronunciation": "토코야",
+            "level": "4",
+            "id": 6769
+        },
+        {
+            "kanji": "オートバイ",
+            "kana": "オートバイ",
+            "meaning": "오토바이",
+            "korean_pronunciation": "오토바이",
+            "level": "4",
+            "id": 6770
+        },
+        {
+            "kanji": "運動",
+            "kana": "うんどうする",
+            "meaning": "운동하다",
+            "korean_pronunciation": "운도-스루",
+            "level": "4",
+            "id": 6771
+        },
+        {
+            "kanji": "止む",
+            "kana": "やむ",
+            "meaning": "그치다, 멈추다",
+            "korean_pronunciation": "야무",
+            "level": "4",
+            "id": 6772
+        },
+        {
+            "kanji": "もし",
+            "kana": "もし",
+            "meaning": "만약",
+            "korean_pronunciation": "모시",
+            "level": "4",
+            "id": 6773
+        },
+        {
+            "kanji": "表",
+            "kana": "おもて",
+            "meaning": "표면; 앞면; 겉",
+            "korean_pronunciation": "오모테",
+            "level": "4",
+            "id": 6774
+        },
+        {
+            "kanji": "大学生",
+            "kana": "だいがくせい",
+            "meaning": "대학생",
+            "korean_pronunciation": "다이가쿠세이",
+            "level": "4",
+            "id": 6775
+        },
+        {
+            "kanji": "運転手",
+            "kana": "うんてんしゅ",
+            "meaning": "운전수",
+            "korean_pronunciation": "운텐슈",
+            "level": "4",
+            "id": 6776
+        },
+        {
+            "kanji": "予習",
+            "kana": "よしゅう",
+            "meaning": "예습",
+            "korean_pronunciation": "요슈-",
+            "level": "4",
+            "id": 6777
+        },
+        {
+            "kanji": "心配",
+            "kana": "しんぱいする",
+            "meaning": "걱정하다, 염려하다",
+            "korean_pronunciation": "신파이-스루",
+            "level": "4",
+            "id": 6778
+        },
+        {
+            "kanji": "別",
+            "kana": "べつ",
+            "meaning": "구별, 다른",
+            "korean_pronunciation": "베츠",
+            "level": "4",
+            "id": 6779
+        },
+        {
+            "kanji": "非常に",
+            "kana": "ひじょうに",
+            "meaning": "매우, 극도로",
+            "korean_pronunciation": "히조-니",
+            "level": "4",
+            "id": 6780
+        },
+        {
+            "kanji": "お宅",
+            "kana": "おたく",
+            "meaning": "(남의) 집, 댁 (집의 공손한 말)",
+            "korean_pronunciation": "오타쿠",
+            "level": "4",
+            "id": 6781
+        },
+        {
+            "kanji": "柔らかい",
+            "kana": "やわらかい",
+            "meaning": "부드러운 (질감)",
+            "korean_pronunciation": "야와라카이",
+            "level": "4",
+            "id": 6782
+        },
+        {
+            "kanji": "拾う",
+            "kana": "ひろう",
+            "meaning": "줍다 (물건), 발견하다",
+            "korean_pronunciation": "히로-",
+            "level": "4",
+            "id": 6783
+        },
+        {
+            "kanji": "～ございます",
+            "kana": "～ございます",
+            "meaning": "있다, 존재하다 (공손한 표현)",
+            "korean_pronunciation": "고자이마스",
+            "level": "4",
+            "id": 6784
+        },
+        {
+            "kanji": "気",
+            "kana": "き",
+            "meaning": "정신, 기분",
+            "korean_pronunciation": "키",
+            "level": "4",
+            "id": 6785
+        },
+        {
+            "kanji": "比べる",
+            "kana": "くらべる",
+            "meaning": "비교하다",
+            "korean_pronunciation": "쿠라베루",
+            "level": "4",
+            "id": 6786
+        },
+        {
+            "kanji": "ほとんど",
+            "kana": "ほとんど",
+            "meaning": "대부분, 거의",
+            "korean_pronunciation": "호토-",
+            "level": "4",
+            "id": 6787
+        },
+        {
+            "kanji": "つもり",
+            "kana": "つもり",
+            "meaning": "의도, 계획",
+            "korean_pronunciation": "츠모리",
+            "level": "4",
+            "id": 6788
+        },
+        {
+            "kanji": "郊外",
+            "kana": "こうがい",
+            "meaning": "교외, 변두리",
+            "korean_pronunciation": "코-가이",
+            "level": "4",
+            "id": 6789
+        },
+        {
+            "kanji": "だめ",
+            "kana": "だめ",
+            "meaning": "안돼, 쓸모없는, 희망 없는",
+            "korean_pronunciation": "다메",
+            "level": "4",
+            "id": 6790
+        },
+        {
+            "kanji": "売り場",
+            "kana": "うりば",
+            "meaning": "판매대, 매장",
+            "korean_pronunciation": "우리바",
+            "level": "4",
+            "id": 6791
+        },
+        {
+            "kanji": "正月",
+            "kana": "しょうがつ",
+            "meaning": "설날, 새해",
+            "korean_pronunciation": "쇼-가츠",
+            "level": "4",
+            "id": 6792
+        },
+        {
+            "kanji": "規則",
+            "kana": "きそく",
+            "meaning": "규칙, 규정",
+            "korean_pronunciation": "키소쿠",
+            "level": "4",
+            "id": 6793
+        },
+        {
+            "kanji": "うん",
+            "kana": "うん",
+            "meaning": "응, 그래 (비격식)",
+            "korean_pronunciation": "운",
+            "level": "4",
+            "id": 6794
+        },
+        {
+            "kanji": "発音",
+            "kana": "はつおん",
+            "meaning": "발음",
+            "korean_pronunciation": "하츠온",
+            "level": "4",
+            "id": 6795
+        },
+        {
+            "kanji": "焼く",
+            "kana": "やく",
+            "meaning": "굽다, 태우다",
+            "korean_pronunciation": "야쿠",
+            "level": "4",
+            "id": 6796
+        },
+        {
+            "kanji": "屋上",
+            "kana": "おくじょう",
+            "meaning": "옥상",
+            "korean_pronunciation": "오쿠죠-",
+            "level": "4",
+            "id": 6797
+        },
+        {
+            "kanji": "失礼",
+            "kana": "しつれい",
+            "meaning": "무례함, 실례; 실례합니다",
+            "korean_pronunciation": "시츠레이",
+            "level": "4",
+            "id": 6798
+        },
+        {
+            "kanji": "ごみ",
+            "kana": "ごみ",
+            "meaning": "쓰레기, 폐기물",
+            "korean_pronunciation": "고미",
+            "level": "4",
+            "id": 6799
+        },
+        {
+            "kanji": "アフリカ",
+            "kana": "アフリカ",
+            "meaning": "아프리카",
+            "korean_pronunciation": "아후리카",
+            "level": "4",
+            "id": 6800
+        },
+        {
+            "kanji": "点",
+            "kana": "てん",
+            "meaning": "점수, 등급; 점, 도트",
+            "korean_pronunciation": "텐",
+            "level": "4",
+            "id": 6801
+        },
+        {
+            "kanji": "一生懸命",
+            "kana": "いっしょうけんめい",
+            "meaning": "필사적으로 (예: 열심히 일하다), 최선을 다해",
+            "korean_pronunciation": "잇쇼-켄메-",
+            "level": "4",
+            "id": 6802
+        },
+        {
+            "kanji": "今度",
+            "kana": "こんど",
+            "meaning": "이번, 가까운 미래, 조만간, 다음번",
+            "korean_pronunciation": "콘도",
+            "level": "4",
+            "id": 6803
+        },
+        {
+            "kanji": "機会",
+            "kana": "きかい",
+            "meaning": "기회",
+            "korean_pronunciation": "키카이",
+            "level": "4",
+            "id": 6804
+        },
+        {
+            "kanji": "建てる",
+            "kana": "たてる",
+            "meaning": "짓다",
+            "korean_pronunciation": "타테루",
+            "level": "4",
+            "id": 6805
+        },
+        {
+            "kanji": "複雑",
+            "kana": "ふくざつ",
+            "meaning": "복잡함, 복잡한",
+            "korean_pronunciation": "후쿠자츠",
+            "level": "4",
+            "id": 6806
+        },
+        {
+            "kanji": "彼",
+            "kana": "かれ",
+            "meaning": "그, 남자친구",
+            "korean_pronunciation": "카레",
+            "level": "4",
+            "id": 6807
+        },
+        {
+            "kanji": "いらっしゃる",
+            "kana": "いらっしゃる",
+            "meaning": "가다, 오다, 있다 (존경어)",
+            "korean_pronunciation": "이랏샤루",
+            "level": "4",
+            "id": 6808
+        },
+        {
+            "kanji": "布団",
+            "kana": "ふとん",
+            "meaning": "이불",
+            "korean_pronunciation": "후톤",
+            "level": "4",
+            "id": 6809
+        },
+        {
+            "kanji": "大事",
+            "kana": "だいじ",
+            "meaning": "중요한, 귀중한, 심각한 문제",
+            "korean_pronunciation": "다이지",
+            "level": "4",
+            "id": 6810
+        },
+        {
+            "kanji": "贈り物",
+            "kana": "おくりもの",
+            "meaning": "선물",
+            "korean_pronunciation": "오쿠리모노",
+            "level": "4",
+            "id": 6811
+        },
+        {
+            "kanji": "泥棒",
+            "kana": "どろぼう",
+            "meaning": "도둑, 강도",
+            "korean_pronunciation": "도로보-",
+            "level": "4",
+            "id": 6812
+        },
+        {
+            "kanji": "～製",
+            "kana": "～せい",
+            "meaning": "~제",
+            "korean_pronunciation": "세이",
+            "level": "4",
+            "id": 6813
+        },
+        {
+            "kanji": "注意",
+            "kana": "ちゅうい",
+            "meaning": "주의, 조심",
+            "korean_pronunciation": "츄-이",
+            "level": "4",
+            "id": 6814
+        },
+        {
+            "kanji": "台風",
+            "kana": "たいふう",
+            "meaning": "태풍",
+            "korean_pronunciation": "타이후-",
+            "level": "4",
+            "id": 6815
+        },
+        {
+            "kanji": "日",
+            "kana": "ひ",
+            "meaning": "해, 햇빛, 날",
+            "korean_pronunciation": "히",
+            "level": "4",
+            "id": 6816
+        },
+        {
+            "kanji": "～軒",
+            "kana": "～けん",
+            "meaning": "가구 (집 세는 단위)",
+            "korean_pronunciation": "켄",
+            "level": "4",
+            "id": 6817
+        },
+        {
+            "kanji": "そう",
+            "kana": "そう",
+            "meaning": "정말, 그렇구나; 응, 맞아",
+            "korean_pronunciation": "소-",
+            "level": "4",
+            "id": 6818
+        },
+        {
+            "kanji": "通る",
+            "kana": "とおる",
+            "meaning": "통과하다, 지나가다",
+            "korean_pronunciation": "토-루",
+            "level": "4",
+            "id": 6819
+        },
+        {
+            "kanji": "過ぎる",
+            "kana": "すぎる",
+            "meaning": "지나가다, 초과하다, 넘다",
+            "korean_pronunciation": "스기루",
+            "level": "4",
+            "id": 6820
+        },
+        {
+            "kanji": "レポート; リポート",
+            "kana": "レポート; リポート",
+            "meaning": "보고서",
+            "korean_pronunciation": "레포-토; 리포-토",
+            "level": "4",
+            "id": 6821
+        },
+        {
+            "kanji": "葉",
+            "kana": "は",
+            "meaning": "잎",
+            "korean_pronunciation": "하",
+            "level": "4",
+            "id": 6822
+        },
+        {
+            "kanji": "必要",
+            "kana": "ひつよう",
+            "meaning": "필요한",
+            "korean_pronunciation": "히츠요-",
+            "level": "4",
+            "id": 6823
+        },
+        {
+            "kanji": "課長",
+            "kana": "かちょう",
+            "meaning": "과장",
+            "korean_pronunciation": "카쵸-",
+            "level": "4",
+            "id": 6824
+        },
+        {
+            "kanji": "地震",
+            "kana": "じしん",
+            "meaning": "지진",
+            "korean_pronunciation": "지신",
+            "level": "4",
+            "id": 6825
+        },
+        {
+            "kanji": "すると",
+            "kana": "すると",
+            "meaning": "그러면, 그리고 나서",
+            "korean_pronunciation": "스루토",
+            "level": "4",
+            "id": 6826
+        },
+        {
+            "kanji": "止める",
+            "kana": "やめる",
+            "meaning": "그만두다, 멈추다",
+            "korean_pronunciation": "야메루",
+            "level": "4",
+            "id": 6827
+        },
+        {
+            "kanji": "ガラス",
+            "kana": "ガラス",
+            "meaning": "유리, 판유리",
+            "korean_pronunciation": "가라스",
+            "level": "4",
+            "id": 6828
+        },
+        {
+            "kanji": "～学部",
+            "kana": "～がくぶ",
+            "meaning": "대학교의 학부",
+            "korean_pronunciation": "가쿠부",
+            "level": "4",
+            "id": 6829
+        },
+        {
+            "kanji": "厳しい",
+            "kana": "きびしい",
+            "meaning": "엄격한; 엄한; 혹독한",
+            "korean_pronunciation": "키비시이",
+            "level": "4",
+            "id": 6830
+        },
+        {
+            "kanji": "エスカレーター",
+            "kana": "エスカレーター",
+            "meaning": "에스컬레이터",
+            "korean_pronunciation": "에스카레-타-",
+            "level": "4",
+            "id": 6831
+        },
+        {
+            "kanji": "人口",
+            "kana": "じんこう",
+            "meaning": "인구",
+            "korean_pronunciation": "진코-",
+            "level": "4",
+            "id": 6832
+        },
+        {
+            "kanji": "月",
+            "kana": "つき",
+            "meaning": "달",
+            "korean_pronunciation": "츠키",
+            "level": "4",
+            "id": 6833
+        },
+        {
+            "kanji": "絹",
+            "kana": "きぬ",
+            "meaning": "비단, 견직물",
+            "korean_pronunciation": "키누",
+            "level": "4",
+            "id": 6834
+        },
+        {
+            "kanji": "ちっとも",
+            "kana": "ちっとも",
+            "meaning": "조금도 (~않다, 부정 동사)",
+            "korean_pronunciation": "칫토모",
+            "level": "4",
+            "id": 6835
+        },
+        {
+            "kanji": "深い",
+            "kana": "ふかい",
+            "meaning": "깊은, 심오한",
+            "korean_pronunciation": "후카이",
+            "level": "4",
+            "id": 6836
+        },
+        {
+            "kanji": "壊れる",
+            "kana": "こわれる",
+            "meaning": "부서지다, 망가지다 (자동사)",
+            "korean_pronunciation": "코와레루",
+            "level": "4",
+            "id": 6837
+        },
+        {
+            "kanji": "揺れる",
+            "kana": "ゆれる",
+            "meaning": "흔들리다, 동요하다",
+            "korean_pronunciation": "유레루",
+            "level": "4",
+            "id": 6838
+        },
+        {
+            "kanji": "落る",
+            "kana": "おちる",
+            "meaning": "떨어지다, 낙하하다",
+            "korean_pronunciation": "오치루",
+            "level": "4",
+            "id": 6839
+        },
+        {
+            "kanji": "できるだけ",
+            "kana": "できるだけ",
+            "meaning": "가능한 한, 최대한",
+            "korean_pronunciation": "데키루다케",
+            "level": "4",
+            "id": 6840
+        },
+        {
+            "kanji": "悲しい",
+            "kana": "かなしい",
+            "meaning": "슬픈, 비통한",
+            "korean_pronunciation": "카나시이",
+            "level": "4",
+            "id": 6841
+        },
+        {
+            "kanji": "中学校",
+            "kana": "ちゅうがっこう",
+            "meaning": "중학교 학생",
+            "korean_pronunciation": "츄-가콧코-",
+            "level": "4",
+            "id": 6842
+        },
+        {
+            "kanji": "ガス",
+            "kana": "ガス",
+            "meaning": "가스",
+            "korean_pronunciation": "가스",
+            "level": "4",
+            "id": 6843
+        },
+        {
+            "kanji": "祈る",
+            "kana": "いのる",
+            "meaning": "기도하다; 바라다",
+            "korean_pronunciation": "이노루",
+            "level": "4",
+            "id": 6844
+        },
+        {
+            "kanji": "盛ん",
+            "kana": "さかん",
+            "meaning": "번영하는, 활발한, 번창하는",
+            "korean_pronunciation": "사칸",
+            "level": "4",
+            "id": 6845
+        },
+        {
+            "kanji": "アルバイト",
+            "kana": "アルバイト",
+            "meaning": "아르바이트 (시간제 근무)",
+            "korean_pronunciation": "아루바이토",
+            "level": "4",
+            "id": 6846
+        },
+        {
+            "kanji": "起こす",
+            "kana": "おこす",
+            "meaning": "깨우다 (누군가를)",
+            "korean_pronunciation": "오코스",
+            "level": "4",
+            "id": 6847
+        },
+        {
+            "kanji": "致す",
+            "kana": "いたす",
+            "meaning": "하다 (극도로 겸손한 표현)",
+            "korean_pronunciation": "이타스",
+            "level": "4",
+            "id": 6848
+        },
+        {
+            "kanji": "噛む",
+            "kana": "かむ",
+            "meaning": "물다, 씹다",
+            "korean_pronunciation": "카무",
+            "level": "4",
+            "id": 6849
+        },
+        {
+            "kanji": "赤ちゃん",
+            "kana": "あかちゃん",
+            "meaning": "아기, 유아",
+            "korean_pronunciation": "아카챤",
+            "level": "4",
+            "id": 6850
+        },
+        {
+            "kanji": "浅い",
+            "kana": "あさい",
+            "meaning": "얕은, 피상적인",
+            "korean_pronunciation": "아사이",
+            "level": "4",
+            "id": 6851
+        },
+        {
+            "kanji": "嘘",
+            "kana": "うそ",
+            "meaning": "거짓말",
+            "korean_pronunciation": "우소",
+            "level": "4",
+            "id": 6852
+        },
+        {
+            "kanji": "小説",
+            "kana": "しょうせつ",
+            "meaning": "소설",
+            "korean_pronunciation": "쇼-세츠",
+            "level": "4",
+            "id": 6853
+        },
+        {
+            "kanji": "親",
+            "kana": "おや",
+            "meaning": "부모",
+            "korean_pronunciation": "오야",
+            "level": "4",
+            "id": 6854
+        },
+        {
+            "kanji": "それに",
+            "kana": "それに",
+            "meaning": "게다가, 더욱이",
+            "korean_pronunciation": "소레니",
+            "level": "4",
+            "id": 6855
+        },
+        {
+            "kanji": "西洋",
+            "kana": "せいよう",
+            "meaning": "서양, 서구 국가",
+            "korean_pronunciation": "세이요-",
+            "level": "4",
+            "id": 6856
+        },
+        {
+            "kanji": "思う",
+            "kana": "おもう",
+            "meaning": "생각하다, 느끼다",
+            "korean_pronunciation": "오모-",
+            "level": "4",
+            "id": 6857
+        },
+        {
+            "kanji": "パート (タイム)",
+            "kana": "パート (タイム)",
+            "meaning": "파트 타임 (특히 여성 파트 타임 근로자)",
+            "korean_pronunciation": "파-토 (타이무)",
+            "level": "4",
+            "id": 6858
+        },
+        {
+            "kanji": "時代",
+            "kana": "じだい",
+            "meaning": "시대, 시기, 시대, 막",
+            "korean_pronunciation": "지다이",
+            "level": "4",
+            "id": 6859
+        },
+        {
+            "kanji": "申し上げる",
+            "kana": "もうしあげる",
+            "meaning": "말하다, 들려주다 (겸손)",
+            "korean_pronunciation": "모-시아게루",
+            "level": "4",
+            "id": 6860
+        },
+        {
+            "kanji": "～式",
+            "kana": "～しき",
+            "meaning": "~식; ~ 스타일",
+            "korean_pronunciation": "시키",
+            "level": "4",
+            "id": 6861
+        },
+        {
+            "kanji": "出席",
+            "kana": "しゅっせきする",
+            "meaning": "출석",
+            "korean_pronunciation": "슛세키-스루",
+            "level": "4",
+            "id": 6862
+        },
+        {
+            "kanji": "～家",
+            "kana": "～か",
+            "meaning": "~에 특화된 사람",
+            "korean_pronunciation": "카",
+            "level": "4",
+            "id": 6863
+        },
+        {
+            "kanji": "迎える",
+            "kana": "むかえる",
+            "meaning": "맞이하다; 만나다; 인사하다",
+            "korean_pronunciation": "무카에루",
+            "level": "4",
+            "id": 6864
+        },
+        {
+            "kanji": "触る",
+            "kana": "さわる",
+            "meaning": "만지다, 느끼다",
+            "korean_pronunciation": "사와루",
+            "level": "4",
+            "id": 6865
+        },
+        {
+            "kanji": "建て",
+            "kana": "～だて",
+            "meaning": "~층 건물, 독립적인 주거",
+            "korean_pronunciation": "다테",
+            "level": "4",
+            "id": 6866
+        },
+        {
+            "kanji": "社長",
+            "kana": "しゃちょう",
+            "meaning": "사장",
+            "korean_pronunciation": "샤쵸-",
+            "level": "4",
+            "id": 6867
+        },
+        {
+            "kanji": "動物園",
+            "kana": "どうぶつえん",
+            "meaning": "동물원",
+            "korean_pronunciation": "도-부츠엔",
+            "level": "4",
+            "id": 6868
+        },
+        {
+            "kanji": "捕まえる",
+            "kana": "つかまえる",
+            "meaning": "잡다, 체포하다",
+            "korean_pronunciation": "츠카마에루",
+            "level": "4",
+            "id": 6869
+        },
+        {
+            "kanji": "季節",
+            "kana": "きせつ",
+            "meaning": "계절 (날씨와 관련)",
+            "korean_pronunciation": "키세츠",
+            "level": "4",
+            "id": 6870
+        },
+        {
+            "kanji": "寄る",
+            "kana": "よる",
+            "meaning": "들르다",
+            "korean_pronunciation": "요루",
+            "level": "4",
+            "id": 6871
+        },
+        {
+            "kanji": "決まる",
+            "kana": "きまる",
+            "meaning": "정해지다; 결정되다 (자동사)",
+            "korean_pronunciation": "키마루",
+            "level": "4",
+            "id": 6872
+        },
+        {
+            "kanji": "開く",
+            "kana": "ひらく",
+            "meaning": "열다; (행사를) 개최하다",
+            "korean_pronunciation": "히라쿠",
+            "level": "4",
+            "id": 6873
+        },
+        {
+            "kanji": "逃げる",
+            "kana": "にげる",
+            "meaning": "도망치다, 달아나다",
+            "korean_pronunciation": "니게루",
+            "level": "4",
+            "id": 6874
+        },
+        {
+            "kanji": "だから",
+            "kana": "だから",
+            "meaning": "그래서, 그러므로",
+            "korean_pronunciation": "다카라",
+            "level": "4",
+            "id": 6875
+        },
+        {
+            "kanji": "残念",
+            "kana": "ざんねん",
+            "meaning": "유감; 안타까운",
+            "korean_pronunciation": "잔넨",
+            "level": "4",
+            "id": 6876
+        },
+        {
+            "kanji": "畳",
+            "kana": "たたみ",
+            "meaning": "다다미 (일본식 돗자리)",
+            "korean_pronunciation": "다타미",
+            "level": "4",
+            "id": 6877
+        },
+        {
+            "kanji": "丁寧",
+            "kana": "ていねい",
+            "meaning": "정중한, 예의 바른, 세심한",
+            "korean_pronunciation": "테-네-",
+            "level": "4",
+            "id": 6878
+        },
+        {
+            "kanji": "地理",
+            "kana": "ちり",
+            "meaning": "지리",
+            "korean_pronunciation": "치리",
+            "level": "4",
+            "id": 6879
+        },
+        {
+            "kanji": "さっき",
+            "kana": "さっき",
+            "meaning": "방금, 조금 전",
+            "korean_pronunciation": "삿키",
+            "level": "4",
+            "id": 6880
+        },
+        {
+            "kanji": "怖い",
+            "kana": "こわい",
+            "meaning": "무서운, 두려운",
+            "korean_pronunciation": "코와이",
+            "level": "4",
+            "id": 6881
+        },
+        {
+            "kanji": "包む",
+            "kana": "つつむ",
+            "meaning": "싸다, 감싸다",
+            "korean_pronunciation": "츠츠무",
+            "level": "4",
+            "id": 6882
+        },
+        {
+            "kanji": "なるべく",
+            "kana": "なるべく",
+            "meaning": "가능한 한, 가급적",
+            "korean_pronunciation": "나루베쿠",
+            "level": "4",
+            "id": 6883
+        },
+        {
+            "kanji": "無理",
+            "kana": "むり",
+            "meaning": "불합리한, 불가능한",
+            "korean_pronunciation": "무리",
+            "level": "4",
+            "id": 6884
+        },
+        {
+            "kanji": "サンドイッチ",
+            "kana": "サンドイッチ",
+            "meaning": "샌드위치",
+            "korean_pronunciation": "산도잇치",
+            "level": "4",
+            "id": 6885
+        },
+        {
+            "kanji": "会議室",
+            "kana": "かいぎしつ",
+            "meaning": "회의실",
+            "korean_pronunciation": "카이기시츠",
+            "level": "4",
+            "id": 6886
+        },
+        {
+            "kanji": "品物",
+            "kana": "しなもの",
+            "meaning": "상품, 물품",
+            "korean_pronunciation": "시나모노",
+            "level": "4",
+            "id": 6887
+        },
+        {
+            "kanji": "人形",
+            "kana": "にんぎょう",
+            "meaning": "인형, 조각",
+            "korean_pronunciation": "닌교-",
+            "level": "4",
+            "id": 6888
+        },
+        {
+            "kanji": "利用",
+            "kana": "りよう",
+            "meaning": "이용, 활용",
+            "korean_pronunciation": "리요-",
+            "level": "4",
+            "id": 6889
+        },
+        {
+            "kanji": "飾る",
+            "kana": "かざる",
+            "meaning": "장식하다, 꾸미다",
+            "korean_pronunciation": "카자루",
+            "level": "4",
+            "id": 6890
+        },
+        {
+            "kanji": "止める",
+            "kana": "とめる",
+            "meaning": "멈추게 하다 (무언가를)",
+            "korean_pronunciation": "토메루",
+            "level": "4",
+            "id": 6891
+        },
+        {
+            "kanji": "恥ずかしい",
+            "kana": "はずかしい",
+            "meaning": "부끄러운, 창피한",
+            "korean_pronunciation": "하즈카시이",
+            "level": "4",
+            "id": 6892
+        },
+        {
+            "kanji": "いくら～ても",
+            "kana": "いくら～ても",
+            "meaning": "아무리 ~해도",
+            "korean_pronunciation": "이쿠라~테모",
+            "level": "4",
+            "id": 6893
+        },
+        {
+            "kanji": "用事",
+            "kana": "ようじ",
+            "meaning": "용무, 볼일, 심부름",
+            "korean_pronunciation": "요-지",
+            "level": "4",
+            "id": 6894
+        },
+        {
+            "kanji": "ビル",
+            "kana": "ビル",
+            "meaning": "빌딩 (약어)",
+            "korean_pronunciation": "비루",
+            "level": "4",
+            "id": 6895
+        },
+        {
+            "kanji": "けんかする",
+            "kana": "けんかする",
+            "meaning": "싸우다",
+            "korean_pronunciation": "켄카-스루",
+            "level": "4",
+            "id": 6896
+        },
+        {
+            "kanji": "頑張る",
+            "kana": "がんばる",
+            "meaning": "열심히 하다, 노력하다, 인내하다",
+            "korean_pronunciation": "감바루",
+            "level": "4",
+            "id": 6897
+        },
+        {
+            "kanji": "投げる",
+            "kana": "なげる",
+            "meaning": "던지다, 내버리다",
+            "korean_pronunciation": "나게루",
+            "level": "4",
+            "id": 6898
+        },
+        {
+            "kanji": "故障",
+            "kana": "こしょうする",
+            "meaning": "고장나다",
+            "korean_pronunciation": "코쇼-스루",
+            "level": "4",
+            "id": 6899
+        },
+        {
+            "kanji": "力",
+            "kana": "ちから",
+            "meaning": "힘, 능력",
+            "korean_pronunciation": "치카라",
+            "level": "4",
+            "id": 6900
+        },
+        {
+            "kanji": "受ける",
+            "kana": "うける",
+            "meaning": "(시험, 면접 등을) 보다; 받다",
+            "korean_pronunciation": "우케루",
+            "level": "4",
+            "id": 6901
+        },
+        {
+            "kanji": "気分",
+            "kana": "きぶん",
+            "meaning": "기분, 감정",
+            "korean_pronunciation": "키분",
+            "level": "4",
+            "id": 6902
+        },
+        {
+            "kanji": "間違える",
+            "kana": "まちがえる",
+            "meaning": "실수하다",
+            "korean_pronunciation": "마치가에루",
+            "level": "4",
+            "id": 6903
+        },
+        {
+            "kanji": "そんな",
+            "kana": "そんな",
+            "meaning": "그런, 저런, 그런 종류의",
+            "korean_pronunciation": "손나",
+            "level": "4",
+            "id": 6904
+        },
+        {
+            "kanji": "星",
+            "kana": "ほし",
+            "meaning": "별",
+            "korean_pronunciation": "호시",
+            "level": "4",
+            "id": 6905
+        },
+        {
+            "kanji": "場合",
+            "kana": "ばあい",
+            "meaning": "경우, 상황",
+            "korean_pronunciation": "바아이",
+            "level": "4",
+            "id": 6906
+        },
+        {
+            "kanji": "やっと",
+            "kana": "やっと",
+            "meaning": "마침내, 드디어",
+            "korean_pronunciation": "얏토",
+            "level": "4",
+            "id": 6907
+        },
+        {
+            "kanji": "足りる",
+            "kana": "たりる",
+            "meaning": "충분하다; 모자라지 않다 (자동사)",
+            "korean_pronunciation": "타리루",
+            "level": "4",
+            "id": 6908
+        },
+        {
+            "kanji": "行う",
+            "kana": "おこなう",
+            "meaning": "실행하다; (보통 서면체에서) 개최하다",
+            "korean_pronunciation": "오코나-",
+            "level": "4",
+            "id": 6909
+        },
+        {
+            "kanji": "ぶどう",
+            "kana": "ぶどう",
+            "meaning": "포도",
+            "korean_pronunciation": "부도-",
+            "level": "4",
+            "id": 6910
+        },
+        {
+            "kanji": "無くなる",
+            "kana": "なくなる",
+            "meaning": "없어지다, 분실되다",
+            "korean_pronunciation": "나쿠나루",
+            "level": "4",
+            "id": 6911
+        },
+        {
+            "kanji": "準備",
+            "kana": "じゅんびする",
+            "meaning": "준비하다",
+            "korean_pronunciation": "쥰비-스루",
+            "level": "4",
+            "id": 6912
+        },
+        {
+            "kanji": "世界",
+            "kana": "せかい",
+            "meaning": "세계",
+            "korean_pronunciation": "세카이",
+            "level": "4",
+            "id": 6913
+        },
+        {
+            "kanji": "住所",
+            "kana": "じゅうしょ",
+            "meaning": "주소; 거주지",
+            "korean_pronunciation": "쥬-쇼",
+            "level": "4",
+            "id": 6914
+        },
+        {
+            "kanji": "再来月",
+            "kana": "さらいげつ",
+            "meaning": "다다음 달",
+            "korean_pronunciation": "사라이게츠",
+            "level": "4",
+            "id": 6915
+        },
+        {
+            "kanji": "林",
+            "kana": "はやし",
+            "meaning": "숲, 삼림",
+            "korean_pronunciation": "하야시",
+            "level": "4",
+            "id": 6916
+        },
+        {
+            "kanji": "倍",
+            "kana": "ばい",
+            "meaning": "배, 두 배",
+            "korean_pronunciation": "바이",
+            "level": "4",
+            "id": 6917
+        },
+        {
+            "kanji": "痩せる",
+            "kana": "やせる",
+            "meaning": "살이 빠지다",
+            "korean_pronunciation": "야세루",
+            "level": "4",
+            "id": 6918
+        },
+        {
+            "kanji": "線",
+            "kana": "せん",
+            "meaning": "선, 전선",
+            "korean_pronunciation": "센",
+            "level": "4",
+            "id": 6919
+        },
+        {
+            "kanji": "戦争",
+            "kana": "せんそう",
+            "meaning": "전쟁",
+            "korean_pronunciation": "센소-",
+            "level": "4",
+            "id": 6920
+        },
+        {
+            "kanji": "決める",
+            "kana": "きめる",
+            "meaning": "결정하다 (타동사)",
+            "korean_pronunciation": "키메루",
+            "level": "4",
+            "id": 6921
+        },
+        {
+            "kanji": "調べる",
+            "kana": "しらべる",
+            "meaning": "조사하다; 찾아보다; 문의하다; 검색하다",
+            "korean_pronunciation": "시라베루",
+            "level": "4",
+            "id": 6922
+        },
+        {
+            "kanji": "寝坊",
+            "kana": "ねぼう",
+            "meaning": "늦잠",
+            "korean_pronunciation": "네보-",
+            "level": "4",
+            "id": 6923
+        },
+        {
+            "kanji": "パパ",
+            "kana": "パパ",
+            "meaning": "아빠",
+            "korean_pronunciation": "파파",
+            "level": "4",
+            "id": 6924
+        },
+        {
+            "kanji": "光る",
+            "kana": "ひかる",
+            "meaning": "빛나다, 반짝이다",
+            "korean_pronunciation": "히카루",
+            "level": "4",
+            "id": 6925
+        },
+        {
+            "kanji": "夫",
+            "kana": "おっと",
+            "meaning": "남편",
+            "korean_pronunciation": "옷토",
+            "level": "4",
+            "id": 6926
+        },
+        {
+            "kanji": "雲",
+            "kana": "くも",
+            "meaning": "구름",
+            "korean_pronunciation": "쿠모",
+            "level": "4",
+            "id": 6927
+        },
+        {
+            "kanji": "坂",
+            "kana": "さか",
+            "meaning": "경사, 언덕",
+            "korean_pronunciation": "사카",
+            "level": "4",
+            "id": 6928
+        },
+        {
+            "kanji": "～(て) しまう",
+            "kana": "～(て) しまう",
+            "meaning": "~해 버리다",
+            "korean_pronunciation": "시마-",
+            "level": "4",
+            "id": 6929
+        },
+        {
+            "kanji": "飛行場",
+            "kana": "ひこうじょう",
+            "meaning": "비행장, 공항",
+            "korean_pronunciation": "히코-죠-",
+            "level": "4",
+            "id": 6930
+        },
+        {
+            "kanji": "柔道",
+            "kana": "じゅうどう",
+            "meaning": "유도",
+            "korean_pronunciation": "쥬-도-",
+            "level": "4",
+            "id": 6931
+        },
+        {
+            "kanji": "決して",
+            "kana": "けっして",
+            "meaning": "결코",
+            "korean_pronunciation": "켓시테",
+            "level": "4",
+            "id": 6932
+        },
+        {
+            "kanji": "事務所",
+            "kana": "じむしょ",
+            "meaning": "사무실",
+            "korean_pronunciation": "지무쇼",
+            "level": "4",
+            "id": 6933
+        },
+        {
+            "kanji": "連絡",
+            "kana": "れんらく",
+            "meaning": "연락, 접촉, 연결",
+            "korean_pronunciation": "렌라쿠",
+            "level": "4",
+            "id": 6934
+        },
+        {
+            "kanji": "小学校",
+            "kana": "しょうがっこう",
+            "meaning": "초등학교 학생",
+            "korean_pronunciation": "쇼-가콧코-",
+            "level": "4",
+            "id": 6935
+        },
+        {
+            "kanji": "客",
+            "kana": "きゃく",
+            "meaning": "손님, 고객",
+            "korean_pronunciation": "캬쿠",
+            "level": "4",
+            "id": 6936
+        },
+        {
+            "kanji": "昔",
+            "kana": "むかし",
+            "meaning": "옛날; 과거",
+            "korean_pronunciation": "무카시",
+            "level": "4",
+            "id": 6937
+        },
+        {
+            "kanji": "美しい",
+            "kana": "うつくしい",
+            "meaning": "아름다운, 사랑스러운",
+            "korean_pronunciation": "우츠쿠시이",
+            "level": "4",
+            "id": 6938
+        },
+        {
+            "kanji": "捨てる",
+            "kana": "すてる",
+            "meaning": "버리다 (쓰레기), 던지다, 폐기하다",
+            "korean_pronunciation": "스테루",
+            "level": "4",
+            "id": 6939
+        },
+        {
+            "kanji": "なさる",
+            "kana": "なさる",
+            "meaning": "하다 (존경어)",
+            "korean_pronunciation": "나사루",
+            "level": "4",
+            "id": 6940
+        },
+        {
+            "kanji": "事",
+            "kana": "こと",
+            "meaning": "일, 사건, 사실",
+            "korean_pronunciation": "코토",
+            "level": "4",
+            "id": 6941
+        },
+        {
+            "kanji": "どんどん",
+            "kana": "どんどん",
+            "meaning": "차츰차츰; 빠른 속도로",
+            "korean_pronunciation": "돈돈",
+            "level": "4",
+            "id": 6942
+        },
+        {
+            "kanji": "試合",
+            "kana": "しあい",
+            "meaning": "시합, 경기, 대회",
+            "korean_pronunciation": "시아이",
+            "level": "4",
+            "id": 6943
+        },
+        {
+            "kanji": "適当",
+            "kana": "てきとう",
+            "meaning": "적합성, 적당함",
+            "korean_pronunciation": "테키토-",
+            "level": "4",
+            "id": 6944
+        },
+        {
+            "kanji": "素晴らしい",
+            "kana": "すばらしい",
+            "meaning": "훌륭한; 멋진",
+            "korean_pronunciation": "스바라시이",
+            "level": "4",
+            "id": 6945
+        },
+        {
+            "kanji": "美術館",
+            "kana": "びじゅつかん",
+            "meaning": "미술관",
+            "korean_pronunciation": "비쥬츠칸",
+            "level": "4",
+            "id": 6946
+        },
+        {
+            "kanji": "文法",
+            "kana": "ぶんぽう",
+            "meaning": "문법",
+            "korean_pronunciation": "분포-",
+            "level": "4",
+            "id": 6947
+        },
+        {
+            "kanji": "終わり",
+            "kana": "おわり",
+            "meaning": "끝",
+            "korean_pronunciation": "오와리",
+            "level": "4",
+            "id": 6948
+        },
+        {
+            "kanji": "壁",
+            "kana": "かべ",
+            "meaning": "벽",
+            "korean_pronunciation": "카베",
+            "level": "4",
+            "id": 6949
+        },
+        {
+            "kanji": "一度",
+            "kana": "いちど",
+            "meaning": "한 번, 한 차례",
+            "korean_pronunciation": "이치도",
+            "level": "4",
+            "id": 6950
+        },
+        {
+            "kanji": "お礼",
+            "kana": "おれい",
+            "meaning": "감사 표현; 감사; 감사 선물; 절",
+            "korean_pronunciation": "오레이",
+            "level": "4",
+            "id": 6951
+        },
+        {
+            "kanji": "親切",
+            "kana": "しんせつ",
+            "meaning": "친절함",
+            "korean_pronunciation": "신세츠",
+            "level": "4",
+            "id": 6952
+        },
+        {
+            "kanji": "知らせる",
+            "kana": "しらせる",
+            "meaning": "알리다",
+            "korean_pronunciation": "시라세루",
+            "level": "4",
+            "id": 6953
+        },
+        {
+            "kanji": "歯医者",
+            "kana": "はいしゃ",
+            "meaning": "치과 의사",
+            "korean_pronunciation": "하이샤",
+            "level": "4",
+            "id": 6954
+        },
+        {
+            "kanji": "熱心",
+            "kana": "ねっしん",
+            "meaning": "열심, 열정",
+            "korean_pronunciation": "넷신",
+            "level": "4",
+            "id": 6955
+        },
+        {
+            "kanji": "始める",
+            "kana": "はじめる",
+            "meaning": "시작하다, 개시하다",
+            "korean_pronunciation": "하지메루",
+            "level": "4",
+            "id": 6956
+        },
+        {
+            "kanji": "もらう",
+            "kana": "もらう",
+            "meaning": "받다",
+            "korean_pronunciation": "모라-",
+            "level": "4",
+            "id": 6957
+        },
+        {
+            "kanji": "泣く",
+            "kana": "なく",
+            "meaning": "울다",
+            "korean_pronunciation": "나쿠",
+            "level": "4",
+            "id": 6958
+        },
+        {
+            "kanji": "治る",
+            "kana": "なおる",
+            "meaning": "낫다; 회복되다 (자동사)",
+            "korean_pronunciation": "나오루",
+            "level": "4",
+            "id": 6959
+        },
+        {
+            "kanji": "熱",
+            "kana": "ねつ",
+            "meaning": "열, 발열, 온도",
+            "korean_pronunciation": "네츠",
+            "level": "4",
+            "id": 6960
+        },
+        {
+            "kanji": "お祭り",
+            "kana": "おまつり",
+            "meaning": "축제",
+            "korean_pronunciation": "오마츠리",
+            "level": "4",
+            "id": 6961
+        },
+        {
+            "kanji": "水道",
+            "kana": "すいどう",
+            "meaning": "수도, 수도관",
+            "korean_pronunciation": "스이도-",
+            "level": "4",
+            "id": 6962
+        },
+        {
+            "kanji": "匂い",
+            "kana": "におい",
+            "meaning": "냄새, 향기",
+            "korean_pronunciation": "니오이",
+            "level": "4",
+            "id": 6963
+        },
+        {
+            "kanji": "ベル",
+            "kana": "ベル",
+            "meaning": "벨",
+            "korean_pronunciation": "베루",
+            "level": "4",
+            "id": 6964
+        },
+        {
+            "kanji": "赤ん坊",
+            "kana": "あかんぼう",
+            "meaning": "아기",
+            "korean_pronunciation": "아칸보-",
+            "level": "4",
+            "id": 6965
+        },
+        {
+            "kanji": "おかしい",
+            "kana": "おかしい",
+            "meaning": "이상한; 묘한; 재미있는",
+            "korean_pronunciation": "오카시이",
+            "level": "4",
+            "id": 6966
+        },
+        {
+            "kanji": "事故",
+            "kana": "じこ",
+            "meaning": "사고",
+            "korean_pronunciation": "지코",
+            "level": "4",
+            "id": 6967
+        },
+        {
+            "kanji": "変",
+            "kana": "へん",
+            "meaning": "이상한, 이상한",
+            "korean_pronunciation": "헨",
+            "level": 4,
+            "id": 6968
+        },
+        {
+            "kanji": "辞典",
+            "kana": "じてん",
+            "meaning": "백과사전, 참고서",
+            "korean_pronunciation": "지텐",
+            "level": 4,
+            "id": 6969
+        },
+        {
+            "kanji": "残る",
+            "kana": "のこる",
+            "meaning": "남다 (자동사), 남겨지다",
+            "korean_pronunciation": "노코루",
+            "level": 4,
+            "id": 6970
+        },
+        {
+            "kanji": "立てる",
+            "kana": "たてる",
+            "meaning": "세우다 (타동사), 세우다",
+            "korean_pronunciation": "타테루",
+            "level": 4,
+            "id": 6971
+        },
+        {
+            "kanji": "くれる",
+            "kana": "くれる",
+            "meaning": "주다, 해주다",
+            "korean_pronunciation": "쿠레루",
+            "level": 4,
+            "id": 6972
+        },
+        {
+            "kanji": "～員",
+            "kana": "～いん",
+            "meaning": "~의 회원",
+            "korean_pronunciation": "인",
+            "level": 4,
+            "id": 6973
+        },
+        {
+            "kanji": "原因",
+            "kana": "げんいん",
+            "meaning": "원인, 발단, 근원",
+            "korean_pronunciation": "겐인",
+            "level": 4,
+            "id": 6974
+        },
+        {
+            "kanji": "驚く",
+            "kana": "おどろく",
+            "meaning": "놀라다, 깜짝 놀라다",
+            "korean_pronunciation": "오도로쿠",
+            "level": 4,
+            "id": 6975
+        },
+        {
+            "kanji": "頂く",
+            "kana": "いただく",
+            "meaning": "먹다/마시다의 극존칭; 받다의 겸양어",
+            "korean_pronunciation": "이타다쿠",
+            "level": 4,
+            "id": 6976
+        },
+        {
+            "kanji": "祖母",
+            "kana": "そぼ",
+            "meaning": "할머니",
+            "korean_pronunciation": "소보",
+            "level": 4,
+            "id": 6977
+        },
+        {
+            "kanji": "場所",
+            "kana": "ばしょ",
+            "meaning": "장소, 위치",
+            "korean_pronunciation": "바쇼",
+            "level": 4,
+            "id": 6978
+        },
+        {
+            "kanji": "答",
+            "kana": "こたえ",
+            "meaning": "답, 대답",
+            "korean_pronunciation": "코타에",
+            "level": 4,
+            "id": 6979
+        },
+        {
+            "kanji": "もちろん",
+            "kana": "もちろん",
+            "meaning": "물론, 당연히",
+            "korean_pronunciation": "모치론",
+            "level": 4,
+            "id": 6980
+        },
+        {
+            "kanji": "漬ける",
+            "kana": "つける",
+            "meaning": "담그다, 적시다, 절이다",
+            "korean_pronunciation": "츠케루",
+            "level": 4,
+            "id": 6981
+        },
+        {
+            "kanji": "受付",
+            "kana": "うけつけ",
+            "meaning": "접수(처)",
+            "korean_pronunciation": "우케츠케",
+            "level": 4,
+            "id": 6982
+        },
+        {
+            "kanji": "内",
+            "kana": "うち",
+            "meaning": "안, 내부",
+            "korean_pronunciation": "우치",
+            "level": 4,
+            "id": 6983
+        },
+        {
+            "kanji": "スクリーン",
+            "kana": "スクリーン",
+            "meaning": "스크린",
+            "korean_pronunciation": "스크린",
+            "level": 4,
+            "id": 6984
+        },
+        {
+            "kanji": "増える",
+            "kana": "ふえる",
+            "meaning": "늘다, 증가하다, 많아지다",
+            "korean_pronunciation": "후에루",
+            "level": 4,
+            "id": 6985
+        },
+        {
+            "kanji": "または",
+            "kana": "または",
+            "meaning": "또는, 혹은",
+            "korean_pronunciation": "마타와",
+            "level": 4,
+            "id": 6986
+        },
+        {
+            "kanji": "けがする",
+            "kana": "けがする",
+            "meaning": "부상 (생물체에 대한), 상처",
+            "korean_pronunciation": "케가스루",
+            "level": 4,
+            "id": 6987
+        },
+        {
+            "kanji": "以下",
+            "kana": "いか",
+            "meaning": "이하, ~아래",
+            "korean_pronunciation": "이카",
+            "level": 4,
+            "id": 6988
+        },
+        {
+            "kanji": "選ぶ",
+            "kana": "えらぶ",
+            "meaning": "고르다; 선택하다",
+            "korean_pronunciation": "에라부",
+            "level": 4,
+            "id": 6989
+        },
+        {
+            "kanji": "～ばかり",
+            "kana": "～ばかり",
+            "meaning": "~ 방금 ~하다, ~만",
+            "korean_pronunciation": "바카리",
+            "level": 4,
+            "id": 6990
+        },
+        {
+            "kanji": "心",
+            "kana": "こころ",
+            "meaning": "마음, 정신",
+            "korean_pronunciation": "코코로",
+            "level": 4,
+            "id": 6991
+        },
+        {
+            "kanji": "～だす",
+            "kana": "～だす",
+            "meaning": "~하기 시작하다",
+            "korean_pronunciation": "다스",
+            "level": 4,
+            "id": 6992
+        },
+        {
+            "kanji": "サラダ",
+            "kana": "サラダ",
+            "meaning": "샐러드",
+            "korean_pronunciation": "사라다",
+            "level": 4,
+            "id": 6993
+        },
+        {
+            "kanji": "届ける",
+            "kana": "とどける",
+            "meaning": "배달하다 (타동사)",
+            "korean_pronunciation": "토도케루",
+            "level": 4,
+            "id": 6994
+        },
+        {
+            "kanji": "挨拶",
+            "kana": "あいさつする",
+            "meaning": "인사하다",
+            "korean_pronunciation": "아이사츠스루",
+            "level": 4,
+            "id": 6995
+        },
+        {
+            "kanji": "景色",
+            "kana": "けしき",
+            "meaning": "경치, 풍경",
+            "korean_pronunciation": "케시키",
+            "level": 4,
+            "id": 6996
+        },
+        {
+            "kanji": "確か",
+            "kana": "たしか",
+            "meaning": "기억이 맞다면; 확실한, 분명한",
+            "korean_pronunciation": "타시카",
+            "level": 4,
+            "id": 6997
+        },
+        {
+            "kanji": "ステーキ",
+            "kana": "ステーキ",
+            "meaning": "스테이크",
+            "korean_pronunciation": "스테-키",
+            "level": 4,
+            "id": 6998
+        },
+        {
+            "kanji": "食料品",
+            "kana": "しょくりょうひん",
+            "meaning": "식료품, 식자재",
+            "korean_pronunciation": "쇼크료-힌",
+            "level": 4,
+            "id": 6999
+        },
+        {
+            "kanji": "森",
+            "kana": "もり",
+            "meaning": "숲",
+            "korean_pronunciation": "모리",
+            "level": 4,
+            "id": 7000
+        },
+        {
+            "kanji": "以内",
+            "kana": "いない",
+            "meaning": "이내, ~안에",
+            "korean_pronunciation": "이나이",
+            "level": 4,
+            "id": 7001
+        },
+        {
+            "kanji": "予定",
+            "kana": "よてい",
+            "meaning": "계획, 예정, 일정",
+            "korean_pronunciation": "요테이",
+            "level": 4,
+            "id": 7002
+        },
+        {
+            "kanji": "オーバー",
+            "kana": "オーバー",
+            "meaning": "오버코트; 초과, 과장",
+            "korean_pronunciation": "오-바-",
+            "level": 4,
+            "id": 7003
+        },
+        {
+            "kanji": "乾く",
+            "kana": "かわく",
+            "meaning": "마르다",
+            "korean_pronunciation": "카와쿠",
+            "level": 4,
+            "id": 7004
+        },
+        {
+            "kanji": "石",
+            "kana": "いし",
+            "meaning": "돌",
+            "korean_pronunciation": "이시",
+            "level": 4,
+            "id": 7005
+        },
+        {
+            "kanji": "思い出す",
+            "kana": "おもいだす",
+            "meaning": "기억하다, 생각해내다",
+            "korean_pronunciation": "오모이다스",
+            "level": 4,
+            "id": 7006
+        },
+        {
+            "kanji": "踊る",
+            "kana": "おどる",
+            "meaning": "춤추다",
+            "korean_pronunciation": "오도루",
+            "level": 4,
+            "id": 7007
+        },
+        {
+            "kanji": "細かい",
+            "kana": "こまかい",
+            "meaning": "작은; 세세한, 미세한",
+            "korean_pronunciation": "코마카이",
+            "level": 4,
+            "id": 7008
+        },
+        {
+            "kanji": "塗る",
+            "kana": "ぬる",
+            "meaning": "칠하다, 바르다",
+            "korean_pronunciation": "누루",
+            "level": 4,
+            "id": 7009
+        },
+        {
+            "kanji": "ご主人",
+            "kana": "ごしゅじん",
+            "meaning": "(당신/그녀의) 남편",
+            "korean_pronunciation": "고슈진",
+            "level": 4,
+            "id": 7010
+        },
+        {
+            "kanji": "珍しい",
+            "kana": "めずらしい",
+            "meaning": "드문, 희귀한",
+            "korean_pronunciation": "메즈라시이",
+            "level": 4,
+            "id": 7011
+        },
+        {
+            "kanji": "用",
+            "kana": "よう",
+            "meaning": "심부름, 용무, (처리해야 할) 일",
+            "korean_pronunciation": "요-",
+            "level": 4,
+            "id": 7012
+        },
+        {
+            "kanji": "公務員",
+            "kana": "こうむいん",
+            "meaning": "공무원",
+            "korean_pronunciation": "코-무인",
+            "level": 4,
+            "id": 7013
+        },
+        {
+            "kanji": "お嬢さん",
+            "kana": "おじょうさん",
+            "meaning": "(남의) 따님 (경칭)",
+            "korean_pronunciation": "오죠-산",
+            "level": 4,
+            "id": 7014
+        },
+        {
+            "kanji": "用意",
+            "kana": "ようい",
+            "meaning": "준비",
+            "korean_pronunciation": "요-이",
+            "level": 4,
+            "id": 7015
+        },
+        {
+            "kanji": "探す",
+            "kana": "さがす",
+            "meaning": "찾다, 수색하다, 찾아다니다",
+            "korean_pronunciation": "사가스",
+            "level": 4,
+            "id": 7016
+        },
+        {
+            "kanji": "形",
+            "kana": "かたち",
+            "meaning": "모양",
+            "korean_pronunciation": "카타치",
+            "level": 4,
+            "id": 7017
+        },
+        {
+            "kanji": "運転",
+            "kana": "うんてんする",
+            "meaning": "운전",
+            "korean_pronunciation": "운텐스루",
+            "level": 4,
+            "id": 7018
+        },
+        {
+            "kanji": "すっかり",
+            "kana": "すっかり",
+            "meaning": "모두, 완전히",
+            "korean_pronunciation": "슷카리",
+            "level": 4,
+            "id": 7019
+        },
+        {
+            "kanji": "アナウンサー",
+            "kana": "アナウンサー",
+            "meaning": "아나운서",
+            "korean_pronunciation": "아나운사-",
+            "level": 4,
+            "id": 7020
+        },
+        {
+            "kanji": "お土産",
+            "kana": "おみやげ",
+            "meaning": "기념품",
+            "korean_pronunciation": "오미야게",
+            "level": 4,
+            "id": 7021
+        },
+        {
+            "kanji": "消しゴム",
+            "kana": "けしゴム",
+            "meaning": "지우개",
+            "korean_pronunciation": "케시-고무",
+            "level": 4,
+            "id": 7022
+        },
+        {
+            "kanji": "旅館",
+            "kana": "りょかん",
+            "meaning": "일본식 여관",
+            "korean_pronunciation": "료칸",
+            "level": 4,
+            "id": 7023
+        },
+        {
+            "kanji": "海岸",
+            "kana": "かいがん",
+            "meaning": "해안, 바닷가",
+            "korean_pronunciation": "카이간",
+            "level": 4,
+            "id": 7024
+        },
+        {
+            "kanji": "寂しい",
+            "kana": "さびしい",
+            "meaning": "외로운, 쓸쓸한",
+            "korean_pronunciation": "사비시이",
+            "level": 4,
+            "id": 7025
+        },
+        {
+            "kanji": "火",
+            "kana": "ひ",
+            "meaning": "불",
+            "korean_pronunciation": "히",
+            "level": 4,
+            "id": 7026
+        },
+        {
+            "kanji": "育てる",
+            "kana": "そだてる",
+            "meaning": "기르다 (타동사); 양육하다",
+            "korean_pronunciation": "소다테루",
+            "level": 4,
+            "id": 7027
+        },
+        {
+            "kanji": "味噌",
+            "kana": "みそ",
+            "meaning": "된장",
+            "korean_pronunciation": "미소",
+            "level": 4,
+            "id": 7028
+        },
+        {
+            "kanji": "お祝い",
+            "kana": "おいわい",
+            "meaning": "축하, 경축",
+            "korean_pronunciation": "오이와이",
+            "level": 4,
+            "id": 7029
+        },
+        {
+            "kanji": "乗り物",
+            "kana": "のりもの",
+            "meaning": "탈것, 운송 수단",
+            "korean_pronunciation": "노리모노",
+            "level": 4,
+            "id": 7030
+        },
+        {
+            "kanji": "案内",
+            "kana": "あんないする",
+            "meaning": "안내, 지도",
+            "korean_pronunciation": "안나이-스루",
+            "level": 4,
+            "id": 7031
+        },
+        {
+            "kanji": "通う",
+            "kana": "かよう",
+            "meaning": "왕복하다; 통근하다",
+            "korean_pronunciation": "카요-",
+            "level": 4,
+            "id": 7032
+        },
+        {
+            "kanji": "連れる",
+            "kana": "つれる",
+            "meaning": "데리고 가다",
+            "korean_pronunciation": "츠레루",
+            "level": 4,
+            "id": 7033
+        },
+        {
+            "kanji": "技術",
+            "kana": "ぎじゅつ",
+            "meaning": "기술, 테크놀로지, 기예",
+            "korean_pronunciation": "기쥬츠",
+            "level": 4,
+            "id": 7034
+        },
+        {
+            "kanji": "小鳥",
+            "kana": "ことり",
+            "meaning": "작은 새",
+            "korean_pronunciation": "코토리",
+            "level": 4,
+            "id": 7035
+        },
+        {
+            "kanji": "下宿",
+            "kana": "げしゅく",
+            "meaning": "하숙, 하숙집",
+            "korean_pronunciation": "게슈쿠",
+            "level": 4,
+            "id": 7036
+        },
+        {
+            "kanji": "ジャム",
+            "kana": "ジャム",
+            "meaning": "잼",
+            "korean_pronunciation": "자무",
+            "level": 4,
+            "id": 7037
+        },
+        {
+            "kanji": "招待",
+            "kana": "しょうたいする",
+            "meaning": "초대",
+            "korean_pronunciation": "쇼-타이-스루",
+            "level": 4,
+            "id": 7038
+        },
+        {
+            "kanji": "鏡",
+            "kana": "かがみ",
+            "meaning": "거울",
+            "korean_pronunciation": "카가미",
+            "level": 4,
+            "id": 7039
+        },
+        {
+            "kanji": "はず",
+            "kana": "はず",
+            "meaning": "~해야 한다",
+            "korean_pronunciation": "하즈",
+            "level": 4,
+            "id": 7040
+        },
+        {
+            "kanji": "法律",
+            "kana": "ほうりつ",
+            "meaning": "법률",
+            "korean_pronunciation": "호-리츠",
+            "level": 4,
+            "id": 7041
+        },
+        {
+            "kanji": "進む",
+            "kana": "すすむ",
+            "meaning": "진행하다, 나아가다",
+            "korean_pronunciation": "스스무",
+            "level": 4,
+            "id": 7042
+        },
+        {
+            "kanji": "楽む",
+            "kana": "たのしむ",
+            "meaning": "즐기다",
+            "korean_pronunciation": "타노시무",
+            "level": 4,
+            "id": 7043
+        },
+        {
+            "kanji": "貿易",
+            "kana": "ぼうえき",
+            "meaning": "무역",
+            "korean_pronunciation": "보-에키",
+            "level": 4,
+            "id": 7044
+        },
+        {
+            "kanji": "反対",
+            "kana": "はんたい",
+            "meaning": "반대, 저항, 반항",
+            "korean_pronunciation": "한타이",
+            "level": 4,
+            "id": 7045
+        },
+        {
+            "kanji": "おる",
+            "kana": "おる",
+            "meaning": "있다의 극존칭",
+            "korean_pronunciation": "오루",
+            "level": 4,
+            "id": 7046
+        },
+        {
+            "kanji": "申す",
+            "kana": "もうす",
+            "meaning": "말하다의 극존칭 (겸양어)",
+            "korean_pronunciation": "모-스",
+            "level": 4,
+            "id": 7047
+        },
+        {
+            "kanji": "試験",
+            "kana": "しけん",
+            "meaning": "시험",
+            "korean_pronunciation": "시켄",
+            "level": 4,
+            "id": 7048
+        },
+        {
+            "kanji": "真面目",
+            "kana": "まじめ",
+            "meaning": "성실한, 진지한",
+            "korean_pronunciation": "마지메",
+            "level": 4,
+            "id": 7049
+        },
+        {
+            "kanji": "nan",
+            "kana": "ごらんになる",
+            "meaning": "보다의 존경어",
+            "korean_pronunciation": "고란니나루",
+            "level": 4,
+            "id": 7050
+        },
+        {
+            "kanji": "店員",
+            "kana": "てんいん",
+            "meaning": "점원; 가게 직원",
+            "korean_pronunciation": "텐인",
+            "level": 4,
+            "id": 7051
+        },
+        {
+            "kanji": "泊まる",
+            "kana": "とまる",
+            "meaning": "묵다 (숙박) (자동사)",
+            "korean_pronunciation": "토마루",
+            "level": 4,
+            "id": 7052
+        },
+        {
+            "kanji": "よろしい",
+            "kana": "よろしい",
+            "meaning": "좋습니다, 괜찮습니다 (경칭)",
+            "korean_pronunciation": "요로시이",
+            "level": 4,
+            "id": 7053
+        },
+        {
+            "kanji": "今夜",
+            "kana": "こんや",
+            "meaning": "오늘 밤",
+            "korean_pronunciation": "콘야",
+            "level": 4,
+            "id": 7054
+        },
+        {
+            "kanji": "おつり",
+            "kana": "おつり",
+            "meaning": "잔돈; 구매자에게 거슬러 주는 돈의 잔액",
+            "korean_pronunciation": "오츠리",
+            "level": 4,
+            "id": 7055
+        },
+        {
+            "kanji": "チェックする",
+            "kana": "チェックする",
+            "meaning": "점검하다, 체크하다",
+            "korean_pronunciation": "첵쿠스루",
+            "level": 4,
+            "id": 7056
+        },
+        {
+            "kanji": "会話",
+            "kana": "かいわ",
+            "meaning": "대화",
+            "korean_pronunciation": "카이와",
+            "level": 4,
+            "id": 7057
+        },
+        {
+            "kanji": "空気",
+            "kana": "くうき",
+            "meaning": "공기, 분위기",
+            "korean_pronunciation": "쿠-키",
+            "level": 4,
+            "id": 7058
+        },
+        {
+            "kanji": "交通",
+            "kana": "こうつう",
+            "meaning": "교통, 운송",
+            "korean_pronunciation": "코-츠-",
+            "level": 4,
+            "id": 7059
+        },
+        {
+            "kanji": "ワープロ",
+            "kana": "ワープロ",
+            "meaning": "워드 프로세서",
+            "korean_pronunciation": "와-푸로",
+            "level": 4,
+            "id": 7060
+        },
+        {
+            "kanji": "喜ぶ",
+            "kana": "よろこぶ",
+            "meaning": "기뻐하다, 매우 기뻐하다, 즐거워하다",
+            "korean_pronunciation": "요로코부",
+            "level": 4,
+            "id": 7061
+        },
+        {
+            "kanji": "急行",
+            "kana": "きゅうこう",
+            "meaning": "급행 열차 또는 버스",
+            "korean_pronunciation": "큐-코-",
+            "level": 4,
+            "id": 7062
+        },
+        {
+            "kanji": "皆",
+            "kana": "みな",
+            "meaning": "모두, 전부",
+            "korean_pronunciation": "미나",
+            "level": 4,
+            "id": 7063
+        },
+        {
+            "kanji": "味",
+            "kana": "あじ",
+            "meaning": "맛, 풍미",
+            "korean_pronunciation": "아지",
+            "level": 4,
+            "id": 7064
+        },
+        {
+            "kanji": "空港",
+            "kana": "くうこう",
+            "meaning": "공항",
+            "korean_pronunciation": "쿠-코-",
+            "level": 4,
+            "id": 7065
+        },
+        {
+            "kanji": "手袋",
+            "kana": "てぶくろ",
+            "meaning": "장갑",
+            "korean_pronunciation": "테부쿠로",
+            "level": 4,
+            "id": 7066
+        },
+        {
+            "kanji": "校長",
+            "kana": "こうちょう",
+            "meaning": "교장",
+            "korean_pronunciation": "코-쵸-",
+            "level": 4,
+            "id": 7067
+        },
+        {
+            "kanji": "ごちそう",
+            "kana": "ごちそう",
+            "meaning": "잔치, (누군가를) 대접함",
+            "korean_pronunciation": "고치소-",
+            "level": 4,
+            "id": 7068
+        },
+        {
+            "kanji": "踊り",
+            "kana": "おどり",
+            "meaning": "춤",
+            "korean_pronunciation": "오도리",
+            "level": 4,
+            "id": 7069
+        },
+        {
+            "kanji": "興味",
+            "kana": "きょうみ",
+            "meaning": "흥미 (무엇에 대한)",
+            "korean_pronunciation": "쿄-미",
+            "level": 4,
+            "id": 7070
+        },
+        {
+            "kanji": "引っ越す",
+            "kana": "ひっこす",
+            "meaning": "이사하다",
+            "korean_pronunciation": "힉코스",
+            "level": 4,
+            "id": 7071
+        },
+        {
+            "kanji": "冷房",
+            "kana": "れいぼう",
+            "meaning": "냉방, 에어컨",
+            "korean_pronunciation": "레이보-",
+            "level": 4,
+            "id": 7072
+        },
+        {
+            "kanji": "都合",
+            "kana": "つごう",
+            "meaning": "사정, 편의",
+            "korean_pronunciation": "츠고-",
+            "level": 4,
+            "id": 7073
+        },
+        {
+            "kanji": "遠慮",
+            "kana": "えんりょする",
+            "meaning": "망설임, 사양, 머뭇거림",
+            "korean_pronunciation": "엔료-스루",
+            "level": 4,
+            "id": 7074
+        },
+        {
+            "kanji": "亡くなる",
+            "kana": "なくなる",
+            "meaning": "돌아가시다",
+            "korean_pronunciation": "나쿠나루",
+            "level": 4,
+            "id": 7075
+        },
+        {
+            "kanji": "科学",
+            "kana": "かがく",
+            "meaning": "과학",
+            "korean_pronunciation": "카가쿠",
+            "level": 4,
+            "id": 7076
+        },
+        {
+            "kanji": "はっきり",
+            "kana": "はっきり",
+            "meaning": "분명하게, 또렷하게",
+            "korean_pronunciation": "핫카리",
+            "level": 4,
+            "id": 7077
+        },
+        {
+            "kanji": "差し上げる",
+            "kana": "さしあげる",
+            "meaning": "주다의 겸양어",
+            "korean_pronunciation": "사시아게루",
+            "level": 4,
+            "id": 7078
+        },
+        {
+            "kanji": "気持ち",
+            "kana": "きもち",
+            "meaning": "기분, 감각, 마음",
+            "korean_pronunciation": "키모치",
+            "level": 4,
+            "id": 7079
+        },
+        {
+            "kanji": "祖父",
+            "kana": "そふ",
+            "meaning": "할아버지",
+            "korean_pronunciation": "소후",
+            "level": 4,
+            "id": 7080
+        },
+        {
+            "kanji": "港",
+            "kana": "みなと",
+            "meaning": "항구, 항만",
+            "korean_pronunciation": "미나토",
+            "level": 4,
+            "id": 7081
+        },
+        {
+            "kanji": "予約",
+            "kana": "よやく",
+            "meaning": "예약",
+            "korean_pronunciation": "요야쿠",
+            "level": 4,
+            "id": 7082
+        },
+        {
+            "kanji": "凄い",
+            "kana": "すごい",
+            "meaning": "엄청난, 대단한",
+            "korean_pronunciation": "스고이",
+            "level": 4,
+            "id": 7083
+        },
+        {
+            "kanji": "入学",
+            "kana": "にゅうがくする",
+            "meaning": "입학 (학교 또는 대학)",
+            "korean_pronunciation": "뉴-가쿠-스루",
+            "level": 4,
+            "id": 7084
+        },
+        {
+            "kanji": "片付ける",
+            "kana": "かたづける",
+            "meaning": "치우다 (정리하다) (타동사), 정리하다",
+            "korean_pronunciation": "카타즈케루",
+            "level": 4,
+            "id": 7085
+        },
+        {
+            "kanji": "写す",
+            "kana": "うつす",
+            "meaning": "베끼다 (타동사); 사진 찍다",
+            "korean_pronunciation": "우츠스",
+            "level": 4,
+            "id": 7086
+        },
+        {
+            "kanji": "パソコン",
+            "kana": "パソコン",
+            "meaning": "개인용 컴퓨터",
+            "korean_pronunciation": "파소콘",
+            "level": 4,
+            "id": 7087
+        },
+        {
+            "kanji": "部長",
+            "kana": "ぶちょう",
+            "meaning": "부서 책임자, 부장",
+            "korean_pronunciation": "부쵸-",
+            "level": 4,
+            "id": 7088
+        },
+        {
+            "kanji": "火事",
+            "kana": "かじ",
+            "meaning": "화재",
+            "korean_pronunciation": "카지",
+            "level": 4,
+            "id": 7089
+        },
+        {
+            "kanji": "足す",
+            "kana": "たす",
+            "meaning": "더하다 (숫자)",
+            "korean_pronunciation": "타스",
+            "level": 4,
+            "id": 7090
+        },
+        {
+            "kanji": "教会",
+            "kana": "きょうかい",
+            "meaning": "교회",
+            "korean_pronunciation": "쿄-카이",
+            "level": 4,
+            "id": 7091
+        },
+        {
+            "kanji": "彼ら",
+            "kana": "かれら",
+            "meaning": "그들 (주로 남성)",
+            "korean_pronunciation": "카레라",
+            "level": 4,
+            "id": 7092
+        },
+        {
+            "kanji": "一杯",
+            "kana": "いっぱい",
+            "meaning": "가득, 최대한",
+            "korean_pronunciation": "잇파이",
+            "level": 4,
+            "id": 7093
+        },
+        {
+            "kanji": "アメリカ",
+            "kana": "アメリカ",
+            "meaning": "미국",
+            "korean_pronunciation": "아메리카",
+            "level": 4,
+            "id": 7094
+        },
+        {
+            "kanji": "男性",
+            "kana": "だんせい",
+            "meaning": "남자; 남성",
+            "korean_pronunciation": "단세이",
+            "level": 4,
+            "id": 7095
+        },
+        {
+            "kanji": "理由",
+            "kana": "りゆう",
+            "meaning": "이유",
+            "korean_pronunciation": "리유-",
+            "level": 4,
+            "id": 7096
+        },
+        {
+            "kanji": "生産",
+            "kana": "せいさんする",
+            "meaning": "생산; 생산하다",
+            "korean_pronunciation": "세이산-스루",
+            "level": 4,
+            "id": 7097
+        },
+        {
+            "kanji": "着物",
+            "kana": "きもの",
+            "meaning": "기모노; 일본 전통 의상",
+            "korean_pronunciation": "키모노",
+            "level": 4,
+            "id": 7098
+        },
+        {
+            "kanji": "おもちゃ",
+            "kana": "おもちゃ",
+            "meaning": "장난감",
+            "korean_pronunciation": "오모챠",
+            "level": 4,
+            "id": 7099
+        },
+        {
+            "kanji": "暮れる",
+            "kana": "くれる",
+            "meaning": "어두워지다, 끝나다",
+            "korean_pronunciation": "쿠레루",
+            "level": 4,
+            "id": 7100
+        },
+        {
+            "kanji": "釣る",
+            "kana": "つる",
+            "meaning": "낚시하다",
+            "korean_pronunciation": "츠루",
+            "level": 4,
+            "id": 7101
+        },
+        {
+            "kanji": "～ちゃん",
+            "kana": "～ちゃん",
+            "meaning": "친근한 (여성) 사람에게 붙이는 접미사",
+            "korean_pronunciation": "챤",
+            "level": 4,
+            "id": 7102
+        },
+        {
+            "kanji": "打つ",
+            "kana": "うつ",
+            "meaning": "치다, 때리다",
+            "korean_pronunciation": "우츠",
+            "level": 4,
+            "id": 7103
+        },
+        {
+            "kanji": "あんな",
+            "kana": "あんな",
+            "meaning": "저런, 그런",
+            "korean_pronunciation": "안나",
+            "level": 4,
+            "id": 7104
+        },
+        {
+            "kanji": "謝る",
+            "kana": "あやまる",
+            "meaning": "사과하다",
+            "korean_pronunciation": "아야마루",
+            "level": 4,
+            "id": 7105
+        },
+        {
+            "kanji": "昼間",
+            "kana": "ひるま",
+            "meaning": "낮, 낮 동안",
+            "korean_pronunciation": "히루마",
+            "level": 4,
+            "id": 7106
+        },
+        {
+            "kanji": "教育",
+            "kana": "きょういく",
+            "meaning": "교육",
+            "korean_pronunciation": "쿄-이쿠",
+            "level": 4,
+            "id": 7107
+        },
+        {
+            "kanji": "女性",
+            "kana": "じょせい",
+            "meaning": "여자, 여성",
+            "korean_pronunciation": "죠세이",
+            "level": 4,
+            "id": 7108
+        },
+        {
+            "kanji": "米",
+            "kana": "こめ",
+            "meaning": "쌀 (익히지 않은)",
+            "korean_pronunciation": "코메",
+            "level": 4,
+            "id": 7109
+        },
+        {
+            "kanji": "邪魔",
+            "kana": "じゃま",
+            "meaning": "방해, 폐, 간섭",
+            "korean_pronunciation": "쟈마",
+            "level": 4,
+            "id": 7110
+        },
+        {
+            "kanji": "国際",
+            "kana": "こくさい",
+            "meaning": "국제",
+            "korean_pronunciation": "코쿠사이",
+            "level": 4,
+            "id": 7111
+        },
+        {
+            "kanji": "隅",
+            "kana": "すみ",
+            "meaning": "구석",
+            "korean_pronunciation": "스미",
+            "level": 4,
+            "id": 7112
+        },
+        {
+            "kanji": "伺う",
+            "kana": "うかがう",
+            "meaning": "가다, 듣다, 오다의 겸양어",
+            "korean_pronunciation": "우카가우",
+            "level": 4,
+            "id": 7113
+        },
+        {
+            "kanji": "再来週",
+            "kana": "さらいしゅう",
+            "meaning": "다음 다음 주",
+            "korean_pronunciation": "사라이슈-",
+            "level": 4,
+            "id": 7114
+        },
+        {
+            "kanji": "夢",
+            "kana": "ゆめ",
+            "meaning": "꿈",
+            "korean_pronunciation": "유메",
+            "level": 4,
+            "id": 7115
+        },
+        {
+            "kanji": "喉",
+            "kana": "のど",
+            "meaning": "목",
+            "korean_pronunciation": "노도",
+            "level": 4,
+            "id": 7116
+        },
+        {
+            "kanji": "最近",
+            "kana": "さいきん",
+            "meaning": "최근, 요즘, 최근에, 최신",
+            "korean_pronunciation": "사이킨",
+            "level": 4,
+            "id": 7117
+        },
+        {
+            "kanji": "周り",
+            "kana": "まわり",
+            "meaning": "주변",
+            "korean_pronunciation": "마와리",
+            "level": 4,
+            "id": 7118
+        },
+        {
+            "kanji": "歴史",
+            "kana": "れきし",
+            "meaning": "역사",
+            "korean_pronunciation": "레키시",
+            "level": 4,
+            "id": 7119
+        },
+        {
+            "kanji": "不便",
+            "kana": "ふべん",
+            "meaning": "불편",
+            "korean_pronunciation": "후벤",
+            "level": 4,
+            "id": 7120
+        },
+        {
+            "kanji": "血",
+            "kana": "ち",
+            "meaning": "피",
+            "korean_pronunciation": "치",
+            "level": 4,
+            "id": 7121
+        },
+        {
+            "kanji": "～続ける",
+            "kana": "～つづける",
+            "meaning": "~ 계속하다",
+            "korean_pronunciation": "츠즈케루",
+            "level": 4,
+            "id": 7122
+        },
+        {
+            "kanji": "毛",
+            "kana": "け",
+            "meaning": "털, 머리카락",
+            "korean_pronunciation": "케",
+            "level": 4,
+            "id": 7123
+        },
+        {
+            "kanji": "ひどい",
+            "kana": "ひどい",
+            "meaning": "끔찍한, 심한, 불공평한, 잔인한",
+            "korean_pronunciation": "히도이",
+            "level": 4,
+            "id": 7124
+        },
+        {
+            "kanji": "例えば",
+            "kana": "たとえば",
+            "meaning": "예를 들어, 가령",
+            "korean_pronunciation": "타토에바",
+            "level": 4,
+            "id": 7125
+        },
+        {
+            "kanji": "なかなか",
+            "kana": "なかなか",
+            "meaning": "매우, 상당히, 꽤",
+            "korean_pronunciation": "나카나카",
+            "level": 4,
+            "id": 7126
+        },
+        {
+            "kanji": "随分",
+            "kana": "ずいぶん",
+            "meaning": "아주, 꽤",
+            "korean_pronunciation": "즈이분",
+            "level": 4,
+            "id": 7127
+        },
+        {
+            "kanji": "～やすい",
+            "kana": "～やすい",
+            "meaning": "~하기 쉬운",
+            "korean_pronunciation": "야스이",
+            "level": 4,
+            "id": 7128
+        },
+        {
+            "kanji": "押し入れ",
+            "kana": "おしいれ",
+            "meaning": "벽장",
+            "korean_pronunciation": "오시이레",
+            "level": 4,
+            "id": 7129
+        },
+        {
+            "kanji": "電灯",
+            "kana": "でんとう",
+            "meaning": "전등",
+            "korean_pronunciation": "덴토-",
+            "level": 4,
+            "id": 7130
+        },
+        {
+            "kanji": "叱る",
+            "kana": "しかる",
+            "meaning": "꾸짖다",
+            "korean_pronunciation": "시카루",
+            "level": 4,
+            "id": 7131
+        },
+        {
+            "kanji": "サンダル",
+            "kana": "サンダル",
+            "meaning": "샌들",
+            "korean_pronunciation": "산다루",
+            "level": 4,
+            "id": 7132
+        },
+        {
+            "kanji": "びっくりする",
+            "kana": "びっくりする",
+            "meaning": "깜짝 놀라다",
+            "korean_pronunciation": "빗쿠리스루",
+            "level": 4,
+            "id": 7133
+        },
+        {
+            "kanji": "うまい",
+            "kana": "うまい",
+            "meaning": "맛있다; 능숙하다; 운이 좋다",
+            "korean_pronunciation": "우마이",
+            "level": 4,
+            "id": 7134
+        },
+        {
+            "kanji": "変える",
+            "kana": "かえる",
+            "meaning": "바꾸다, 변경하다, 변화시키다",
+            "korean_pronunciation": "카에루",
+            "level": 4,
+            "id": 7135
+        },
+        {
+            "kanji": "講堂",
+            "kana": "こうどう",
+            "meaning": "강당",
+            "korean_pronunciation": "코-도-",
+            "level": 4,
+            "id": 7136
+        },
+        {
+            "kanji": "子",
+            "kana": "こ",
+            "meaning": "아이",
+            "korean_pronunciation": "코",
+            "level": 4,
+            "id": 7137
+        },
+        {
+            "kanji": "沸かす",
+            "kana": "わかす",
+            "meaning": "끓이다",
+            "korean_pronunciation": "와카스",
+            "level": 4,
+            "id": 7138
+        },
+        {
+            "kanji": "レジ",
+            "kana": "レジ",
+            "meaning": "계산대",
+            "korean_pronunciation": "레지",
+            "level": 4,
+            "id": 7139
+        },
+        {
+            "kanji": "しばらく",
+            "kana": "しばらく",
+            "meaning": "잠깐, 잠시",
+            "korean_pronunciation": "시바라쿠",
+            "level": 4,
+            "id": 7140
+        },
+        {
+            "kanji": "特に",
+            "kana": "とくに",
+            "meaning": "특히",
+            "korean_pronunciation": "토쿠니",
+            "level": 4,
+            "id": 7141
+        },
+        {
+            "kanji": "空く",
+            "kana": "あく",
+            "meaning": "열리다, 비게 되다 (비어있다)",
+            "korean_pronunciation": "아쿠",
+            "level": 4,
+            "id": 7142
+        },
+        {
+            "kanji": "計画",
+            "kana": "けいかくする",
+            "meaning": "계획, 프로젝트, 일정",
+            "korean_pronunciation": "케이카쿠-스루",
+            "level": 4,
+            "id": 7143
+        },
+        {
+            "kanji": "通り",
+            "kana": "とおり",
+            "meaning": "~ 거리, ~ 대로",
+            "korean_pronunciation": "토리",
+            "level": 4,
+            "id": 7144
+        },
+        {
+            "kanji": "下着",
+            "kana": "したぎ",
+            "meaning": "속옷",
+            "korean_pronunciation": "시타기",
+            "level": 4,
+            "id": 7145
+        },
+        {
+            "kanji": "経済",
+            "kana": "けいざい",
+            "meaning": "경제, 재정, 경제",
+            "korean_pronunciation": "케이자이",
+            "level": 4,
+            "id": 7146
+        },
+        {
+            "kanji": "こう",
+            "kana": "こう",
+            "meaning": "이렇게, 이와 같이",
+            "korean_pronunciation": "코-",
+            "level": 4,
+            "id": 7147
+        },
+        {
+            "kanji": "是非",
+            "kana": "ぜひ",
+            "meaning": "꼭, 반드시",
+            "korean_pronunciation": "제히",
+            "level": 4,
+            "id": 7148
+        },
+        {
+            "kanji": "裏",
+            "kana": "うら",
+            "meaning": "뒷면, 뒤",
+            "korean_pronunciation": "우라",
+            "level": 4,
+            "id": 7149
+        },
+        {
+            "kanji": "ため",
+            "kana": "ため",
+            "meaning": "이익, 이점, ~을 위해",
+            "korean_pronunciation": "타메",
+            "level": 4,
+            "id": 7150
+        },
+        {
+            "kanji": "おいでになる",
+            "kana": "おいでになる",
+            "meaning": "있다 (존경)",
+            "korean_pronunciation": "오이데니나루",
+            "level": 4,
+            "id": 7151
+        },
+        {
+            "kanji": "変わる",
+            "kana": "かわる",
+            "meaning": "바뀌다 (자동사), 변하다, 달라지다",
+            "korean_pronunciation": "카와루",
+            "level": 4,
+            "id": 7152
+        },
+        {
+            "kanji": "以外",
+            "kana": "いがい",
+            "meaning": "~ 외에, ~를 제외하고",
+            "korean_pronunciation": "이가이",
+            "level": 4,
+            "id": 7153
+        },
+        {
+            "kanji": "済む",
+            "kana": "すむ",
+            "meaning": "끝나다, 완료되다",
+            "korean_pronunciation": "스무",
+            "level": 4,
+            "id": 7154
+        },
+        {
+            "kanji": "ハンバーグ",
+            "kana": "ハンバーグ",
+            "meaning": "햄버거 스테이크",
+            "korean_pronunciation": "한바-구",
+            "level": 4,
+            "id": 7155
+        },
+        {
+            "kanji": "市",
+            "kana": "し",
+            "meaning": "시",
+            "korean_pronunciation": "시",
+            "level": 4,
+            "id": 7156
+        },
+        {
+            "kanji": "引き出し",
+            "kana": "ひきだし",
+            "meaning": "서랍",
+            "korean_pronunciation": "히키다시",
+            "level": 4,
+            "id": 7157
+        },
+        {
+            "kanji": "遊び",
+            "kana": "あそび",
+            "meaning": "놀이",
+            "korean_pronunciation": "아소비",
+            "level": 4,
+            "id": 7158
+        },
+        {
+            "kanji": "支度",
+            "kana": "したくする",
+            "meaning": "준비",
+            "korean_pronunciation": "시타쿠-스루",
+            "level": 4,
+            "id": 7159
+        },
+        {
+            "kanji": "～始める",
+            "kana": "～はじめる",
+            "meaning": "~하기 시작하다",
+            "korean_pronunciation": "하지메루",
+            "level": 4,
+            "id": 7160
+        },
+        {
+            "kanji": "見える",
+            "kana": "みえる",
+            "meaning": "보이다; 오다의 경칭",
+            "korean_pronunciation": "미에루",
+            "level": 4,
+            "id": 7161
+        },
+        {
+            "kanji": "十分",
+            "kana": "じゅうぶん",
+            "meaning": "충분한",
+            "korean_pronunciation": "쥬-분",
+            "level": 4,
+            "id": 7162
+        },
+        {
+            "kanji": "音",
+            "kana": "おと",
+            "meaning": "소리, 음",
+            "korean_pronunciation": "오토",
+            "level": 4,
+            "id": 7163
+        },
+        {
+            "kanji": "きっと",
+            "kana": "きっと",
+            "meaning": "반드시, 틀림없이, 분명히",
+            "korean_pronunciation": "킷토",
+            "level": 4,
+            "id": 7164
+        },
+        {
+            "kanji": "まず",
+            "kana": "まず",
+            "meaning": "우선, 먼저",
+            "korean_pronunciation": "마즈",
+            "level": 4,
+            "id": 7165
+        },
+        {
+            "kanji": "遠く",
+            "kana": "とおく",
+            "meaning": "멀리, 먼 곳",
+            "korean_pronunciation": "토-오쿠",
+            "level": 4,
+            "id": 7166
+        },
+        {
+            "kanji": "大体",
+            "kana": "だいたい",
+            "meaning": "대략; 대부분의 경우; 일반적으로; 우선 (もともと와 같음)",
+            "korean_pronunciation": "다이타이",
+            "level": 4,
+            "id": 7167
+        },
+        {
+            "kanji": "折れる",
+            "kana": "おれる",
+            "meaning": "부러지다, 접히다, 굽히다; (모퉁이를) 돌다",
+            "korean_pronunciation": "오레루",
+            "level": 4,
+            "id": 7168
+        },
+        {
+            "kanji": "正しい",
+            "kana": "ただしい",
+            "meaning": "올바른, 옳은",
+            "korean_pronunciation": "타다시이",
+            "level": 4,
+            "id": 7169
+        },
+        {
+            "kanji": "輸入",
+            "kana": "ゆにゅう",
+            "meaning": "수입",
+            "korean_pronunciation": "유-뉴-",
+            "level": 4,
+            "id": 7170
+        },
+        {
+            "kanji": "返事",
+            "kana": "へんじ",
+            "meaning": "회답, 답장",
+            "korean_pronunciation": "헨지",
+            "level": 4,
+            "id": 7171
+        },
+        {
+            "kanji": "都",
+            "kana": "と",
+            "meaning": "도쿄 (일본의 수도)",
+            "korean_pronunciation": "토",
+            "level": 4,
+            "id": 7172
+        },
+        {
+            "kanji": "産業",
+            "kana": "さんぎょう",
+            "meaning": "산업",
+            "korean_pronunciation": "상교-",
+            "level": 4,
+            "id": 7173
+        },
+        {
+            "kanji": "伝える",
+            "kana": "つたえる",
+            "meaning": "전하다 (메시지); 말하다, 보고하다",
+            "korean_pronunciation": "츠타에루",
+            "level": 4,
+            "id": 7174
+        },
+        {
+            "kanji": "お金持ち",
+            "kana": "かねもち; おかねもち",
+            "meaning": "부자",
+            "korean_pronunciation": "카네모치; 오카네모치",
+            "level": 4,
+            "id": 7175
+        },
+        {
+            "kanji": "説明",
+            "kana": "せつめい",
+            "meaning": "설명",
+            "korean_pronunciation": "세츠메이",
+            "level": 4,
+            "id": 7176
+        },
+        {
+            "kanji": "島",
+            "kana": "しま",
+            "meaning": "섬",
+            "korean_pronunciation": "시마",
+            "level": 4,
+            "id": 7177
+        },
+        {
+            "kanji": "道具",
+            "kana": "どうぐ",
+            "meaning": "도구",
+            "korean_pronunciation": "도-구",
+            "level": 4,
+            "id": 7178
+        },
+        {
+            "kanji": "滑る",
+            "kana": "すべる",
+            "meaning": "미끄러지다, 미끄럽다",
+            "korean_pronunciation": "스베루",
+            "level": 4,
+            "id": 7179
+        },
+        {
+            "kanji": "それほど",
+            "kana": "それほど",
+            "meaning": "그 정도로; 정도",
+            "korean_pronunciation": "소레호도",
+            "level": 4,
+            "id": 7180
+        },
+        {
+            "kanji": "以上",
+            "kana": "いじょう",
+            "meaning": "~ 이상, 이것으로 마침",
+            "korean_pronunciation": "이죠-",
+            "level": 4,
+            "id": 7181
+        },
+        {
+            "kanji": "～まま",
+            "kana": "～まま",
+            "meaning": "~한 채로",
+            "korean_pronunciation": "마마",
+            "level": 4,
+            "id": 7182
+        },
+        {
+            "kanji": "特急",
+            "kana": "とっきゅう",
+            "meaning": "특급 (열차, 급행보다 빠름)",
+            "korean_pronunciation": "톡큐-",
+            "level": 4,
+            "id": 7183
+        },
+        {
+            "kanji": "プレゼント",
+            "kana": "プレゼント",
+            "meaning": "선물",
+            "korean_pronunciation": "푸레젠토",
+            "level": 4,
+            "id": 7184
+        },
+        {
+            "kanji": "～(に) よると",
+            "kana": "～(に) よると",
+            "meaning": "~에 따르면",
+            "korean_pronunciation": "니요루토",
+            "level": 4,
+            "id": 7185
+        },
+        {
+            "kanji": "妻",
+            "kana": "つま",
+            "meaning": "아내 (겸양)",
+            "korean_pronunciation": "츠마",
+            "level": 4,
+            "id": 7186
+        },
+        {
+            "kanji": "帰り",
+            "kana": "かえり",
+            "meaning": "돌아감, 귀가",
+            "korean_pronunciation": "카에리",
+            "level": 4,
+            "id": 7187
+        },
+        {
+            "kanji": "具合",
+            "kana": "ぐあい",
+            "meaning": "상태, 상황, 건강",
+            "korean_pronunciation": "구아이",
+            "level": 4,
+            "id": 7188
+        },
+        {
+            "kanji": "堅; 硬; 固い",
+            "kana": "かたい",
+            "meaning": "단단한, 딱딱한, 굳은",
+            "korean_pronunciation": "카타이",
+            "level": 4,
+            "id": 7189
+        },
+        {
+            "kanji": "駐車場",
+            "kana": "ちゅうしゃじょう",
+            "meaning": "주차장",
+            "korean_pronunciation": "츄-샤죠-",
+            "level": 4,
+            "id": 7190
+        },
+        {
+            "kanji": "スーツ",
+            "kana": "スーツ",
+            "meaning": "정장, 슈트",
+            "korean_pronunciation": "스-츠",
+            "level": 4,
+            "id": 7191
+        },
+        {
+            "kanji": "危険",
+            "kana": "きけん",
+            "meaning": "위험, 리스크, 위험 요소",
+            "korean_pronunciation": "키켄",
+            "level": 4,
+            "id": 7192
+        },
+        {
+            "kanji": "髪",
+            "kana": "かみ",
+            "meaning": "머리카락",
+            "korean_pronunciation": "카미",
+            "level": 4,
+            "id": 7193
+        },
+        {
+            "kanji": "天気予報",
+            "kana": "てんきよほう",
+            "meaning": "일기 예보",
+            "korean_pronunciation": "텐키요호-",
+            "level": 4,
+            "id": 7194
+        },
+        {
+            "kanji": "彼女",
+            "kana": "かのじょ",
+            "meaning": "여자친구; 그녀",
+            "korean_pronunciation": "카노죠",
+            "level": 4,
+            "id": 7195
+        },
+        {
+            "kanji": "間",
+            "kana": "あいだ",
+            "meaning": "공간, 간격",
+            "korean_pronunciation": "아이-다",
+            "level": 4,
+            "id": 7196
+        },
+        {
+            "kanji": "卒業",
+            "kana": "そつぎょう",
+            "meaning": "졸업",
+            "korean_pronunciation": "소츠교-",
+            "level": 4,
+            "id": 7197
+        },
+        {
+            "kanji": "それで",
+            "kana": "それで",
+            "meaning": "그리고 (접속사), 그래서, 그 때문에",
+            "korean_pronunciation": "소레데",
+            "level": 4,
+            "id": 7198
+        },
+        {
+            "kanji": "枝",
+            "kana": "えだ",
+            "meaning": "나뭇가지, 가지",
+            "korean_pronunciation": "에다",
+            "level": 4,
+            "id": 7199
+        },
+        {
+            "kanji": "専門",
+            "kana": "せんもん",
+            "meaning": "전공; 전문 분야",
+            "korean_pronunciation": "센몬",
+            "level": 4,
+            "id": 7200
+        },
+        {
+            "kanji": "そろそろ",
+            "kana": "そろそろ",
+            "meaning": "서서히, 곧",
+            "korean_pronunciation": "소로소로",
+            "level": 4,
+            "id": 7201
+        },
+        {
+            "kanji": "送る",
+            "kana": "おくる",
+            "meaning": "보내다, 파견하다",
+            "korean_pronunciation": "오쿠루",
+            "level": 4,
+            "id": 7202
+        },
+        {
+            "kanji": "あげる",
+            "kana": "あげる",
+            "meaning": "주다",
+            "korean_pronunciation": "아게루",
+            "level": 4,
+            "id": 7203
+        },
+        {
+            "kanji": "騒ぐ",
+            "kana": "さわぐ",
+            "meaning": "소란 피우다, 떠들다",
+            "korean_pronunciation": "사와구",
+            "level": 4,
+            "id": 7204
+        },
+        {
+            "kanji": "尋ねる",
+            "kana": "たずねる",
+            "meaning": "묻다 (質問하는 것과 같음)",
+            "korean_pronunciation": "타즈네루",
+            "level": 4,
+            "id": 7205
+        },
+        {
+            "kanji": "放送",
+            "kana": "ほうそうする",
+            "meaning": "방송",
+            "korean_pronunciation": "호-소-스루",
+            "level": 4,
+            "id": 7206
+        },
+        {
+            "kanji": "政治",
+            "kana": "せいじ",
+            "meaning": "정치",
+            "korean_pronunciation": "세이지",
+            "level": 4,
+            "id": 7207
+        },
+        {
+            "kanji": "市民",
+            "kana": "しみん",
+            "meaning": "시민",
+            "korean_pronunciation": "시민",
+            "level": 4,
+            "id": 7208
+        },
+        {
+            "kanji": "ファックス",
+            "kana": "ファックス",
+            "meaning": "팩스",
+            "korean_pronunciation": "흭쿠스",
+            "level": 4,
+            "id": 7209
+        },
+        {
+            "kanji": "負ける",
+            "kana": "まける",
+            "meaning": "지다 (게임에서) (자동사), 패배하다",
+            "korean_pronunciation": "마케루",
+            "level": 4,
+            "id": 7210
+        },
+        {
+            "kanji": "指輪",
+            "kana": "ゆびわ",
+            "meaning": "(손가락) 반지",
+            "korean_pronunciation": "유비와",
+            "level": 4,
+            "id": 7211
+        },
+        {
+            "kanji": "田舎",
+            "kana": "いなか",
+            "meaning": "시골, 전원",
+            "korean_pronunciation": "이나카",
+            "level": 4,
+            "id": 7212
+        },
+        {
+            "kanji": "見つける",
+            "kana": "みつける",
+            "meaning": "발견하다, 찾다 (타동사)",
+            "korean_pronunciation": "미츠케루",
+            "level": 4,
+            "id": 7213
+        },
+        {
+            "kanji": "高校生",
+            "kana": "こうこうせい",
+            "meaning": "고등학생",
+            "korean_pronunciation": "코-코-세이",
+            "level": 4,
+            "id": 7214
+        },
+        {
+            "kanji": "講義",
+            "kana": "こうぎ",
+            "meaning": "강의",
+            "korean_pronunciation": "코-기",
+            "level": 4,
+            "id": 7215
+        },
+        {
+            "kanji": "そんなに",
+            "kana": "そんなに",
+            "meaning": "그렇게 많이, 그렇게",
+            "korean_pronunciation": "손나니",
+            "level": 4,
+            "id": 7216
+        },
+        {
+            "kanji": "昼休み",
+            "kana": "ひるやすみ",
+            "meaning": "점심시간, 낮 휴식",
+            "korean_pronunciation": "히루야스미",
+            "level": 4,
+            "id": 7217
+        },
+        {
+            "kanji": "忘れ物",
+            "kana": "わすれもの",
+            "meaning": "분실물, 잊은 물건",
+            "korean_pronunciation": "와스레모노",
+            "level": 4,
+            "id": 7218
+        },
+        {
+            "kanji": "下りる",
+            "kana": "おりる",
+            "meaning": "내리다, 내려가다",
+            "korean_pronunciation": "오리루",
+            "level": 4,
+            "id": 7219
+        },
+        {
+            "kanji": "腕",
+            "kana": "うで",
+            "meaning": "팔 (신체 부위)",
+            "korean_pronunciation": "우데",
+            "level": 4,
+            "id": 7220
+        },
+        {
+            "kanji": "訳",
+            "kana": "わけ",
+            "meaning": "이유; 설명",
+            "korean_pronunciation": "와케",
+            "level": 4,
+            "id": 7221
+        },
+        {
+            "kanji": "承知",
+            "kana": "しょうちする",
+            "meaning": "승낙, 수락",
+            "korean_pronunciation": "쇼-치-스루",
+            "level": 4,
+            "id": 7222
+        },
+        {
+            "kanji": "日記",
+            "kana": "にっき",
+            "meaning": "일기, 기록",
+            "korean_pronunciation": "닛키",
+            "level": 4,
+            "id": 7223
+        },
+        {
+            "kanji": "高校; 高等学校",
+            "kana": "こうこう; こうとうがっこう",
+            "meaning": "고등학교",
+            "korean_pronunciation": "코-코-; 코-토-갓코-",
+            "level": 4,
+            "id": 7224
+        },
+        {
+            "kanji": "似る",
+            "kana": "にる",
+            "meaning": "닮다, 비슷하다",
+            "korean_pronunciation": "니루",
+            "level": 4,
+            "id": 7225
+        },
+        {
+            "kanji": "～おわる",
+            "kana": "～おわる",
+            "meaning": "~을 끝내다",
+            "korean_pronunciation": "오와루",
+            "level": 4,
+            "id": 7226
+        },
+        {
+            "kanji": "暖房",
+            "kana": "だんぼう",
+            "meaning": "난방",
+            "korean_pronunciation": "단보-",
+            "level": 4,
+            "id": 7227
+        },
+        {
+            "kanji": "留守",
+            "kana": "るす",
+            "meaning": "부재; 집에 없음",
+            "korean_pronunciation": "루스",
+            "level": 4,
+            "id": 7228
+        },
+        {
+            "kanji": "割合",
+            "kana": "わりあい",
+            "meaning": "비율, 비율, 퍼센트",
+            "korean_pronunciation": "와리아이",
+            "level": 4,
+            "id": 7229
+        },
+        {
+            "kanji": "寺",
+            "kana": "てら",
+            "meaning": "절 (불교)",
+            "korean_pronunciation": "테라",
+            "level": 4,
+            "id": 7230
+        },
+        {
+            "kanji": "慣れる",
+            "kana": "なれる",
+            "meaning": "익숙해지다",
+            "korean_pronunciation": "나레루",
+            "level": 4,
+            "id": 7231
+        },
+        {
+            "kanji": "普通",
+            "kana": "ふつう",
+            "meaning": "보통; 일반적인",
+            "korean_pronunciation": "후츠-",
+            "level": 4,
+            "id": 7232
+        },
+        {
+            "kanji": "手伝う",
+            "kana": "てつだう",
+            "meaning": "돕다",
+            "korean_pronunciation": "테츠다우",
+            "level": 4,
+            "id": 7233
+        },
+        {
+            "kanji": "なるほど",
+            "kana": "なるほど",
+            "meaning": "그렇군요, 그렇구나",
+            "korean_pronunciation": "나루호도",
+            "level": 4,
+            "id": 7234
+        },
+        {
+            "kanji": "くださる",
+            "kana": "くださる",
+            "meaning": "주시다, 수여하시다 (존경)",
+            "korean_pronunciation": "쿠다사루",
+            "level": 4,
+            "id": 7235
+        },
+        {
+            "kanji": "息子",
+            "kana": "むすこ",
+            "meaning": "아들 (겸양)",
+            "korean_pronunciation": "무스고",
+            "level": 4,
+            "id": 7236
+        },
+        {
+            "kanji": "お子さん",
+            "kana": "おこさん",
+            "meaning": "(남의) 아이 (경칭)",
+            "korean_pronunciation": "오코상",
+            "level": 4,
+            "id": 7237
+        },
+        {
+            "kanji": "会場",
+            "kana": "かいじょう",
+            "meaning": "회장, 장소",
+            "korean_pronunciation": "카이죠-",
+            "level": 4,
+            "id": 7238
+        },
+        {
+            "kanji": "笑う",
+            "kana": "わらう",
+            "meaning": "웃다, 미소짓다",
+            "korean_pronunciation": "와라우",
+            "level": 4,
+            "id": 7239
+        },
+        {
+            "kanji": "運ぶ",
+            "kana": "はこぶ",
+            "meaning": "운반하다, 나르다",
+            "korean_pronunciation": "하코부",
+            "level": 4,
+            "id": 7240
+        },
+        {
+            "kanji": "文学",
+            "kana": "ぶんがく",
+            "meaning": "문학",
+            "korean_pronunciation": "분가쿠",
+            "level": 4,
+            "id": 7241
+        },
+        {
+            "kanji": "光",
+            "kana": "ひかり",
+            "meaning": "빛",
+            "korean_pronunciation": "히카리",
+            "level": 4,
+            "id": 7242
+        },
+        {
+            "kanji": "お見舞い",
+            "kana": "おみまい",
+            "meaning": "문병, 병문안",
+            "korean_pronunciation": "오미마이",
+            "level": 4,
+            "id": 7243
+        },
+        {
+            "kanji": "席",
+            "kana": "せき",
+            "meaning": "자리",
+            "korean_pronunciation": "세키",
+            "level": 4,
+            "id": 7244
+        },
+        {
+            "kanji": "～様",
+            "kana": "～さま",
+            "meaning": "씨, 님 (경칭)",
+            "korean_pronunciation": "사마",
+            "level": 4,
+            "id": 7245
+        },
+        {
+            "kanji": "ご存じ",
+            "kana": "ごぞんじ",
+            "meaning": "알고 있음, 지인",
+            "korean_pronunciation": "고존지",
+            "level": 4,
+            "id": 7246
+        },
+        {
+            "kanji": "下る",
+            "kana": "さがる",
+            "meaning": "내려가다, 떨어지다, 하락하다",
+            "korean_pronunciation": "사가루",
+            "level": 4,
+            "id": 7247
+        },
+        {
+            "kanji": "字",
+            "kana": "じ",
+            "meaning": "글자, 문자",
+            "korean_pronunciation": "지",
+            "level": 4,
+            "id": 7248
+        },
+        {
+            "kanji": "アジア",
+            "kana": "アジア",
+            "meaning": "아시아",
+            "korean_pronunciation": "아시아",
+            "level": 4,
+            "id": 7249
+        },
+        {
+            "kanji": "褒める",
+            "kana": "ほめる",
+            "meaning": "칭찬하다; 좋은 말을 하다",
+            "korean_pronunciation": "호메루",
+            "level": 4,
+            "id": 7250
+        },
+        {
+            "kanji": "空く",
+            "kana": "すく",
+            "meaning": "한가해지다 (사람이), 붐비지 않게 되다",
+            "korean_pronunciation": "스쿠",
+            "level": 4,
+            "id": 7251
+        },
+        {
+            "kanji": "あ",
+            "kana": "あ",
+            "meaning": "아",
+            "korean_pronunciation": "아",
+            "level": 4,
+            "id": 7252
+        },
+        {
+            "kanji": "最も",
+            "kana": "もっとも",
+            "meaning": "가장",
+            "korean_pronunciation": "못토모",
+            "level": 4,
+            "id": 7253
+        },
+        {
+            "kanji": "合う",
+            "kana": "あう",
+            "meaning": "맞다, 어울리다",
+            "korean_pronunciation": "아우",
+            "level": 4,
+            "id": 7254
+        },
+        {
+            "kanji": "～代",
+            "kana": "～だい",
+            "meaning": "~대; 시대",
+            "korean_pronunciation": "다이",
+            "level": 4,
+            "id": 7255
+        },
+        {
+            "kanji": "最後",
+            "kana": "さいご",
+            "meaning": "마지막, 끝",
+            "korean_pronunciation": "사이-고",
+            "level": 4,
+            "id": 7256
+        },
+        {
+            "kanji": "値段",
+            "kana": "ねだん",
+            "meaning": "가격",
+            "korean_pronunciation": "네단",
+            "level": 4,
+            "id": 7257
+        },
+        {
+            "kanji": "退院",
+            "kana": "たいいんする",
+            "meaning": "퇴원",
+            "korean_pronunciation": "타이인-스루",
+            "level": 4,
+            "id": 7258
+        },
+        {
+            "kanji": "展覧会",
+            "kana": "てんらんかい",
+            "meaning": "전람회, 전시회",
+            "korean_pronunciation": "텐란카이",
+            "level": 4,
+            "id": 7259
+        },
+        {
+            "kanji": "久しぶり",
+            "kana": "ひさしぶり",
+            "meaning": "오랜만이야, 오랜만에",
+            "korean_pronunciation": "히사시부리",
+            "level": 4,
+            "id": 7260
+        },
+        {
+            "kanji": "カーテン",
+            "kana": "カーテン",
+            "meaning": "커튼",
+            "korean_pronunciation": "카-텐",
+            "level": 4,
+            "id": 7261
+        },
+        {
+            "kanji": "汽車",
+            "kana": "きしゃ",
+            "meaning": "기차 (증기)",
+            "korean_pronunciation": "키샤",
+            "level": 4,
+            "id": 7262
+        },
+        {
+            "kanji": "遅れる",
+            "kana": "おくれる",
+            "meaning": "늦다",
+            "korean_pronunciation": "오쿠레루",
+            "level": 4,
+            "id": 7263
+        },
+        {
+            "kanji": "見つかる",
+            "kana": "みつかる",
+            "meaning": "발견되다, 찾아지다 (자동사)",
+            "korean_pronunciation": "미츠카루",
+            "level": 4,
+            "id": 7264
+        },
+        {
+            "kanji": "召し上がる",
+            "kana": "めしあがる",
+            "meaning": "먹다, 마시다의 존경어",
+            "korean_pronunciation": "메시아가루",
+            "level": 4,
+            "id": 7265
+        },
+        {
+            "kanji": "太る",
+            "kana": "ふとる",
+            "meaning": "살찌다",
+            "korean_pronunciation": "후토루",
+            "level": 4,
+            "id": 7266
+        },
+        {
+            "kanji": "注射",
+            "kana": "ちゅうしゃ",
+            "meaning": "주사",
+            "korean_pronunciation": "츄-샤",
+            "level": 4,
+            "id": 7267
+        },
+        {
+            "kanji": "様",
+            "kana": "よう",
+            "meaning": "모양, 방식, 종류",
+            "korean_pronunciation": "요-",
+            "level": 4,
+            "id": 7268
+        },
+        {
+            "kanji": "～おき",
+            "kana": "～おき",
+            "meaning": "~마다",
+            "korean_pronunciation": "오키",
+            "level": 4,
+            "id": 7269
+        },
+        {
+            "kanji": "最初",
+            "kana": "さいしょ",
+            "meaning": "처음, 시초",
+            "korean_pronunciation": "사이쇼",
+            "level": 4,
+            "id": 7270
+        },
+        {
+            "kanji": "御～",
+            "kana": "ご～",
+            "meaning": "존경하는 ~",
+            "korean_pronunciation": "고-",
+            "level": 4,
+            "id": 7271
+        },
+        {
+            "kanji": "安心",
+            "kana": "あんしん",
+            "meaning": "안심, 안도",
+            "korean_pronunciation": "안신",
+            "level": 4,
+            "id": 7272
+        },
+        {
+            "kanji": "直る",
+            "kana": "なおる",
+            "meaning": "고쳐지다",
+            "korean_pronunciation": "나오루",
+            "level": 4,
+            "id": 7273
+        },
+        {
+            "kanji": "集める",
+            "kana": "あつめる",
+            "meaning": "모으다, 수집하다 (타동사), 집결시키다",
+            "korean_pronunciation": "아츠메루",
+            "level": 4,
+            "id": 7274
+        },
+        {
+            "kanji": "直す",
+            "kana": "なおす",
+            "meaning": "고치다 (타동사); 수정하다",
+            "korean_pronunciation": "나오스",
+            "level": 4,
+            "id": 7275
+        },
+        {
+            "kanji": "続く",
+            "kana": "つづく",
+            "meaning": "계속되다",
+            "korean_pronunciation": "츠즈쿠",
+            "level": 4,
+            "id": 7276
+        },
+        {
+            "kanji": "先輩",
+            "kana": "せんぱい",
+            "meaning": "선배 (그룹 내)",
+            "korean_pronunciation": "셈바이",
+            "level": 4,
+            "id": 7277
+        },
+        {
+            "kanji": "約束",
+            "kana": "やくそく",
+            "meaning": "약속, 예정, 구속",
+            "korean_pronunciation": "야쿠소쿠",
+            "level": 4,
+            "id": 7278
+        },
+        {
+            "kanji": "世話",
+            "kana": "せわする",
+            "meaning": "돌봄; 돌보다",
+            "korean_pronunciation": "세와-스루",
+            "level": 4,
+            "id": 7279
+        },
+        {
+            "kanji": "近所",
+            "kana": "きんじょ",
+            "meaning": "이웃, 근처",
+            "korean_pronunciation": "킨죠",
+            "level": 4,
+            "id": 7280
+        },
+        {
+            "kanji": "将来",
+            "kana": "しょうらい",
+            "meaning": "장래; 전망",
+            "korean_pronunciation": "쇼-라이",
+            "level": 4,
+            "id": 7281
+        },
+        {
+            "kanji": "億",
+            "kana": "おく",
+            "meaning": "억 (100,000,000)",
+            "korean_pronunciation": "오쿠",
+            "level": 4,
+            "id": 7282
+        },
+        {
+            "kanji": "数学",
+            "kana": "すうがく",
+            "meaning": "수학",
+            "korean_pronunciation": "스-가쿠",
+            "level": 4,
+            "id": 7283
+        },
+        {
+            "kanji": "文化",
+            "kana": "ぶんか",
+            "meaning": "문화",
+            "korean_pronunciation": "분카",
+            "level": 4,
+            "id": 7284
+        },
+        {
+            "kanji": "払う",
+            "kana": "はらう",
+            "meaning": "지불하다",
+            "korean_pronunciation": "하라-우",
+            "level": 4,
+            "id": 7285
+        },
+        {
+            "kanji": "習慣",
+            "kana": "しゅうかん",
+            "meaning": "습관 (문화적인 맥락)",
+            "korean_pronunciation": "슈-칸",
+            "level": 4,
+            "id": 7286
+        },
+        {
+            "kanji": "焼ける",
+            "kana": "やける",
+            "meaning": "타다, 구워지다",
+            "korean_pronunciation": "야케루",
+            "level": 4,
+            "id": 7287
+        },
+        {
+            "kanji": "君",
+            "kana": "きみ",
+            "meaning": "너 (남성용 비격식)",
+            "korean_pronunciation": "키미",
+            "level": 4,
+            "id": 7288
+        },
+        {
+            "kanji": "冷える",
+            "kana": "ひえる",
+            "meaning": "차가워지다, 식다",
+            "korean_pronunciation": "히에루",
+            "level": 4,
+            "id": 7289
+        },
+        {
+            "kanji": "点く",
+            "kana": "つく",
+            "meaning": "켜지다, 시작되다",
+            "korean_pronunciation": "츠쿠",
+            "level": 4,
+            "id": 7290
+        },
+        {
+            "kanji": "この間",
+            "kana": "このあいだ",
+            "meaning": "요즘, 최근",
+            "korean_pronunciation": "코노아이-다",
+            "level": 4,
+            "id": 7291
+        },
+        {
+            "kanji": "格好",
+            "kana": "かっこう",
+            "meaning": "모양, 모습, 자세, 형태",
+            "korean_pronunciation": "칵코-",
+            "level": 4,
+            "id": 7292
+        },
+        {
+            "kanji": "nan",
+            "kana": "かまう",
+            "meaning": "신경 쓰다, 개의하다, 관계하다",
+            "korean_pronunciation": "카마-우",
+            "level": 4,
+            "id": 7293
+        },
+        {
+            "kanji": "続ける",
+            "kana": "つづける",
+            "meaning": "계속하다, 유지하다",
+            "korean_pronunciation": "츠즈케루",
+            "level": 4,
+            "id": 7294
+        },
+        {
+            "kanji": "落す",
+            "kana": "おとす",
+            "meaning": "떨어뜨리다, 잃어버리다",
+            "korean_pronunciation": "오토스",
+            "level": 4,
+            "id": 7295
+        },
+        {
+            "kanji": "明日",
+            "kana": "あす",
+            "meaning": "내일",
+            "korean_pronunciation": "아스",
+            "level": 4,
+            "id": 7296
+        },
+        {
+            "kanji": "出発",
+            "kana": "しゅっぱつする",
+            "meaning": "출발",
+            "korean_pronunciation": "슛파츠-스루",
+            "level": 4,
+            "id": 7297
+        },
+        {
+            "kanji": "拝見",
+            "kana": "はいけんする",
+            "meaning": "(겸양) (경칭) 보다, 열람하다",
+            "korean_pronunciation": "하이켄-스루",
+            "level": 4,
+            "id": 7298
+        },
+        {
+            "kanji": "割れる",
+            "kana": "われる",
+            "meaning": "깨지다",
+            "korean_pronunciation": "와레루",
+            "level": 4,
+            "id": 7299
+        },
+        {
+            "kanji": "背中",
+            "kana": "せなか",
+            "meaning": "등 (몸의)",
+            "korean_pronunciation": "세나카",
+            "level": 4,
+            "id": 7300
+        },
+        {
+            "kanji": "新聞社",
+            "kana": "しんぶんしゃ",
+            "meaning": "신문사",
+            "korean_pronunciation": "신분샤",
+            "level": 4,
+            "id": 7301
+        },
+        {
+            "kanji": "いじめる",
+            "kana": "いじめる",
+            "meaning": "괴롭히다, 학대하다",
+            "korean_pronunciation": "이지메루",
+            "level": 4,
+            "id": 7302
+        },
+        {
+            "kanji": "回る、回す",
+            "kana": "まわる、まわす",
+            "meaning": "돌다, 회전하다",
+            "korean_pronunciation": "마와루, 마와스",
+            "level": 4,
+            "id": 7303
+        },
+        {
+            "kanji": "～君",
+            "kana": "～くん",
+            "meaning": "군 (어린 남자, 연하)",
+            "korean_pronunciation": "쿤",
+            "level": 4,
+            "id": 7304
+        },
+        {
+            "kanji": "おっしゃる",
+            "kana": "おっしゃる",
+            "meaning": "말하다의 존경어",
+            "korean_pronunciation": "옷샤루",
+            "level": 4,
+            "id": 7305
+        },
+        {
+            "kanji": "眠い",
+            "kana": "ねむい",
+            "meaning": "졸린, 졸음이 오는",
+            "korean_pronunciation": "네무이",
+            "level": 4,
+            "id": 7306
+        },
+        {
+            "kanji": "濡れる",
+            "kana": "ぬれる",
+            "meaning": "젖다",
+            "korean_pronunciation": "누레루",
+            "level": 4,
+            "id": 7307
+        },
+        {
+            "kanji": "倒れる",
+            "kana": "たおれる",
+            "meaning": "넘어지다, 쓰러지다, 파산하다",
+            "korean_pronunciation": "타오레루",
+            "level": 4,
+            "id": 7308
+        },
+        {
+            "kanji": "スーパー (マーケット)",
+            "kana": "スーパー (マーケット)",
+            "meaning": "슈퍼마켓",
+            "korean_pronunciation": "스-파- (마-케토)",
+            "level": 4,
+            "id": 7309
+        },
+        {
+            "kanji": "アクセサリー",
+            "kana": "アクセサリー",
+            "meaning": "액세서리",
+            "korean_pronunciation": "아쿠세사리-",
+            "level": 4,
+            "id": 7310
+        },
+        {
+            "kanji": "考える",
+            "kana": "かんがえる",
+            "meaning": "생각하다; 고려하다",
+            "korean_pronunciation": "캉가에루",
+            "level": 4,
+            "id": 7311
+        },
+        {
+            "kanji": "向かう",
+            "kana": "むかう",
+            "meaning": "향하다, 마주보다",
+            "korean_pronunciation": "무카-우",
+            "level": 4,
+            "id": 7312
+        },
+        {
+            "kanji": "自由",
+            "kana": "じゆう",
+            "meaning": "자유",
+            "korean_pronunciation": "지유-",
+            "level": 4,
+            "id": 7313
+        },
+        {
+            "kanji": "仕方",
+            "kana": "しかた",
+            "meaning": "방법 (무엇을 하는)",
+            "korean_pronunciation": "시카타",
+            "level": 4,
+            "id": 7314
+        },
+        {
+            "kanji": "首",
+            "kana": "くび",
+            "meaning": "목",
+            "korean_pronunciation": "쿠비",
+            "level": 4,
+            "id": 7315
+        },
+        {
+            "kanji": "程",
+            "kana": "ほど",
+            "meaning": "정도, 범위",
+            "korean_pronunciation": "호도",
+            "level": 4,
+            "id": 7316
+        },
+        {
+            "kanji": "代わり",
+            "kana": "かわり",
+            "meaning": "대리, 대체, 교체",
+            "korean_pronunciation": "카와리",
+            "level": 4,
+            "id": 7317
+        },
+        {
+            "kanji": "失敗",
+            "kana": "しっぱい",
+            "meaning": "실패, 실수",
+            "korean_pronunciation": "싯파이",
+            "level": 4,
+            "id": 7318
+        },
+        {
+            "kanji": "工業",
+            "kana": "こうぎょう",
+            "meaning": "(제조) 산업",
+            "korean_pronunciation": "코-교-",
+            "level": 4,
+            "id": 7319
+        },
+        {
+            "kanji": "移る",
+            "kana": "うつる",
+            "meaning": "이사하다 (집에서); 전근하다 (부서에서); 옮기다",
+            "korean_pronunciation": "우츠루",
+            "level": 4,
+            "id": 7320
+        },
+        {
+            "kanji": "スーツケース",
+            "kana": "スーツケース",
+            "meaning": "여행 가방",
+            "korean_pronunciation": "스-츠케-스",
+            "level": 4,
+            "id": 7321
+        },
+        {
+            "kanji": "ひげ",
+            "kana": "ひげ",
+            "meaning": "수염",
+            "korean_pronunciation": "히게",
+            "level": 4,
+            "id": 7322
+        },
+        {
+            "kanji": "研究室",
+            "kana": "けんきゅうしつ",
+            "meaning": "교수 연구실; 실험실",
+            "korean_pronunciation": "켄큐-시츠",
+            "level": 4,
+            "id": 7323
+        },
+        {
+            "kanji": "工場",
+            "kana": "こうじょう",
+            "meaning": "공장",
+            "korean_pronunciation": "코-죠-",
+            "level": 4,
+            "id": 7324
+        },
+        {
+            "kanji": "紹介",
+            "kana": "しょうかい",
+            "meaning": "소개",
+            "korean_pronunciation": "쇼-카이",
+            "level": 4,
+            "id": 7325
+        },
+        {
+            "kanji": "けれど; けれども",
+            "kana": "けれど; けれども",
+            "meaning": "하지만, 그러나",
+            "korean_pronunciation": "케레도; 케레도모",
+            "level": 4,
+            "id": 7326
+        },
+        {
+            "kanji": "舟",
+            "kana": "ふね",
+            "meaning": "배, 선박",
+            "korean_pronunciation": "후네",
+            "level": 4,
+            "id": 7327
+        },
+        {
+            "kanji": "動く",
+            "kana": "うごく",
+            "meaning": "움직이다",
+            "korean_pronunciation": "우고쿠",
+            "level": 4,
+            "id": 7328
+        },
+        {
+            "kanji": "～(に) ついて",
+            "kana": "～(に) ついて",
+            "meaning": "~에 대해, ~에 관해",
+            "korean_pronunciation": "니츠이테",
+            "level": 4,
+            "id": 7329
+        },
+        {
+            "kanji": "コンサート",
+            "kana": "コンサート",
+            "meaning": "콘서트",
+            "korean_pronunciation": "콘사-토",
+            "level": 4,
+            "id": 7330
+        },
+        {
+            "kanji": "虫",
+            "kana": "むし",
+            "meaning": "벌레",
+            "korean_pronunciation": "무시",
+            "level": 4,
+            "id": 7331
+        },
+        {
+            "kanji": "優しい",
+            "kana": "やさしい",
+            "meaning": "친절한 (사람), 상냥한 (사람), 쉬운 (문제)",
+            "korean_pronunciation": "야사시이",
+            "level": 4,
+            "id": 7332
+        },
+        {
+            "kanji": "コンピュータ; コンピューター",
+            "kana": "コンピュータ; コンピューター",
+            "meaning": "컴퓨터",
+            "korean_pronunciation": "콘퓨-타; 콘퓨-타-",
+            "level": 4,
+            "id": 7333
+        },
+        {
+            "kanji": "植える",
+            "kana": "うえる",
+            "meaning": "심다",
+            "korean_pronunciation": "우에루",
+            "level": 4,
+            "id": 7334
+        },
+        {
+            "kanji": "両方",
+            "kana": "りょうほう",
+            "meaning": "양쪽, 둘 다",
+            "korean_pronunciation": "료-호-",
+            "level": 4,
+            "id": 7335
+        },
+        {
+            "kanji": "汚れる",
+            "kana": "よごれる",
+            "meaning": "더러워지다",
+            "korean_pronunciation": "요고레루",
+            "level": 4,
+            "id": 7336
+        },
+        {
+            "kanji": "水泳",
+            "kana": "すいえい",
+            "meaning": "수영",
+            "korean_pronunciation": "스이에이",
+            "level": 4,
+            "id": 7337
+        },
+        {
+            "kanji": "経験",
+            "kana": "けいけんする",
+            "meaning": "경험",
+            "korean_pronunciation": "케이켄-스루",
+            "level": 4,
+            "id": 7338
+        },
+        {
+            "kanji": "勝つ",
+            "kana": "かつ",
+            "meaning": "이기다",
+            "korean_pronunciation": "카츠",
+            "level": 4,
+            "id": 7339
+        },
+        {
+            "kanji": "砂",
+            "kana": "すな",
+            "meaning": "모래",
+            "korean_pronunciation": "스나",
+            "level": 4,
+            "id": 7340
+        },
+        {
+            "kanji": "警察",
+            "kana": "けいさつ",
+            "meaning": "경찰; 경찰서",
+            "korean_pronunciation": "케이사츠",
+            "level": 4,
+            "id": 7341
+        },
+        {
+            "kanji": "取り替える",
+            "kana": "とりかえる",
+            "meaning": "교환하다, 대체하다",
+            "korean_pronunciation": "토리카에루",
+            "level": 4,
+            "id": 7342
+        },
+        {
+            "kanji": "急ぐ",
+            "kana": "いそぐ",
+            "meaning": "서두르다, 급하다, 서둘러 하다",
+            "korean_pronunciation": "이소구",
+            "level": 4,
+            "id": 7343
+        },
+        {
+            "kanji": "簡単",
+            "kana": "かんたん",
+            "meaning": "간단한",
+            "korean_pronunciation": "칸탄",
+            "level": 4,
+            "id": 7344
+        },
+        {
+            "kanji": "参る",
+            "kana": "まいる",
+            "meaning": "가다, 오다의 겸양어",
+            "korean_pronunciation": "마이루",
+            "level": 4,
+            "id": 7345
+        },
+        {
+            "kanji": "全然",
+            "kana": "ぜんぜん",
+            "meaning": "전혀; 완전히, 아주",
+            "korean_pronunciation": "젠젠",
+            "level": 4,
+            "id": 7346
+        },
+        {
+            "kanji": "特別",
+            "kana": "とくべつ",
+            "meaning": "특별한",
+            "korean_pronunciation": "토쿠베츠",
+            "level": 4,
+            "id": 7347
+        },
+        {
+            "kanji": "復習",
+            "kana": "ふくしゅう",
+            "meaning": "복습 (수업의), 교정",
+            "korean_pronunciation": "후쿠슈-",
+            "level": 4,
+            "id": 7348
+        },
+        {
+            "kanji": "間に合う",
+            "kana": "まにあう",
+            "meaning": "~에間に 맞추다",
+            "korean_pronunciation": "마니아우",
+            "level": 4,
+            "id": 7349
+        },
+        {
+            "kanji": "役に立つ",
+            "kana": "やくにたつ",
+            "meaning": "도움이 되다, 유용하다",
+            "korean_pronunciation": "야쿠니 타츠",
+            "level": 4,
+            "id": 7350
+        },
+        {
+            "kanji": "もうすぐ",
+            "kana": "もうすぐ",
+            "meaning": "곧, 얼마 안 있으면",
+            "korean_pronunciation": "모-스구",
+            "level": 4,
+            "id": 7351
+        },
+        {
+            "kanji": "真中",
+            "kana": "まんなか",
+            "meaning": "가운데, 중앙",
+            "korean_pronunciation": "만나카",
+            "level": 4,
+            "id": 7352
+        },
+        {
+            "kanji": "戻る",
+            "kana": "もどる",
+            "meaning": "돌아오다 (자동사), 되돌아오다",
+            "korean_pronunciation": "모도루",
+            "level": 4,
+            "id": 7353
+        },
+        {
+            "kanji": "研究",
+            "kana": "けんきゅう",
+            "meaning": "연구, 조사, 탐구",
+            "korean_pronunciation": "켄큐-",
+            "level": 4,
+            "id": 7354
+        },
+        {
+            "kanji": "ケーキ",
+            "kana": "ケーキ",
+            "meaning": "케이크",
+            "korean_pronunciation": "케-키",
+            "level": 4,
+            "id": 7355
+        },
+        {
+            "kanji": "草",
+            "kana": "くさ",
+            "meaning": "풀",
+            "korean_pronunciation": "쿠사",
+            "level": 4,
+            "id": 7356
+        },
+        {
+            "kanji": "込む",
+            "kana": "こむ",
+            "meaning": "붐비다",
+            "korean_pronunciation": "코무",
+            "level": 4,
+            "id": 7357
+        },
+        {
+            "kanji": "この頃",
+            "kana": "このごろ",
+            "meaning": "요즘, 근래",
+            "korean_pronunciation": "코노고로",
+            "level": 4,
+            "id": 7358
+        },
+        {
+            "kanji": "訪ねる",
+            "kana": "たずねる",
+            "meaning": "방문하다",
+            "korean_pronunciation": "타즈네루",
+            "level": 4,
+            "id": 7359
+        },
+        {
+            "kanji": "下げる",
+            "kana": "さげる",
+            "meaning": "내리다 (타동사); 걸다",
+            "korean_pronunciation": "사게루",
+            "level": 4,
+            "id": 7360
+        },
+        {
+            "kanji": "花見",
+            "kana": "はなみ",
+            "meaning": "꽃구경",
+            "korean_pronunciation": "하나미",
+            "level": 4,
+            "id": 7361
+        },
+        {
+            "kanji": "途中",
+            "kana": "とちゅう",
+            "meaning": "도중, 중간",
+            "korean_pronunciation": "토츄-",
+            "level": 4,
+            "id": 7362
+        },
+        {
+            "kanji": "入院",
+            "kana": "にゅういんする",
+            "meaning": "입원",
+            "korean_pronunciation": "뉴-인-스루",
+            "level": 4,
+            "id": 7363
+        },
+        {
+            "kanji": "乗り換える",
+            "kana": "のりかえる",
+            "meaning": "환승하다 (열차), 갈아타다 (버스, 열차 등)",
+            "korean_pronunciation": "노리카에루",
+            "level": 4,
+            "id": 7364
+        },
+        {
+            "kanji": "別れる",
+            "kana": "わかれる",
+            "meaning": "헤어지다, 이별하다",
+            "korean_pronunciation": "와카레루",
+            "level": 4,
+            "id": 7365
+        },
+        {
+            "kanji": "～町",
+            "kana": "～ちょう",
+            "meaning": "~ 마을",
+            "korean_pronunciation": "쵸-",
+            "level": 4,
+            "id": 7366
+        },
+        {
+            "kanji": "安全",
+            "kana": "あんぜん",
+            "meaning": "안전",
+            "korean_pronunciation": "안젠",
+            "level": 4,
+            "id": 7367
+        },
+        {
+            "kanji": "看護婦",
+            "kana": "かんごふ",
+            "meaning": "간호사 (여성)",
+            "korean_pronunciation": "캉고후",
+            "level": 4,
+            "id": 7368
+        },
+        {
+            "kanji": "見物",
+            "kana": "けんぶつ",
+            "meaning": "관광",
+            "korean_pronunciation": "켄부츠",
+            "level": 4,
+            "id": 7369
+        },
+        {
+            "kanji": "相談",
+            "kana": "そうだんする",
+            "meaning": "상담",
+            "korean_pronunciation": "소-단-스루",
+            "level": 4,
+            "id": 7370
+        },
+        {
+            "kanji": "ガソリンスタンド",
+            "kana": "ガソリンスタンド",
+            "meaning": "주유소",
+            "korean_pronunciation": "가소린-스탄도",
+            "level": 4,
+            "id": 7371
+        },
+        {
+            "kanji": "テニス",
+            "kana": "テニス",
+            "meaning": "테니스",
+            "korean_pronunciation": "테니스",
+            "level": 4,
+            "id": 7372
+        },
+        {
+            "kanji": "眠る",
+            "kana": "ねむる",
+            "meaning": "잠자다",
+            "korean_pronunciation": "네무루",
+            "level": 4,
+            "id": 7373
+        },
+        {
+            "kanji": "上がる",
+            "kana": "あがる",
+            "meaning": "오르다, 올라가다",
+            "korean_pronunciation": "아가루",
+            "level": 4,
+            "id": 7374
+        },
+        {
+            "kanji": "翻訳",
+            "kana": "ほんやく",
+            "meaning": "번역",
+            "korean_pronunciation": "혼야쿠",
+            "level": 4,
+            "id": 7375
+        },
+        {
+            "kanji": "食事",
+            "kana": "しょくじする",
+            "meaning": "식사",
+            "korean_pronunciation": "쇼쿠지-스루",
+            "level": 4,
+            "id": 7376
+        },
+        {
+            "kanji": "おかげ",
+            "kana": "おかげ",
+            "meaning": "덕분, 덕택",
+            "korean_pronunciation": "오카게",
+            "level": 4,
+            "id": 7377
+        },
+        {
+            "kanji": "娘",
+            "kana": "むすめ",
+            "meaning": "딸 (겸양)",
+            "korean_pronunciation": "무스메",
+            "level": 4,
+            "id": 7378
+        },
+        {
+            "kanji": "湯",
+            "kana": "ゆ",
+            "meaning": "뜨거운 물",
+            "korean_pronunciation": "유",
+            "level": 4,
+            "id": 7379
+        },
+        {
+            "kanji": "競争",
+            "kana": "きょうそう",
+            "meaning": "경쟁, 시합",
+            "korean_pronunciation": "쿄-소-",
+            "level": 4,
+            "id": 7380
+        },
+        {
+            "kanji": "会議",
+            "kana": "かいぎ",
+            "meaning": "회의; 회담",
+            "korean_pronunciation": "카이-기",
+            "level": 4,
+            "id": 7381
+        },
+        {
+            "kanji": "湖",
+            "kana": "みずうみ",
+            "meaning": "호수",
+            "korean_pronunciation": "미즈우미",
+            "level": 4,
+            "id": 7382
+        },
+        {
+            "kanji": "集まる",
+            "kana": "あつまる",
+            "meaning": "모이다 (자동사), 수집하다",
+            "korean_pronunciation": "아츠마루",
+            "level": 4,
+            "id": 7383
+        },
+        {
+            "kanji": "～にくい",
+            "kana": "～にくい",
+            "meaning": "~하기 어렵다",
+            "korean_pronunciation": "~니쿠이",
+            "level": 4,
+            "id": 7384
+        },
+        {
+            "kanji": "生活",
+            "kana": "せいかつする",
+            "meaning": "생활; 살다",
+            "korean_pronunciation": "세이카츠스루",
+            "level": 4,
+            "id": 7385
+        },
+        {
+            "kanji": "糸",
+            "kana": "いと",
+            "meaning": "실",
+            "korean_pronunciation": "이토",
+            "level": 4,
+            "id": 7386
+        },
+        {
+            "kanji": "関係",
+            "kana": "かんけい",
+            "meaning": "관계, 연결",
+            "korean_pronunciation": "칸-케이",
+            "level": 4,
+            "id": 7387
+        },
+        {
+            "kanji": "ピアノ",
+            "kana": "ピアノ",
+            "meaning": "피아노",
+            "korean_pronunciation": "피아노",
+            "level": 4,
+            "id": 7388
+        },
+        {
+            "kanji": "～目",
+            "kana": "～め",
+            "meaning": "번호 ~ 순서, ~번째",
+            "korean_pronunciation": "~메",
+            "level": 4,
+            "id": 7389
+        },
+        {
+            "kanji": "番組",
+            "kana": "ばんぐみ",
+            "meaning": "방송 프로그램",
+            "korean_pronunciation": "반-구미",
+            "level": 4,
+            "id": 7390
+        },
+        {
+            "kanji": "急",
+            "kana": "きゅう",
+            "meaning": "급한, 갑작스러운; 가파른",
+            "korean_pronunciation": "큐-",
+            "level": 4,
+            "id": 7391
+        },
+        {
+            "kanji": "棚",
+            "kana": "たな",
+            "meaning": "선반, 진열대",
+            "korean_pronunciation": "타나",
+            "level": 4,
+            "id": 7392
+        },
+        {
+            "kanji": "木綿",
+            "kana": "もめん",
+            "meaning": "면화, 목면",
+            "korean_pronunciation": "모멘",
+            "level": 4,
+            "id": 7393
+        },
+        {
+            "kanji": "輸出",
+            "kana": "ゆしゅつする",
+            "meaning": "수출",
+            "korean_pronunciation": "유슈츠스루",
+            "level": 4,
+            "id": 7394
+        },
+        {
+            "kanji": "タイプ",
+            "kana": "タイプ",
+            "meaning": "타입, 스타일",
+            "korean_pronunciation": "타이푸",
+            "level": 4,
+            "id": 7395
+        },
+        {
+            "kanji": "すり",
+            "kana": "すり",
+            "meaning": "소매치기",
+            "korean_pronunciation": "스리",
+            "level": 4,
+            "id": 7396
+        },
+        {
+            "kanji": "嬉しい",
+            "kana": "うれしい",
+            "meaning": "기쁘다; 즐겁다",
+            "korean_pronunciation": "우레시이",
+            "level": 4,
+            "id": 7397
+        },
+        {
+            "kanji": "アルコール",
+            "kana": "アルコール",
+            "meaning": "알코올",
+            "korean_pronunciation": "아루코-루",
+            "level": 4,
+            "id": 7398
+        },
+        {
+            "kanji": "ソフト",
+            "kana": "ソフト",
+            "meaning": "부드러운; 소프트 모자; 소프트웨어",
+            "korean_pronunciation": "소후토",
+            "level": 4,
+            "id": 7399
+        },
+        {
+            "kanji": "神社",
+            "kana": "じんじゃ",
+            "meaning": "신사 (일본 고유 종교)",
+            "korean_pronunciation": "진-쟈",
+            "level": 4,
+            "id": 7400
+        },
+        {
+            "kanji": "大分",
+            "kana": "だいぶ",
+            "meaning": "꽤, 상당히, 상당히, 꽤",
+            "korean_pronunciation": "다이부",
+            "level": 4,
+            "id": 7401
+        },
+        {
+            "kanji": "楽しみ",
+            "kana": "たのしみ",
+            "meaning": "즐거움, 기쁨",
+            "korean_pronunciation": "타노시미",
+            "level": 4,
+            "id": 7402
+        },
+        {
+            "kanji": "趣味",
+            "kana": "しゅみ",
+            "meaning": "취미; 소일거리",
+            "korean_pronunciation": "슈미",
+            "level": 4,
+            "id": 7403
+        },
+        {
+            "kanji": "電報",
+            "kana": "でんぽう",
+            "meaning": "전보",
+            "korean_pronunciation": "덴-포-",
+            "level": 4,
+            "id": 7404
+        },
+        {
+            "kanji": "家内",
+            "kana": "かない",
+            "meaning": "(자신의) 아내 (겸양)",
+            "korean_pronunciation": "카나이",
+            "level": 4,
+            "id": 7405
+        },
+        {
+            "kanji": "指",
+            "kana": "ゆび",
+            "meaning": "손가락",
+            "korean_pronunciation": "유비",
+            "level": 4,
+            "id": 7406
+        },
+        {
+            "kanji": "これから",
+            "kana": "これから",
+            "meaning": "이제부터, 이후에",
+            "korean_pronunciation": "코레카라",
+            "level": 4,
+            "id": 7407
+        },
+        {
+            "kanji": "たまに",
+            "kana": "たまに",
+            "meaning": "가끔",
+            "korean_pronunciation": "타마니",
+            "level": 4,
+            "id": 7408
+        },
+        {
+            "kanji": "社会",
+            "kana": "しゃかい",
+            "meaning": "사회",
+            "korean_pronunciation": "샤카이",
+            "level": 4,
+            "id": 7409
+        }
+    ]
+}
