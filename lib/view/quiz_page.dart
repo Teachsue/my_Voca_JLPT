@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import '../model/word.dart';
 import '../view_model/study_view_model.dart';
+import '../service/database_service.dart';
 
 class QuizPage extends StatefulWidget {
   final String level;
@@ -64,13 +67,18 @@ class _QuizPageState extends State<QuizPage> {
 
   @override
   Widget build(BuildContext context) {
+    final todayStr = DateFormat('yyyy-MM-dd').format(DateTime.now());
+    final bool isTodaysCompleted = Hive.box(DatabaseService.sessionBoxName).get('todays_words_completed_$todayStr', defaultValue: false);
+
     return ChangeNotifierProvider.value(
       value: _viewModel,
       child: Scaffold(
         backgroundColor: const Color(0xFFF8FAFC),
         appBar: AppBar(
           title: Text(
-            widget.day == 0 ? '오늘의 단어 퀴즈' : (widget.day != null ? '${widget.level} DAY ${widget.day} 퀴즈' : '${widget.level} 퀴즈'),
+            widget.day == 0 
+                ? (isTodaysCompleted ? '오늘의 단어 복습 퀴즈' : '오늘의 단어 퀴즈')
+                : (widget.day != null ? '${widget.level} DAY ${widget.day} 퀴즈' : '${widget.level} 퀴즈'),
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           backgroundColor: Colors.white,
@@ -82,9 +90,8 @@ class _QuizPageState extends State<QuizPage> {
           builder: (context, viewModel, child) {
             if (viewModel.total == 0) return const Center(child: CircularProgressIndicator(color: Color(0xFF5B86E5)));
             if (viewModel.isFinished) {
-              if (widget.day == 0) {
-                viewModel.markTodaysWordsAsCompleted();
-              }
+              final bool isPerfect = viewModel.score == viewModel.total;
+              if (widget.day == 0 && isPerfect) viewModel.markTodaysWordsAsCompleted();
               return _buildResultView(viewModel);
             }
             return _buildQuizView(context, viewModel);
@@ -95,39 +102,147 @@ class _QuizPageState extends State<QuizPage> {
   }
 
   Widget _buildResultView(StudyViewModel viewModel) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.celebration_rounded, size: 80, color: Color(0xFF5B86E5)),
-            const SizedBox(height: 24),
-            const Text('퀴즈 완료!', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 12),
-            Text('총 ${viewModel.total}문제 중 ${viewModel.score}문제를 맞혔습니다.', style: TextStyle(fontSize: 17, color: Colors.grey[600]), textAlign: TextAlign.center),
-            const SizedBox(height: 48),
-            SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: ElevatedButton(
-                onPressed: () => Navigator.pop(context),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF5B86E5),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  elevation: 0,
+    final bool isPerfect = viewModel.score == viewModel.total;
+    final int wrongCount = viewModel.total - viewModel.score;
+
+    return Column(
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                Icon(
+                  isPerfect ? Icons.workspace_premium_rounded : Icons.fitness_center_rounded,
+                  size: 80, // 아이콘 사이즈 축소
+                  color: isPerfect ? Colors.orange : Colors.blueGrey,
                 ),
-                child: const Text('완료', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              ),
+                const SizedBox(height: 20),
+                Text(
+                  isPerfect ? '완벽합니다! 💯' : '아쉬워요! 조금만 더 힘내세요 💪',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                // 맞춘 개수 빨간색으로 강조
+                RichText(
+                  text: TextSpan(
+                    style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.grey),
+                    children: [
+                      TextSpan(
+                        text: '${viewModel.score}',
+                        style: const TextStyle(color: Colors.redAccent),
+                      ),
+                      TextSpan(text: ' / ${viewModel.total}'),
+                    ],
+                  ),
+                ),
+                if (!isPerfect) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    '$wrongCount개를 틀렸어요.\n오답을 확인해보세요.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 15, color: Colors.grey[600], height: 1.4),
+                  ),
+                ],
+                const SizedBox(height: 35),
+                if (!isPerfect) ...[
+                  const Row(
+                    children: [
+                      Icon(Icons.menu_book_rounded, color: Colors.blueGrey, size: 20),
+                      SizedBox(width: 8),
+                      Text('틀린 단어 확인', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black87)),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  // 오답 리스트
+                  ...List.generate(viewModel.sessionWords.length, (index) {
+                    final word = viewModel.sessionWords[index];
+                    final userAnswer = viewModel.userAnswers[index];
+                    final isCorrect = userAnswer == word.meaning;
+
+                    if (isCorrect) return const SizedBox.shrink();
+
+                    return Container(
+                      margin: const EdgeInsets.only(bottom: 12),
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        border: Border.all(color: Colors.redAccent.withOpacity(0.1), width: 1),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8, offset: const Offset(0, 2))],
+                      ),
+                      child: Row(
+                        children: [
+                          const Icon(Icons.cancel_rounded, color: Colors.redAccent, size: 22),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // 단어 정보 (한글 발음 추가)
+                                Row(
+                                  children: [
+                                    Text('${word.kanji} (${word.kana})', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                    const SizedBox(width: 8),
+                                    Text('[${word.koreanPronunciation}]', style: TextStyle(fontSize: 13, color: Colors.indigo.withOpacity(0.6))),
+                                  ],
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  '$userAnswer -> ${word.meaning}',
+                                  style: const TextStyle(fontSize: 14, color: Colors.redAccent, fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
+                ],
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+        SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(24, 10, 24, 30),
+            child: Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: ElevatedButton(
+                    onPressed: isPerfect ? () => Navigator.pop(context) : () => viewModel.restart(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: isPerfect ? const Color(0xFF5B86E5) : Colors.orange,
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                      elevation: 4,
+                    ),
+                    child: Text(isPerfect ? '학습 완료' : '다시 도전하기', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  ),
+                ),
+                if (!isPerfect) ...[
+                  const SizedBox(height: 12),
+                  TextButton(
+                    onPressed: () => Navigator.popUntil(context, (route) => route.isFirst),
+                    child: Text('나중에 하기', style: TextStyle(color: Colors.grey[600], fontSize: 16)),
+                  ),
+                ],
+              ],
+            ),
+          ),
+        ),
+      ],
     );
   }
 
   Widget _buildQuizView(BuildContext context, StudyViewModel viewModel) {
+    final bool isLast = viewModel.currentIndex == viewModel.total - 1;
+
     return Column(
       children: [
         Padding(
@@ -161,9 +276,8 @@ class _QuizPageState extends State<QuizPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 10),
-                // 최적화된 높이의 문제 카드
                 Container(
-                  height: 160, // 200 -> 160으로 축소
+                  height: 160,
                   alignment: Alignment.center,
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   decoration: BoxDecoration(
@@ -194,8 +308,7 @@ class _QuizPageState extends State<QuizPage> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 20), // 24 -> 20으로 축소
-                // 최적화된 높이의 보기 리스트
+                const SizedBox(height: 20),
                 ...viewModel.currentOptionWords.map((word) => _buildOptionButton(viewModel, word)),
                 const SizedBox(height: 20),
               ],
@@ -205,10 +318,10 @@ class _QuizPageState extends State<QuizPage> {
         if (viewModel.isAnswered)
           SafeArea(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 24, 25), // 하단 여백 조정
+              padding: const EdgeInsets.fromLTRB(24, 0, 24, 25),
               child: SizedBox(
                 width: double.infinity,
-                height: 52, // 55 -> 52로 축소
+                height: 52,
                 child: ElevatedButton(
                   onPressed: viewModel.nextQuestion,
                   style: ElevatedButton.styleFrom(
@@ -217,7 +330,7 @@ class _QuizPageState extends State<QuizPage> {
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                     elevation: 4,
                   ),
-                  child: const Text('다음 문제', style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+                  child: Text(isLast ? '결과 보기' : '다음 문제', style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
                 ),
               ),
             ),
@@ -250,9 +363,9 @@ class _QuizPageState extends State<QuizPage> {
     }
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10), // 12 -> 10으로 축소
+      padding: const EdgeInsets.only(bottom: 10),
       child: SizedBox(
-        height: 72, // 85 -> 72로 축소
+        height: 72,
         child: OutlinedButton(
           onPressed: isAnswered ? null : () => viewModel.submitAnswer(optionWord.meaning),
           style: OutlinedButton.styleFrom(
@@ -268,7 +381,7 @@ class _QuizPageState extends State<QuizPage> {
                 optionWord.meaning,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 16, // 17 -> 16
+                  fontSize: 16,
                   fontWeight: (isAnswered && isCorrect) ? FontWeight.bold : FontWeight.w500,
                   color: textColor,
                 ),

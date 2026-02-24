@@ -9,6 +9,7 @@ import 'wrong_answer_page.dart';
 import 'statistics_page.dart';
 import 'word_list_page.dart';
 import 'level_test_page.dart';
+import 'calendar_page.dart';
 import '../model/word.dart';
 
 class HomePage extends StatefulWidget {
@@ -62,7 +63,10 @@ class _HomePageState extends State<HomePage> {
                           _refresh();
                         }),
                         const SizedBox(width: 12),
-                        _buildHeaderIcon(Icons.calendar_month_rounded, () {}),
+                        _buildHeaderIcon(Icons.calendar_month_rounded, () async {
+                          await Navigator.push(context, MaterialPageRoute(builder: (context) => const CalendarPage()));
+                          _refresh();
+                        }),
                       ],
                     ),
                   ],
@@ -71,64 +75,80 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 25),
 
                 // 2. 메인 배너 (오늘의 학습)
-                GestureDetector(
-                  onTap: () async {
-                    final viewModel = StudyViewModel();
-                    final List<Word> todaysWords = await viewModel.loadTodaysWords();
-                    if (context.mounted) {
-                      await Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => WordListPage(level: '오늘의 단어', day: 0, words: todaysWords),
-                        ),
-                      );
-                      _refresh();
-                    }
-                  },
-                  child: Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF5B86E5), Color(0xFF36D1DC)],
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                      ),
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xFF5B86E5).withOpacity(0.35),
-                          blurRadius: 10,
-                          offset: const Offset(0, 6),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        const Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '오늘의 단어 🔥',
-                                style: TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                ValueListenableBuilder(
+                  valueListenable: Hive.box(DatabaseService.sessionBoxName).listenable(keys: [
+                    'todays_words_completed_${DateFormat('yyyy-MM-dd').format(DateTime.now())}'
+                  ]),
+                  builder: (context, box, child) {
+                    final todayStr = DateFormat('yyyy-MM-dd').format(DateTime.now());
+                    final bool isCompleted = box.get('todays_words_completed_$todayStr', defaultValue: false);
+
+                    return GestureDetector(
+                      onTap: () async {
+                        final viewModel = StudyViewModel();
+                        final List<Word> todaysWords = await viewModel.loadTodaysWords();
+                        if (context.mounted) {
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WordListPage(
+                                level: isCompleted ? '오늘의 단어 복습' : '오늘의 단어',
+                                day: 0,
+                                words: todaysWords,
                               ),
-                              SizedBox(height: 8),
-                              Text(
-                                "매일 10개씩 꾸준히!\n지금 바로 시작하세요.",
-                                style: TextStyle(color: Colors.white, fontSize: 13, height: 1.4),
-                              ),
-                            ],
+                            ),
+                          );
+                          _refresh();
+                        }
+                      },
+                      child: Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: isCompleted
+                                ? [Colors.grey.shade400, Colors.grey.shade500]
+                                : [const Color(0xFF5B86E5), const Color(0xFF36D1DC)],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
                           ),
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: isCompleted ? Colors.grey.withOpacity(0.2) : const Color(0xFF5B86E5).withOpacity(0.35),
+                              blurRadius: 10,
+                              offset: const Offset(0, 6),
+                            ),
+                          ],
                         ),
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
-                          child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 28),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    isCompleted ? '학습 완료 ✅' : '오늘의 단어 🔥',
+                                    style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    isCompleted ? "훌륭합니다! 내일 다시 만나요.\n복습은 언제나 환영이에요." : "매일 10개씩 꾸준히!\n지금 바로 시작하세요.",
+                                    style: const TextStyle(color: Colors.white, fontSize: 13, height: 1.4),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
+                              child: Icon(isCompleted ? Icons.check_rounded : Icons.play_arrow_rounded, color: Colors.white, size: 28),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
+                      ),
+                    );
+                  },
                 ),
 
                 const SizedBox(height: 12),

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'view/home_page.dart';
 import 'service/database_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // 날짜 형식 초기화 (한국어)
+  await initializeDateFormatting('ko_KR', null);
 
   // 화면 방향 고정 (세로 모드)
   await SystemChrome.setPreferredOrientations([

@@ -10,12 +10,15 @@ class StudyViewModel extends ChangeNotifier {
   bool _isAnswered = false;
   bool _isCorrect = false;
   String? _selectedAnswer;
-  List<Word> _currentOptionWords = []; // String 대신 Word 객체 리스트로 변경
+  List<Word> _currentOptionWords = [];
+  List<String?> _userAnswers = []; // 사용자가 선택한 답변 이력 저장
   String? _currentSessionKey;
 
   // Getters
   Word? get currentWord => (_words.isNotEmpty && _currentIndex < _words.length) ? _words[_currentIndex] : null;
   List<Word> get currentOptionWords => _currentOptionWords;
+  List<String?> get userAnswers => _userAnswers;
+  List<Word> get sessionWords => _words;
   bool get isAnswered => _isAnswered;
   bool get isCorrect => _isCorrect;
   String? get selectedAnswer => _selectedAnswer;
@@ -51,6 +54,7 @@ class StudyViewModel extends ChangeNotifier {
     _currentIndex = 0;
     _score = 0;
     _isAnswered = false;
+    _userAnswers = List.filled(_words.length, null); // 이력 초기화
     if (_words.isNotEmpty) _generateOptions();
     notifyListeners();
   }
@@ -100,6 +104,14 @@ class StudyViewModel extends ChangeNotifier {
     _currentIndex = sessionData['currentIndex'];
     _score = sessionData['score'];
     _currentSessionKey = sessionData['sessionKey'];
+    
+    // 저장된 답변 이력이 있으면 복구, 없으면 새로 생성
+    if (sessionData['userAnswers'] != null) {
+      _userAnswers = List<String?>.from(sessionData['userAnswers']);
+    } else {
+      _userAnswers = List.filled(_words.length, null);
+    }
+
     _isAnswered = false;
     _selectedAnswer = null;
     
@@ -132,6 +144,7 @@ class StudyViewModel extends ChangeNotifier {
     if (_isAnswered || currentWord == null) return;
     _isAnswered = true;
     _selectedAnswer = answer;
+    _userAnswers[_currentIndex] = answer; // 답변 저장
 
     if (answer == currentWord!.meaning) {
       _isCorrect = true;
@@ -162,6 +175,7 @@ class StudyViewModel extends ChangeNotifier {
       'wordIds': _words.map((w) => w.id).toList(),
       'currentIndex': _currentIndex,
       'score': _score,
+      'userAnswers': _userAnswers, // 선택 이력 추가 저장
     });
   }
 
