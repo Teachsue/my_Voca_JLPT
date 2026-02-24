@@ -65,6 +65,15 @@ class _WordListPageState extends State<WordListPage> {
         foregroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.home_rounded, size: 22),
+            onPressed: () {
+              Navigator.popUntil(context, (route) => route.isFirst);
+            },
+            tooltip: '홈으로 이동',
+          ),
+        ],
       ),
       body: PageView.builder(
         controller: _pageController,

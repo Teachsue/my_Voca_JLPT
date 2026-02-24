@@ -74,6 +74,13 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
         elevation: 0,
         actions: [
           IconButton(
+            icon: const Icon(Icons.home_rounded, size: 22),
+            onPressed: () {
+              Navigator.popUntil(context, (route) => route.isFirst);
+            },
+            tooltip: '홈으로 이동',
+          ),
+          IconButton(
             icon: Icon(_isSearching ? Icons.close : Icons.search),
             onPressed: () {
               setState(() {
