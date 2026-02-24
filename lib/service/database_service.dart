@@ -13,7 +13,12 @@ class DatabaseService {
       Hive.registerAdapter(WordAdapter());
     }
     await Hive.openBox<Word>(boxName);
-    await Hive.openBox(sessionBoxName);
+    final sessionBox = await Hive.openBox(sessionBoxName);
+
+    // 구버전 데이터 보정: 'N5 미만' 기록이 있다면 'N5'로 변경
+    if (sessionBox.get('recommended_level') == 'N5 미만') {
+      await sessionBox.put('recommended_level', 'N5');
+    }
   }
 
   // 앱 최초 실행 시 JSON 데이터를 Hive DB로 옮기는 함수

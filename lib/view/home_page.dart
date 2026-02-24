@@ -153,31 +153,34 @@ class _HomePageState extends State<HomePage> {
 
                 const SizedBox(height: 12),
 
-                // 3. 실력 테스트 또는 맞춤 학습
+                // 3. 실력 테스트 결과 또는 테스트 시작
                 ValueListenableBuilder(
                   valueListenable: Hive.box(DatabaseService.sessionBoxName).listenable(keys: ['recommended_level']),
                   builder: (context, box, child) {
                     final String? recommendedLevel = box.get('recommended_level');
-                    final bool hasResult = recommendedLevel != null && recommendedLevel != 'N5 미만';
+                    final bool hasResult = recommendedLevel != null;
 
                     return GestureDetector(
                       onTap: () async {
                         if (hasResult) {
+                          // 결과가 있으면 해당 레벨 학습 페이지로 이동
                           await Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => LevelSummaryPage(level: recommendedLevel)),
                           );
                         } else {
+                          // 결과가 없으면 테스트 안내창 표시
                           _showLevelTestGuide(context);
                         }
                         _refresh();
                       },
                       child: Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: hasResult ? const Color(0xFFF0F7FF) : Colors.white,
                           borderRadius: BorderRadius.circular(20),
+                          border: hasResult ? Border.all(color: const Color(0xFF5B86E5).withOpacity(0.3), width: 1.5) : null,
                           boxShadow: [
                             BoxShadow(color: Colors.grey.withOpacity(0.08), blurRadius: 10, offset: const Offset(0, 4)),
                           ],
@@ -187,33 +190,43 @@ class _HomePageState extends State<HomePage> {
                             Container(
                               padding: const EdgeInsets.all(12),
                               decoration: BoxDecoration(
-                                color: (hasResult ? Colors.blue : Colors.orange).withOpacity(0.06),
+                                color: (hasResult ? const Color(0xFF5B86E5) : Colors.orange).withOpacity(0.1),
                                 borderRadius: BorderRadius.circular(14),
                               ),
                               child: Icon(
-                                hasResult ? Icons.auto_awesome_rounded : Icons.psychology_alt_rounded,
-                                color: hasResult ? Colors.blue : Colors.orange,
-                                size: 24,
+                                hasResult ? Icons.workspace_premium_rounded : Icons.psychology_alt_rounded,
+                                color: hasResult ? const Color(0xFF5B86E5) : Colors.orange,
+                                size: 26,
                               ),
                             ),
-                            const SizedBox(width: 14),
+                            const SizedBox(width: 16),
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    hasResult ? "나의 맞춤 레벨 학습" : "내 실력 확인하기",
-                                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black87),
+                                    hasResult ? "나의 맞춤 레벨: $recommendedLevel" : "내 실력 확인하기",
+                                    style: TextStyle(
+                                      fontSize: 16, 
+                                      fontWeight: FontWeight.bold, 
+                                      color: hasResult ? const Color(0xFF5B86E5) : Colors.black87
+                                    ),
                                   ),
-                                  const SizedBox(height: 2),
+                                  const SizedBox(height: 4),
                                   Text(
-                                    hasResult ? "추천 레벨: $recommendedLevel 과정 바로가기" : "30문제로 JLPT 등급 판정받기",
-                                    style: const TextStyle(fontSize: 12, color: Colors.grey, fontWeight: FontWeight.w500),
+                                    hasResult 
+                                      ? "$recommendedLevel 과정 학습을 시작하세요!"
+                                      : "30문제로 JLPT 등급 판정받기",
+                                    style: const TextStyle(fontSize: 13, color: Colors.grey, fontWeight: FontWeight.w500),
                                   ),
                                 ],
                               ),
                             ),
-                            const Icon(Icons.chevron_right_rounded, color: Colors.grey, size: 22),
+                            Icon(
+                              hasResult ? Icons.arrow_forward_ios_rounded : Icons.chevron_right_rounded, 
+                              color: hasResult ? const Color(0xFF5B86E5) : Colors.grey, 
+                              size: 18
+                            ),
                           ],
                         ),
                       ),
