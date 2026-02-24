@@ -20,12 +20,16 @@ void main() async {
   // 1. Hive 및 어댑터 초기화
   await DatabaseService.init();
 
-  // 2. 초기 데이터가 필요하다면 여기서 로드 (예: N1~N5)
-  for (int i = 1; i <= 5; i++) {
-    await DatabaseService.loadJsonToHive(i);
-  }
-
   runApp(const MyApp());
+
+  // 2. 초기 데이터가 필요하다면 백그라운드에서 로드
+  if (DatabaseService.needsInitialLoading()) {
+    Future.microtask(() async {
+      for (int i = 1; i <= 5; i++) {
+        await DatabaseService.loadJsonToHive(i);
+      }
+    });
+  }
 }
 
 class MyApp extends StatelessWidget {

@@ -172,8 +172,8 @@ class _QuizPageState extends State<QuizPage> {
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
-                        border: Border.all(color: Colors.redAccent.withValues(alpha: 0.1), width: 1),
-                        boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 8, offset: const Offset(0, 2))],
+                        border: Border.all(color: Colors.redAccent.withOpacity(0.1), width: 1),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8, offset: const Offset(0, 2))],
                       ),
                       child: Row(
                         children: [
@@ -187,7 +187,7 @@ class _QuizPageState extends State<QuizPage> {
                                   children: [
                                     Text('${word.kanji} (${word.kana})', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                                     const SizedBox(width: 8),
-                                    Text('[${word.koreanPronunciation}]', style: TextStyle(fontSize: 13, color: Colors.indigo.withValues(alpha: 0.6))),
+                                    Text('[${word.koreanPronunciation}]', style: TextStyle(fontSize: 13, color: Colors.indigo.withOpacity(0.6))),
                                   ],
                                 ),
                                 const SizedBox(height: 6),
@@ -287,7 +287,7 @@ class _QuizPageState extends State<QuizPage> {
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
-                    boxShadow: [BoxShadow(color: Colors.black.withValues(alpha: 0.03), blurRadius: 12, offset: const Offset(0, 4))],
+                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 12, offset: const Offset(0, 4))],
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -416,7 +416,7 @@ class _QuizPageState extends State<QuizPage> {
                   type == QuizType.kanjiToMeaning 
                       ? '${optionWord.kanji} (${optionWord.kana}) - ${optionWord.koreanPronunciation}'
                       : optionWord.meaning,
-                  style: TextStyle(fontSize: 11, color: textColor.withValues(alpha: 0.7)),
+                  style: TextStyle(fontSize: 11, color: textColor.withOpacity(0.7)),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

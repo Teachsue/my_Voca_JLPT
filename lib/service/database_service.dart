@@ -30,13 +30,21 @@ class DatabaseService {
       final Map<String, dynamic> data = json.decode(response);
       List<dynamic> vocabulary = data['vocabulary'];
 
+      Map<String, Word> wordMap = {};
       for (var item in vocabulary) {
         final word = Word.fromJson(item);
-        await box.put('${level}_${word.id}', word); // 유니크한 키로 저장
+        wordMap['${level}_${word.id}'] = word;
       }
+      
+      await box.putAll(wordMap); // 대량 저장은 putAll이 훨씬 빠름
     } catch (e) {
       print("❌ 데이터 로드 에러 (N$level): $e");
     }
+  }
+
+  static bool needsInitialLoading() {
+    var box = Hive.box<Word>(boxName);
+    return box.isEmpty;
   }
 
   static List<Word> getWordsByLevel(int level) {
