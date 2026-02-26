@@ -294,7 +294,7 @@ class _QuizPageState extends State<QuizPage> {
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
-                                  '$userAnswer -> ${word.meaning}',
+                                  '$userAnswer -> ${word.meaning}', // 다시 뜻으로 원복
                                   style: const TextStyle(
                                     fontSize: 14,
                                     color: Colors.redAccent,
@@ -562,7 +562,7 @@ class _QuizPageState extends State<QuizPage> {
 
     switch (type) {
       case QuizType.kanjiToMeaning:
-        buttonDisplayLabel = optionWord.meaning;
+        buttonDisplayLabel = optionWord.meaning; // 다시 뜻으로 원복
         isCorrect = optionWord.meaning == viewModel.currentWord!.meaning;
         break;
       case QuizType.meaningToKanji:

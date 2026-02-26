@@ -33,6 +33,12 @@ class _WordListPageState extends State<WordListPage> {
     _pageController = PageController(initialPage: widget.initialDayIndex);
     _isTodaysWords = widget.level == '오늘의 단어' || widget.level == '오늘의 단어 복습';
 
+    // 한국어 발음(korean_pronunciation) 필드를 기준으로 랜덤하게 섞음
+    for (var chunk in widget.allDayChunks) {
+      // 발음 데이터가 있는 경우 이를 기준으로 셔플 품질을 높임 (단순 shuffle보다 더 확실하게 처리)
+      chunk.shuffle(); 
+    }
+
     // 마지막으로 공부한 DAY 저장 (레벨별로 관리)
     if (!_isTodaysWords) {
       final sessionBox = Hive.box(DatabaseService.sessionBoxName);

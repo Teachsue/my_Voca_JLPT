@@ -175,9 +175,12 @@ class StudyViewModel extends ChangeNotifier {
     final distractors = allWords.where((w) {
       if (w.id == correctWord.id) return false;
       switch (type) {
-        case QuizType.kanjiToMeaning: return w.meaning != correctWord.meaning;
-        case QuizType.meaningToKanji: return w.kanji != correctWord.kanji;
-        case QuizType.meaningToKana: return w.kana != correctWord.kana;
+        case QuizType.kanjiToMeaning: 
+          return w.meaning != correctWord.meaning;
+        case QuizType.meaningToKanji: 
+          return w.kanji != correctWord.kanji;
+        case QuizType.meaningToKana: 
+          return w.kana != correctWord.kana;
       }
     }).toList();
     
