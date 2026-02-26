@@ -28,9 +28,12 @@ void main() async {
   });
 }
 
-// 느리고 부드러운 페이드 전환을 위한 커스텀 빌더
-class SmoothFadeTransitionsBuilder extends PageTransitionsBuilder {
-  const SmoothFadeTransitionsBuilder();
+// 책장을 넘길 때 배경도 함께 이동시켜 잔상을 없애는 커스텀 빌더
+class SolidPageTurnTransitionsBuilder extends PageTransitionsBuilder {
+  final bool isDarkMode;
+  final String appTheme;
+
+  const SolidPageTurnTransitionsBuilder({required this.isDarkMode, required this.appTheme});
 
   @override
   Widget buildTransitions<T>(
@@ -40,13 +43,32 @@ class SmoothFadeTransitionsBuilder extends PageTransitionsBuilder {
     Animation<double> secondaryAnimation,
     Widget child,
   ) {
-    // 0.5초 동안 부드럽게 나타나도록 커브와 함께 적용
-    return FadeTransition(
-      opacity: CurvedAnimation(
-        parent: animation,
-        curve: Curves.easeInOut, // 시작과 끝이 부드러운 효과
+    // 1. 페이지 이동 애니메이션 (오른쪽 -> 왼쪽)
+    final slideIn = Tween<Offset>(
+      begin: const Offset(1.0, 0.0),
+      end: Offset.zero,
+    ).animate(CurvedAnimation(parent: animation, curve: Curves.easeOutQuart));
+
+    // 2. 나가는 페이지 애니메이션 (왼쪽으로 살짝 밀림)
+    final slideOut = Tween<Offset>(
+      begin: Offset.zero,
+      end: const Offset(-0.3, 0.0),
+    ).animate(CurvedAnimation(parent: secondaryAnimation, curve: Curves.easeOutQuart));
+
+    // 핵심: 이동하는 페이지(child)에 배경을 입혀서 이전 페이지를 덮어버림 (잔상 방지)
+    return SlideTransition(
+      position: slideIn,
+      child: SlideTransition(
+        position: slideOut,
+        child: SeasonalBackground(
+          isDarkMode: isDarkMode,
+          appTheme: appTheme,
+          child: Material(
+            color: Colors.transparent,
+            child: child,
+          ),
+        ),
       ),
-      child: child,
     );
   }
 }
@@ -58,60 +80,47 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final sessionBox = Hive.box(DatabaseService.sessionBoxName);
 
-    return MaterialApp(
-      title: 'JLPT 단어장',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true, colorSchemeSeed: const Color(0xFF5B86E5)),
-      builder: (context, child) {
-        return ValueListenableBuilder<Box>(
-          valueListenable: sessionBox.listenable(keys: ['dark_mode', 'app_theme']),
-          builder: (context, box, _) {
-            final bool isDarkMode = box.get('dark_mode', defaultValue: false);
-            final String appTheme = box.get('app_theme', defaultValue: 'auto');
+    return ValueListenableBuilder<Box>(
+      valueListenable: sessionBox.listenable(keys: ['dark_mode', 'app_theme']),
+      builder: (context, box, _) {
+        final bool isDarkMode = box.get('dark_mode', defaultValue: false);
+        final String appTheme = box.get('app_theme', defaultValue: 'auto');
 
-            return Theme(
-              data: ThemeData(
-                useMaterial3: true,
-                colorScheme: ColorScheme.fromSeed(
-                  seedColor: const Color(0xFF5B86E5),
-                  brightness: isDarkMode ? Brightness.dark : Brightness.light,
-                  surface: Colors.transparent,
-                ),
-                textTheme: GoogleFonts.notoSansTextTheme(
-                  isDarkMode ? ThemeData.dark().textTheme : ThemeData.light().textTheme,
-                ).apply(
-                  bodyColor: isDarkMode ? Colors.white : Colors.black87,
-                  displayColor: isDarkMode ? Colors.white : Colors.black87,
-                ),
-                scaffoldBackgroundColor: Colors.transparent,
-                canvasColor: Colors.transparent,
-                appBarTheme: const AppBarTheme(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  centerTitle: true,
-                  surfaceTintColor: Colors.transparent,
-                ),
-                // 전역 페이지 전환 속도 최적화 (안드로이드/iOS 모두 부드러운 페이드 적용)
-                pageTransitionsTheme: const PageTransitionsTheme(builders: {
-                  TargetPlatform.android: SmoothFadeTransitionsBuilder(),
-                  TargetPlatform.iOS: SmoothFadeTransitionsBuilder(),
-                }),
-              ),
-              child: SeasonalBackground(
-                isDarkMode: isDarkMode,
-                appTheme: appTheme,
-                child: RepaintBoundary(
-                  child: Material(
-                    color: Colors.transparent,
-                    child: child!,
-                  ),
-                ),
-              ),
-            );
+        return MaterialApp(
+          title: 'JLPT 단어장',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color(0xFF5B86E5),
+              brightness: isDarkMode ? Brightness.dark : Brightness.light,
+            ),
+            textTheme: GoogleFonts.notoSansTextTheme(
+              isDarkMode ? ThemeData.dark().textTheme : ThemeData.light().textTheme,
+            ).apply(
+              bodyColor: isDarkMode ? Colors.white : Colors.black87,
+              displayColor: isDarkMode ? Colors.white : Colors.black87,
+            ),
+            scaffoldBackgroundColor: Colors.transparent,
+            canvasColor: isDarkMode ? const Color(0xFF1A1C2C) : Colors.white,
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              centerTitle: true,
+            ),
+            // 모든 페이지 이동 시 배경을 들고 움직이는 커스텀 슬라이드 적용
+            pageTransitionsTheme: PageTransitionsTheme(builders: {
+              TargetPlatform.android: SolidPageTurnTransitionsBuilder(isDarkMode: isDarkMode, appTheme: appTheme),
+              TargetPlatform.iOS: SolidPageTurnTransitionsBuilder(isDarkMode: isDarkMode, appTheme: appTheme),
+            }),
+          ),
+          // builder에서는 이제 배경을 씌우지 않고 내용물만 보냅니다. (전환 효과에서 배경을 처리하므로)
+          builder: (context, child) {
+            return child!;
           },
+          home: const HomePage(),
         );
       },
-      home: const HomePage(),
     );
   }
 }

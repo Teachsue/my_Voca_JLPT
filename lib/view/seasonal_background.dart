@@ -63,6 +63,7 @@ class SeasonalBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = _getSeasonalTheme();
     
+    // 배경을 포함한 컨테이너를 반환하여 각 페이지가 자신만의 배경을 갖게 함
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -74,14 +75,14 @@ class SeasonalBackground extends StatelessWidget {
         ),
       ),
       child: Stack(
+        clipBehavior: Clip.none,
         children: [
-          // 배경 아이콘은 항상 고정
           Positioned(
             top: -30,
             right: -30,
             child: Icon(theme['icon'], size: 250, color: theme['iconColor']),
           ),
-          // 이 위에 실제 페이지가 올라감
+          // 페이지 내용
           child,
         ],
       ),
