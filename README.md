@@ -47,11 +47,9 @@
 ## 📸 Screenshots
 
 | 메인 화면 | 단어 리스트 | 퀴즈 화면 |
-| :---: | :---: | :---: |
 | <img src="screenshots/home.png" width="200"> | <img src="screenshots/list.png" width="200"> | <img src="screenshots/quiz.png" width="200"> |
 
 | 학습 통계 | 오답노트 | 실력 테스트 |
-| :---: | :---: | : :---: |
 | <img src="screenshots/stats.png" width="200"> | <img src="screenshots/wrong.png" width="200"> | <img src="screenshots/test.png" width="200"> |
 
 ---
