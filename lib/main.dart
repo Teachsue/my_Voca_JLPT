@@ -9,12 +9,8 @@ import 'view/seasonal_background.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // 1. Hive 초기화 및 박스 열기 보장
   await DatabaseService.init();
-
   await initializeDateFormatting('ko_KR', null);
-
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -22,7 +18,6 @@ void main() async {
 
   runApp(const MyApp());
 
-  // 데이터 로딩은 백그라운드에서 진행
   Future.microtask(() async {
     for (int i = 1; i <= 5; i++) {
       await DatabaseService.loadJsonToHive(i);
@@ -37,24 +32,25 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 세션 박스를 미리 참조
     final sessionBox = Hive.box(DatabaseService.sessionBoxName);
 
-    return ValueListenableBuilder(
-      valueListenable: sessionBox.listenable(keys: ['dark_mode']),
-      builder: (context, Box box, _) {
+    return ValueListenableBuilder<Box>(
+      valueListenable: sessionBox.listenable(keys: ['dark_mode', 'app_theme']),
+      builder: (context, box, _) {
         final bool isDarkMode = box.get('dark_mode', defaultValue: false);
+        final String appTheme = box.get('app_theme', defaultValue: 'auto');
         
         return MaterialApp(
           title: 'JLPT 단어장',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             useMaterial3: true,
+            // 모든 표면 색상을 투명하게 하여 배경 딜레이 원천 차단
             colorScheme: ColorScheme.fromSeed(
               seedColor: const Color(0xFF5B86E5),
               brightness: isDarkMode ? Brightness.dark : Brightness.light,
+              surface: Colors.transparent, // 표면 투명화
             ),
-            // Theme.of(context) 대신 정적 텍스트 테마 사용
             textTheme: GoogleFonts.notoSansTextTheme(
               isDarkMode ? ThemeData.dark().textTheme : ThemeData.light().textTheme,
             ).apply(
@@ -63,25 +59,28 @@ class MyApp extends StatelessWidget {
             ),
             scaffoldBackgroundColor: Colors.transparent,
             canvasColor: Colors.transparent,
-            appBarTheme: AppBarTheme(
+            appBarTheme: const AppBarTheme(
               backgroundColor: Colors.transparent,
               elevation: 0,
               centerTitle: true,
-              iconTheme: IconThemeData(color: isDarkMode ? Colors.white : Colors.black87),
-              titleTextStyle: TextStyle(
-                color: isDarkMode ? Colors.white : Colors.black87,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              surfaceTintColor: Colors.transparent,
             ),
             cardTheme: CardThemeData(
-              color: isDarkMode ? Colors.white.withOpacity(0.1) : Colors.white,
+              color: isDarkMode ? Colors.white.withOpacity(0.1) : Colors.white.withOpacity(0.9),
               elevation: 0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             ),
           ),
           builder: (context, child) {
-            return SeasonalBackground(child: child!);
+            // 배경이 항상 Navigator보다 먼저 존재하도록 Stack 구조 보장
+            return SeasonalBackground(
+              isDarkMode: isDarkMode,
+              appTheme: appTheme,
+              child: Material(
+                color: Colors.transparent, // 기본 배경 제거
+                child: child!,
+              ),
+            );
           },
           home: const HomePage(),
         );

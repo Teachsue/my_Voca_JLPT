@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import '../service/database_service.dart';
 
 class SeasonalBackground extends StatelessWidget {
   final Widget child;
+  final bool isDarkMode;
+  final String appTheme;
 
-  const SeasonalBackground({super.key, required this.child});
+  const SeasonalBackground({
+    super.key, 
+    required this.child, 
+    required this.isDarkMode, 
+    required this.appTheme
+  });
 
-  Map<String, dynamic> _getSeasonalTheme(String? preferredTheme, bool isDarkMode) {
-    // 다크 모드일 때의 기본 색상 정의
+  Map<String, dynamic> _getSeasonalTheme() {
     if (isDarkMode) {
       return {
-        'colors': [const Color(0xFF1A1C2C), const Color(0xFF2D3436)], // 심야 테마: 깊은 네이비
+        'colors': [const Color(0xFF1A1C2C), const Color(0xFF2D3436)],
         'icon': Icons.nights_stay_rounded,
         'iconColor': Colors.white.withOpacity(0.05),
       };
     }
 
     int month = DateTime.now().month;
-    String target = preferredTheme ?? 'auto';
-    
+    String target = appTheme;
     if (target == 'auto') {
       if (month >= 3 && month <= 5) target = 'spring';
       else if (month >= 6 && month <= 8) target = 'summer';
@@ -58,36 +61,30 @@ class SeasonalBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sessionBox = Hive.box(DatabaseService.sessionBoxName);
+    final theme = _getSeasonalTheme();
     
-    return ValueListenableBuilder(
-      valueListenable: sessionBox.listenable(keys: ['app_theme', 'dark_mode']),
-      builder: (context, box, _) {
-        final bool isDarkMode = box.get('dark_mode', defaultValue: false);
-        final theme = _getSeasonalTheme(box.get('app_theme'), isDarkMode);
-        
-        return Material(
-          child: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: theme['colors'],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
-            child: Stack(
-              children: [
-                Positioned(
-                  top: -30,
-                  right: -30,
-                  child: Icon(theme['icon'], size: 250, color: theme['iconColor']),
-                ),
-                child,
-              ],
-            ),
+    return Container(
+      width: double.infinity,
+      height: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: theme['colors'],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      child: Stack(
+        children: [
+          // 배경 아이콘은 항상 고정
+          Positioned(
+            top: -30,
+            right: -30,
+            child: Icon(theme['icon'], size: 250, color: theme['iconColor']),
           ),
-        );
-      },
+          // 이 위에 실제 페이지가 올라감
+          child,
+        ],
+      ),
     );
   }
 }

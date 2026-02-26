@@ -30,7 +30,6 @@ class _HomePageState extends State<HomePage> {
     final todayStr = DateFormat('yyyy-MM-dd').format(DateTime.now());
     final isCompletedKey = 'todays_words_completed_$todayStr';
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final Color textColor = isDarkMode ? Colors.white : Colors.black87;
     final Color subTextColor = isDarkMode ? Colors.white70 : Colors.blueGrey;
 
     return Scaffold(
@@ -76,9 +75,9 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
 
-                const SizedBox(height: 12),
+                const SizedBox(height: 10),
 
-                // 2. 오늘의 학습 배너
+                // 2. 오늘의 학습 배너 (사이즈 확대)
                 ValueListenableBuilder(
                   valueListenable: Hive.box(DatabaseService.sessionBoxName).listenable(keys: [isCompletedKey]),
                   builder: (context, box, child) {
@@ -104,7 +103,7 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 22), // 패딩 확대
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: isCompleted
@@ -113,12 +112,12 @@ class _HomePageState extends State<HomePage> {
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
                           ),
-                          borderRadius: BorderRadius.circular(16),
+                          borderRadius: BorderRadius.circular(18),
                           boxShadow: [
                             BoxShadow(
                               color: isCompleted ? Colors.black26 : const Color(0xFF5B86E5).withOpacity(0.3),
-                              blurRadius: 8,
-                              offset: const Offset(0, 4),
+                              blurRadius: 10,
+                              offset: const Offset(0, 5),
                             )
                           ],
                         ),
@@ -130,17 +129,21 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   Text(
                                     isCompleted ? '오늘의 학습 완료! ✅' : '오늘의 학습 시작하기 🔥',
-                                    style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold),
+                                    style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold), // 폰트 확대
                                   ),
-                                  const SizedBox(height: 2),
+                                  const SizedBox(height: 4),
                                   Text(
                                     isCompleted ? "복습으로 실력을 다지세요." : "매일 10개씩 꾸준히 시작하세요.",
-                                    style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 13),
+                                    style: TextStyle(color: Colors.white.withOpacity(0.9), fontSize: 14), // 폰트 확대
                                   ),
                                 ],
                               ),
                             ),
-                            const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 28),
+                            Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle),
+                              child: const Icon(Icons.play_arrow_rounded, color: Colors.white, size: 32), // 아이콘 확대
+                            ),
                           ],
                         ),
                       ),
@@ -150,7 +153,7 @@ class _HomePageState extends State<HomePage> {
 
                 const SizedBox(height: 12),
 
-                // 3. 실력 테스트
+                // 3. 추천 레벨 (크기 유지)
                 ValueListenableBuilder(
                   valueListenable: Hive.box(DatabaseService.sessionBoxName).listenable(keys: ['recommended_level']),
                   builder: (context, box, child) {
@@ -168,10 +171,10 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 14), // 살짝 축소하여 배너 공간 확보
                         decoration: BoxDecoration(
                           color: isDarkMode ? Colors.white.withOpacity(0.1) : (hasResult ? const Color(0xFFF0F7FF) : Colors.white),
-                          borderRadius: BorderRadius.circular(12),
+                          borderRadius: BorderRadius.circular(14),
                           boxShadow: isDarkMode ? [] : [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6)],
                         ),
                         child: Row(
@@ -179,16 +182,16 @@ class _HomePageState extends State<HomePage> {
                             Icon(
                               hasResult ? Icons.workspace_premium_rounded : Icons.psychology_alt_rounded,
                               color: hasResult ? const Color(0xFF5B86E5) : Colors.orange,
-                              size: 24,
+                              size: 28,
                             ),
-                            const SizedBox(width: 10),
+                            const SizedBox(width: 12),
                             Expanded(
                               child: Text(
                                 hasResult ? "추천 레벨: $recommendedLevel" : "내 실력 진단 테스트",
-                                style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
+                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                             ),
-                            const Icon(Icons.chevron_right_rounded, color: Colors.grey, size: 18),
+                            const Icon(Icons.chevron_right_rounded, color: Colors.grey, size: 20),
                           ],
                         ),
                       ),
@@ -196,7 +199,7 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
 
-                const SizedBox(height: 12),
+                const SizedBox(height: 10), // 간격 축소
 
                 // 4. 기초 다지기
                 const Text("기초 다지기", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
@@ -209,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
 
-                const SizedBox(height: 12),
+                const SizedBox(height: 10), // 간격 축소
 
                 // 5. 레벨별 학습
                 const Text("레벨별 학습", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
@@ -218,9 +221,9 @@ class _HomePageState extends State<HomePage> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   crossAxisCount: 3,
-                  mainAxisSpacing: 10,
+                  mainAxisSpacing: 8, // 간격 축소
                   crossAxisSpacing: 10,
-                  childAspectRatio: 1.3,
+                  childAspectRatio: 1.4, // 높이 추가 절약
                   children: [
                     _buildLevelCard(context, 'N5', '입문', Colors.green, isDarkMode),
                     _buildLevelCard(context, 'N4', '초급', Colors.lightGreen, isDarkMode),
@@ -230,7 +233,7 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
 
-                const SizedBox(height: 12),
+                const SizedBox(height: 10), // 간격 축소
 
                 // 6. 나의 관리
                 const Text("나의 관리", style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
@@ -286,11 +289,11 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
+        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8), // 살짝 축소
         decoration: BoxDecoration(
           color: isDarkMode ? Colors.white.withOpacity(0.1) : Colors.white.withOpacity(0.85),
           borderRadius: BorderRadius.circular(16),
-          boxShadow: isDarkMode ? [] : [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8)],
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8)],
         ),
         child: Column(
           children: [
