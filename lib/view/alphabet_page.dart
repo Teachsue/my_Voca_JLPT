@@ -49,10 +49,10 @@ class _AlphabetPageState extends State<AlphabetPage> {
     final groupedWords = _getGroupedWords();
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: Text('${widget.title} 학습', style: const TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0,
         actions: [

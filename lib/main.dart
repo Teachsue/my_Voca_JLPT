@@ -4,31 +4,26 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'view/home_page.dart';
 import 'service/database_service.dart';
+import 'view/seasonal_background.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // 날짜 형식 초기화 (한국어)
   await initializeDateFormatting('ko_KR', null);
 
-  // 화면 방향 고정 (세로 모드)
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  // 1. Hive 및 어댑터 초기화
   await DatabaseService.init();
 
   runApp(const MyApp());
 
-  // 2. 초기 데이터 로드 (이미 있으면 건너뜀)
   Future.microtask(() async {
-    // JLPT N1~N5 로드
     for (int i = 1; i <= 5; i++) {
       await DatabaseService.loadJsonToHive(i);
     }
-    // 히라가나(11), 가타카나(12) 로드
     await DatabaseService.loadJsonToHive(11);
     await DatabaseService.loadJsonToHive(12);
   });
@@ -46,13 +41,25 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(
           seedColor: const Color(0xFF5B86E5),
           primary: const Color(0xFF5B86E5),
+          surface: Colors.transparent, // 기본 표면 색상 투명화
         ),
         useMaterial3: true,
         textTheme: GoogleFonts.notoSansTextTheme(
           Theme.of(context).textTheme,
         ),
-        scaffoldBackgroundColor: const Color(0xFFF8FAFC),
+        // 전역 투명도 설정 최적화
+        scaffoldBackgroundColor: Colors.transparent,
+        canvasColor: Colors.transparent,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          surfaceTintColor: Colors.transparent,
+        ),
       ),
+      builder: (context, child) {
+        // 배경을 최하단 레이어에 한 번만 렌더링하고, Navigator를 그 위에 올림
+        return SeasonalBackground(child: child!);
+      },
       home: const HomePage(),
     );
   }

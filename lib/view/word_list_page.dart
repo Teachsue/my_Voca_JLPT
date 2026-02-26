@@ -53,7 +53,7 @@ class _WordListPageState extends State<WordListPage> {
         Hive.box(DatabaseService.sessionBoxName).get('todays_words_completed_$todayStr', defaultValue: false);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: Text(
           _isTodaysWords 
@@ -61,7 +61,7 @@ class _WordListPageState extends State<WordListPage> {
               : '${widget.level} DAY ${_currentDayIndex + 1}', 
           style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,

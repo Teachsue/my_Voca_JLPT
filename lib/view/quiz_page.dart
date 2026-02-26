@@ -106,7 +106,7 @@ class _QuizPageState extends State<QuizPage> {
     return ChangeNotifierProvider.value(
       value: _viewModel,
       child: Scaffold(
-        backgroundColor: const Color(0xFFF8FAFC),
+        backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
             widget.day == 0
@@ -116,7 +116,7 @@ class _QuizPageState extends State<QuizPage> {
                       : '${widget.level} 퀴즈'),
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
           foregroundColor: Colors.black,
           elevation: 0,
           centerTitle: true,

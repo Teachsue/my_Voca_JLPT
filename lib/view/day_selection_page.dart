@@ -51,7 +51,7 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
         title: _isSearching
             ? TextField(
@@ -69,7 +69,7 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
                 },
               )
             : Text('${widget.level} DAY 선택', style: const TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0,
         actions: [

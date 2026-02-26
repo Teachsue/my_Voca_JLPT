@@ -31,15 +31,16 @@ class _HomePageState extends State<HomePage> {
     final isCompletedKey = 'todays_words_completed_$todayStr';
 
     return Scaffold(
+      backgroundColor: Colors.transparent, // 배경 테마가 보이도록 투명 설정
       body: SafeArea(
         child: SingleChildScrollView(
-          physics: const NeverScrollableScrollPhysics(), // 스크롤 방지 (한 화면 목표)
+          physics: const NeverScrollableScrollPhysics(),
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 1. 헤더 (슬림)
+                // 1. 헤더 (설정 아이콘 톱니바퀴)
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Row(
                       children: [
-                        _buildHeaderIcon(Icons.bar_chart_rounded, () async {
+                        _buildHeaderIcon(Icons.settings_rounded, () async {
                           await Navigator.push(context, MaterialPageRoute(builder: (context) => const StatisticsPage()));
                           _refresh();
                         }),
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
 
                 const SizedBox(height: 12),
 
-                // 2. 오늘의 학습 배너 (글자는 크게, 높이는 효율적으로)
+                // 2. 오늘의 학습 배너
                 ValueListenableBuilder(
                   valueListenable: Hive.box(DatabaseService.sessionBoxName).listenable(keys: [isCompletedKey]),
                   builder: (context, box, child) {
@@ -91,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                       },
                       child: Container(
                         width: double.infinity,
-                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20), // 30에서 20으로 축소
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: isCompleted
@@ -101,6 +102,13 @@ class _HomePageState extends State<HomePage> {
                             end: Alignment.bottomRight,
                           ),
                           borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              color: isCompleted ? Colors.black.withOpacity(0.05) : const Color(0xFF5B86E5).withOpacity(0.2),
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            )
+                          ],
                         ),
                         child: Row(
                           children: [
@@ -130,7 +138,7 @@ class _HomePageState extends State<HomePage> {
 
                 const SizedBox(height: 12),
 
-                // 3. 실력 테스트 (슬림 바)
+                // 3. 실력 테스트
                 ValueListenableBuilder(
                   valueListenable: Hive.box(DatabaseService.sessionBoxName).listenable(keys: ['recommended_level']),
                   builder: (context, box, child) {
@@ -150,9 +158,9 @@ class _HomePageState extends State<HomePage> {
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         decoration: BoxDecoration(
-                          color: hasResult ? const Color(0xFFF0F7FF) : Colors.white,
+                          color: hasResult ? const Color(0xFFF0F7FF).withOpacity(0.7) : Colors.white.withOpacity(0.8),
                           borderRadius: BorderRadius.circular(12),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6)],
+                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 6)],
                         ),
                         child: Row(
                           children: [
@@ -200,7 +208,7 @@ class _HomePageState extends State<HomePage> {
                   crossAxisCount: 3,
                   mainAxisSpacing: 10,
                   crossAxisSpacing: 10,
-                  childAspectRatio: 1.3, // 가로로 더 넓게 해서 높이 절약
+                  childAspectRatio: 1.3,
                   children: [
                     _buildLevelCard(context, 'N5', '입문', Colors.green),
                     _buildLevelCard(context, 'N4', '초급', Colors.lightGreen),
@@ -233,7 +241,7 @@ class _HomePageState extends State<HomePage> {
   Widget _buildHeaderIcon(IconData icon, VoidCallback onTap) {
     return Container(
       width: 40, height: 40,
-      decoration: BoxDecoration(color: Colors.white, shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 4)]),
+      decoration: BoxDecoration(color: Colors.white.withOpacity(0.8), shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 4)]),
       child: IconButton(icon: Icon(icon, color: const Color(0xFF5B86E5), size: 20), onPressed: onTap, padding: EdgeInsets.zero),
     );
   }
@@ -243,15 +251,15 @@ class _HomePageState extends State<HomePage> {
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => LevelSummaryPage(level: level))),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.white.withOpacity(0.85),
           borderRadius: BorderRadius.circular(14),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6)],
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 6)],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(level, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: color)),
-            Text(desc, style: TextStyle(fontSize: 11, color: Colors.grey[500], fontWeight: FontWeight.w600)),
+            Text(desc, style: TextStyle(fontSize: 11, color: Colors.grey[600], fontWeight: FontWeight.w600)),
           ],
         ),
       ),
@@ -262,18 +270,18 @@ class _HomePageState extends State<HomePage> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8), // 패딩 최적화
+        padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.white.withOpacity(0.85),
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8)],
+          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8)],
         ),
         child: Column(
           children: [
             Icon(icon, color: color, size: 24),
             const SizedBox(height: 4),
             Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-            Text(subtitle, style: TextStyle(fontSize: 11, color: Colors.grey[500])),
+            Text(subtitle, style: TextStyle(fontSize: 11, color: Colors.grey[600])),
           ],
         ),
       ),

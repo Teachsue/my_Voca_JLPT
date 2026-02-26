@@ -22,10 +22,10 @@ class StatisticsPage extends StatelessWidget {
     final recommendedLevel = sessionBox.get('recommended_level', defaultValue: '기록 없음');
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8FAFC),
+      backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: const Text('학습 통계 및 설정', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-        backgroundColor: Colors.white,
+        title: const Text('설정 및 학습 통계', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+        backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0,
         centerTitle: true,
@@ -58,6 +58,45 @@ class StatisticsPage extends StatelessWidget {
                   ],
                 ),
               ),
+              
+              const SizedBox(height: 32),
+              _buildSectionTitle('배경 테마 설정'),
+              const SizedBox(height: 12),
+              ValueListenableBuilder(
+                valueListenable: sessionBox.listenable(keys: ['app_theme']),
+                builder: (context, box, _) {
+                  String currentTheme = box.get('app_theme', defaultValue: 'auto');
+                  return Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, 4))],
+                    ),
+                    child: Column(
+                      children: [
+                        _buildThemeOption(context, '자동 (계절에 맞춤)', 'auto', currentTheme),
+                        const Divider(),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              _buildSeasonalChip(context, '봄', 'spring', currentTheme, Colors.pinkAccent),
+                              const SizedBox(width: 8),
+                              _buildSeasonalChip(context, '여름', 'summer', currentTheme, Colors.blueAccent),
+                              const SizedBox(width: 8),
+                              _buildSeasonalChip(context, '가을', 'autumn', currentTheme, Colors.orangeAccent),
+                              const SizedBox(width: 8),
+                              _buildSeasonalChip(context, '겨울', 'winter', currentTheme, Colors.blueGrey),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+
               const SizedBox(height: 32),
               _buildSectionTitle('데이터 관리'),
               const SizedBox(height: 12),
@@ -97,6 +136,31 @@ class StatisticsPage extends StatelessWidget {
 
   Widget _buildSectionTitle(String title) {
     return Text(title, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold));
+  }
+
+  Widget _buildThemeOption(BuildContext context, String label, String value, String current) {
+    bool isSelected = current == value;
+    return ListTile(
+      contentPadding: EdgeInsets.zero,
+      title: Text(label, style: TextStyle(fontSize: 15, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal)),
+      trailing: isSelected ? const Icon(Icons.check_circle_rounded, color: Color(0xFF5B86E5)) : null,
+      onTap: () => Hive.box(DatabaseService.sessionBoxName).put('app_theme', value),
+    );
+  }
+
+  Widget _buildSeasonalChip(BuildContext context, String label, String value, String current, Color color) {
+    bool isSelected = current == value;
+    return ChoiceChip(
+      label: Text(label),
+      selected: isSelected,
+      onSelected: (selected) {
+        if (selected) Hive.box(DatabaseService.sessionBoxName).put('app_theme', value);
+      },
+      selectedColor: color.withOpacity(0.2),
+      labelStyle: TextStyle(color: isSelected ? color : Colors.black87, fontWeight: isSelected ? FontWeight.bold : FontWeight.normal),
+      backgroundColor: Colors.grey[100],
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10), side: BorderSide(color: isSelected ? color : Colors.transparent)),
+    );
   }
 
   Widget _buildStatRow(String label, String value, IconData icon, Color color) {
