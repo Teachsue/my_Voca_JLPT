@@ -11,6 +11,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DatabaseService.init();
   await initializeDateFormatting('ko_KR', null);
+  
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -40,16 +41,42 @@ class MyApp extends StatelessWidget {
         final bool isDarkMode = box.get('dark_mode', defaultValue: false);
         final String appTheme = box.get('app_theme', defaultValue: 'auto');
         
+        // 배경 테마 색상 결정 (canvasColor 용)
+        Color themeBgColor;
+        if (isDarkMode) {
+          themeBgColor = const Color(0xFF1A1C2C);
+        } else {
+          int month = DateTime.now().month;
+          String target = appTheme;
+          if (target == 'auto') {
+            if (month >= 3 && month <= 5) target = 'spring';
+            else if (month >= 6 && month <= 8) target = 'summer';
+            else if (month >= 9 && month <= 11) target = 'autumn';
+            else target = 'winter';
+          }
+          if (target == 'spring') themeBgColor = const Color(0xFFFFF0F5);
+          else if (target == 'summer') themeBgColor = const Color(0xFFE0F7FA);
+          else if (target == 'autumn') themeBgColor = const Color(0xFFFFF3E0);
+          else themeBgColor = const Color(0xFFF1F4F8);
+        }
+
+        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: isDarkMode ? Brightness.light : Brightness.dark,
+          systemNavigationBarColor: Colors.transparent,
+          systemNavigationBarDividerColor: Colors.transparent,
+          systemNavigationBarIconBrightness: isDarkMode ? Brightness.light : Brightness.dark,
+        ));
+
         return MaterialApp(
           title: 'JLPT 단어장',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             useMaterial3: true,
-            // 모든 표면 색상을 투명하게 하여 배경 딜레이 원천 차단
             colorScheme: ColorScheme.fromSeed(
               seedColor: const Color(0xFF5B86E5),
               brightness: isDarkMode ? Brightness.dark : Brightness.light,
-              surface: Colors.transparent, // 표면 투명화
+              surface: Colors.transparent,
             ),
             textTheme: GoogleFonts.notoSansTextTheme(
               isDarkMode ? ThemeData.dark().textTheme : ThemeData.light().textTheme,
@@ -58,26 +85,35 @@ class MyApp extends StatelessWidget {
               displayColor: isDarkMode ? Colors.white : Colors.black87,
             ),
             scaffoldBackgroundColor: Colors.transparent,
-            canvasColor: Colors.transparent,
-            appBarTheme: const AppBarTheme(
+            canvasColor: themeBgColor, // 제스처 중 배경이 튀지 않도록 테마색과 일치
+            appBarTheme: AppBarTheme(
               backgroundColor: Colors.transparent,
               elevation: 0,
               centerTitle: true,
               surfaceTintColor: Colors.transparent,
+              iconTheme: IconThemeData(color: isDarkMode ? Colors.white : Colors.black87),
+              titleTextStyle: TextStyle(
+                color: isDarkMode ? Colors.white : Colors.black87,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             cardTheme: CardThemeData(
               color: isDarkMode ? Colors.white.withOpacity(0.1) : Colors.white.withOpacity(0.9),
               elevation: 0,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             ),
+            pageTransitionsTheme: const PageTransitionsTheme(builders: {
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            }),
           ),
           builder: (context, child) {
-            // 배경이 항상 Navigator보다 먼저 존재하도록 Stack 구조 보장
             return SeasonalBackground(
               isDarkMode: isDarkMode,
               appTheme: appTheme,
               child: Material(
-                color: Colors.transparent, // 기본 배경 제거
+                color: Colors.transparent,
                 child: child!,
               ),
             );

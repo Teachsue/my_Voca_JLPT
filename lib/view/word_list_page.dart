@@ -33,13 +33,10 @@ class _WordListPageState extends State<WordListPage> {
     _pageController = PageController(initialPage: widget.initialDayIndex);
     _isTodaysWords = widget.level == '오늘의 단어' || widget.level == '오늘의 단어 복습';
 
-    // 한국어 발음(korean_pronunciation) 필드를 기준으로 랜덤하게 섞음
     for (var chunk in widget.allDayChunks) {
-      // 발음 데이터가 있는 경우 이를 기준으로 셔플 품질을 높임 (단순 shuffle보다 더 확실하게 처리)
       chunk.shuffle(); 
     }
 
-    // 마지막으로 공부한 DAY 저장 (레벨별로 관리)
     if (!_isTodaysWords) {
       final sessionBox = Hive.box(DatabaseService.sessionBoxName);
       sessionBox.put('last_day_${widget.level}', _currentDayIndex + 1);
@@ -57,6 +54,8 @@ class _WordListPageState extends State<WordListPage> {
     final todayStr = DateFormat('yyyy-MM-dd').format(DateTime.now());
     final bool isCompleted = _isTodaysWords && 
         Hive.box(DatabaseService.sessionBoxName).get('todays_words_completed_$todayStr', defaultValue: false);
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final Color textColor = isDarkMode ? Colors.white : Colors.black87;
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -65,29 +64,23 @@ class _WordListPageState extends State<WordListPage> {
           _isTodaysWords 
               ? (isCompleted ? '오늘의 단어 복습' : '오늘의 단어') 
               : '${widget.level} DAY ${_currentDayIndex + 1}', 
-          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor)
         ),
         backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
+        foregroundColor: textColor,
         elevation: 0,
         centerTitle: true,
         actions: [
           IconButton(
-            icon: const Icon(Icons.home_rounded, size: 22),
-            onPressed: () {
-              Navigator.popUntil(context, (route) => route.isFirst);
-            },
-            tooltip: '홈으로 이동',
+            icon: Icon(Icons.home_rounded, size: 22, color: textColor),
+            onPressed: () => Navigator.popUntil(context, (route) => route.isFirst),
           ),
         ],
       ),
       body: PageView.builder(
         controller: _pageController,
         onPageChanged: (index) {
-          setState(() {
-            _currentDayIndex = index;
-          });
-          // 페이지 이동 시에도 마지막 공부한 DAY 업데이트
+          setState(() { _currentDayIndex = index; });
           if (!_isTodaysWords) {
             Hive.box(DatabaseService.sessionBoxName).put('last_day_${widget.level}', index + 1);
           }
@@ -95,49 +88,45 @@ class _WordListPageState extends State<WordListPage> {
         itemCount: widget.allDayChunks.length,
         itemBuilder: (context, chunkIndex) {
           final List<Word> currentWords = widget.allDayChunks[chunkIndex];
-          
           return ListView.builder(
-            padding: const EdgeInsets.fromLTRB(24, 20, 24, 24),
+            padding: const EdgeInsets.fromLTRB(24, 10, 24, 24),
             itemCount: currentWords.length + (isCompleted ? 1 : 0),
             itemBuilder: (context, index) {
               if (isCompleted && index == 0) {
                 return Padding(
                   padding: const EdgeInsets.only(bottom: 20),
-                  child: _buildReviewBanner(),
+                  child: _buildReviewBanner(isDarkMode),
                 );
               }
-
               final wordIndex = isCompleted ? index - 1 : index;
-              final word = currentWords[wordIndex];
-              
               return Padding(
                 padding: const EdgeInsets.only(bottom: 12),
-                child: _buildWordCard(word, wordIndex, isCompleted),
+                child: _buildWordCard(currentWords[wordIndex], wordIndex, isCompleted, isDarkMode),
               );
             },
           );
         },
       ),
-      bottomNavigationBar: _buildBottomButton(isCompleted),
+      bottomNavigationBar: _buildBottomButton(isCompleted, isDarkMode),
     );
   }
 
-  Widget _buildReviewBanner() {
+  Widget _buildReviewBanner(bool isDarkMode) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.lightGreen.shade50,
+        color: isDarkMode ? Colors.lightGreen.withOpacity(0.1) : Colors.lightGreen.shade50,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: Colors.lightGreen.shade200),
+        border: Border.all(color: Colors.lightGreen.withOpacity(0.3)),
       ),
       child: Row(
         children: [
-          Icon(Icons.check_circle_outline_rounded, color: Colors.lightGreen.shade700),
+          Icon(Icons.check_circle_outline_rounded, color: Colors.lightGreen.shade400),
           const SizedBox(width: 12),
-          const Expanded(
+          Expanded(
             child: Text(
-              '오늘의 학습을 완료했습니다!\n가볍게 훑어보며 복습해보세요.',
-              style: TextStyle(fontSize: 14, color: Colors.black87, fontWeight: FontWeight.w500, height: 1.4),
+              '학습 완료! 복습 시간입니다.',
+              style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white70 : Colors.black87, fontWeight: FontWeight.w500),
             ),
           ),
         ],
@@ -145,34 +134,26 @@ class _WordListPageState extends State<WordListPage> {
     );
   }
 
-  Widget _buildWordCard(Word word, int index, bool isCompleted) {
+  Widget _buildWordCard(Word word, int index, bool isCompleted, bool isDarkMode) {
+    final Color textColor = isDarkMode ? Colors.white : Colors.black87;
+    final Color subTextColor = isDarkMode ? Colors.white60 : Colors.grey[600]!;
+
     return StatefulBuilder(
       builder: (context, setStateItem) {
         return Container(
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: isDarkMode ? Colors.white.withOpacity(0.1) : Colors.white,
             borderRadius: BorderRadius.circular(16),
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8, offset: const Offset(0, 2))],
+            boxShadow: isDarkMode ? [] : [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8)],
           ),
           child: Row(
             children: [
               Container(
-                width: 32,
-                height: 32,
+                width: 32, height: 32,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: isCompleted ? Colors.lightGreen.shade50 : Colors.grey[100], 
-                  shape: BoxShape.circle
-                ),
-                child: Text(
-                  '${index + 1}', 
-                  style: TextStyle(
-                    color: isCompleted ? Colors.lightGreen.shade700 : Colors.grey[600], 
-                    fontSize: 12, 
-                    fontWeight: FontWeight.bold
-                  )
-                ),
+                decoration: BoxDecoration(color: isDarkMode ? Colors.white10 : Colors.grey[100], shape: BoxShape.circle),
+                child: Text('${index + 1}', style: TextStyle(color: subTextColor, fontSize: 12, fontWeight: FontWeight.bold)),
               ),
               const SizedBox(width: 16),
               Expanded(
@@ -182,36 +163,19 @@ class _WordListPageState extends State<WordListPage> {
                     Wrap(
                       crossAxisAlignment: WrapCrossAlignment.end,
                       spacing: 8,
-                      runSpacing: 4,
                       children: [
-                        Text(word.kanji, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                        Text(word.kana, style: TextStyle(fontSize: 13, color: Colors.grey[500])),
-                        Text(
-                          '[${word.koreanPronunciation}]', 
-                          style: TextStyle(
-                            fontSize: 12, 
-                            color: (isCompleted ? Colors.lightGreen.shade700 : const Color(0xFF5B86E5)).withOpacity(0.7)
-                          )
-                        ),
+                        Text(word.kanji, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor)),
+                        Text(word.kana, style: TextStyle(fontSize: 13, color: isDarkMode ? Colors.white38 : Colors.grey[400])),
                       ],
                     ),
-                    const SizedBox(height: 6),
-                    Text(word.meaning, style: TextStyle(fontSize: 15, color: Colors.grey[700]), softWrap: true),
+                    const SizedBox(height: 4),
+                    Text(word.meaning, style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white70 : Colors.grey[700])),
                   ],
                 ),
               ),
               IconButton(
-                icon: Icon(
-                  word.isBookmarked ? Icons.star_rounded : Icons.star_border_rounded, 
-                  color: word.isBookmarked ? Colors.amber : Colors.grey[300],
-                  size: 26,
-                ),
-                onPressed: () {
-                  setStateItem(() {
-                    word.isBookmarked = !word.isBookmarked;
-                    word.save();
-                  });
-                },
+                icon: Icon(word.isBookmarked ? Icons.star_rounded : Icons.star_border_rounded, color: word.isBookmarked ? Colors.amber : (isDarkMode ? Colors.white24 : Colors.grey[300])),
+                onPressed: () { setStateItem(() { word.isBookmarked = !word.isBookmarked; word.save(); }); },
               ),
             ],
           ),
@@ -220,43 +184,20 @@ class _WordListPageState extends State<WordListPage> {
     );
   }
 
-  Widget _buildBottomButton(bool isCompleted) {
+  Widget _buildBottomButton(bool isCompleted, bool isDarkMode) {
     final currentWords = widget.allDayChunks[_currentDayIndex];
-
     return Container(
-      padding: EdgeInsets.fromLTRB(24, 12, 24, MediaQuery.of(context).padding.bottom + 20),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 10, offset: const Offset(0, -4))],
-      ),
+      padding: EdgeInsets.fromLTRB(24, 12, 24, MediaQuery.of(context).padding.bottom + 15),
+      decoration: BoxDecoration(color: Colors.transparent),
       child: SizedBox(
-        width: double.infinity,
-        height: 56,
+        width: double.infinity, height: 56,
         child: ElevatedButton.icon(
           onPressed: () {
-            if (isCompleted) {
-              Navigator.popUntil(context, (route) => route.isFirst);
-            } else {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => QuizPage(
-                    level: widget.level, 
-                    questionCount: currentWords.length, 
-                    day: _isTodaysWords ? 0 : _currentDayIndex + 1, 
-                    initialWords: currentWords
-                  ),
-                ),
-              );
-            }
+            if (isCompleted) Navigator.popUntil(context, (route) => route.isFirst);
+            else Navigator.push(context, MaterialPageRoute(builder: (context) => QuizPage(level: widget.level, questionCount: currentWords.length, day: _isTodaysWords ? 0 : _currentDayIndex + 1, initialWords: currentWords)));
           },
           icon: Icon(isCompleted ? Icons.check_circle_rounded : Icons.quiz_rounded),
-          label: Text(
-            _isTodaysWords
-                ? (isCompleted ? '복습 완료! ✅' : '오늘의 단어 퀴즈 풀기') 
-                : 'DAY ${_currentDayIndex + 1} 퀴즈 풀기', 
-            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
-          ),
+          label: Text(isCompleted ? '복습 완료! ✅' : '퀴즈 풀기', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           style: ElevatedButton.styleFrom(
             backgroundColor: isCompleted ? Colors.lightGreen : const Color(0xFF5B86E5),
             foregroundColor: Colors.white,
