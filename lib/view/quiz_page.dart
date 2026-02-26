@@ -37,6 +37,19 @@ class _QuizPageState extends State<QuizPage> {
   void _checkAndInit() async {
     final String levelDigit = widget.level.replaceAll(RegExp(r'[^0-9]'), '');
     final int levelInt = levelDigit.isEmpty ? 0 : int.parse(levelDigit);
+    
+    // 오답노트(day == -1)인 경우 이어 풀기 기능을 건너뛰고 즉시 시작
+    if (widget.day == -1) {
+      await _viewModel.loadWords(
+        levelInt,
+        questionCount: widget.questionCount,
+        day: widget.day,
+        initialWords: widget.initialWords,
+      );
+      if (mounted) setState(() {});
+      return;
+    }
+
     final savedSession = _viewModel.getSavedSession(levelInt, widget.day);
 
     if (savedSession != null) {
