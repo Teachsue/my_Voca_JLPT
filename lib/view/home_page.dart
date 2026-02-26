@@ -10,6 +10,7 @@ import 'statistics_page.dart';
 import 'word_list_page.dart';
 import 'level_test_page.dart';
 import 'calendar_page.dart';
+import 'alphabet_page.dart';
 import '../model/word.dart';
 
 class HomePage extends StatefulWidget {
@@ -232,6 +233,37 @@ class _HomePageState extends State<HomePage> {
                       ),
                     );
                   },
+                ),
+
+                const SizedBox(height: 25),
+
+                // 기초 다지기 (히라가나/가타카나)
+                const Text("기초 다지기", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black87)),
+                const SizedBox(height: 12),
+                Row(
+                  children: [
+                    Expanded(
+                      child: _buildCategoryCard(
+                        context, 
+                        '히라가나', 
+                        '기초 문자 1', 
+                        Icons.font_download_rounded, 
+                        Colors.teal, 
+                        () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AlphabetPage(title: '히라가나', level: 11)))
+                      )
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: _buildCategoryCard(
+                        context, 
+                        '가타카나', 
+                        '기초 문자 2', 
+                        Icons.translate_rounded, 
+                        Colors.indigo, 
+                        () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AlphabetPage(title: '가타카나', level: 12)))
+                      )
+                    ),
+                  ],
                 ),
 
                 const SizedBox(height: 25),

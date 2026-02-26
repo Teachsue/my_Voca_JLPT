@@ -1,0 +1,372 @@
+{
+    "vocabulary": [
+        {
+            "kanji": "あ",
+            "kana": "a",
+            "meaning": "아",
+            "korean_pronunciation": "아",
+            "level": 11,
+            "id": 8131
+        },
+        {
+            "kanji": "い",
+            "kana": "i",
+            "meaning": "이",
+            "korean_pronunciation": "이",
+            "level": 11,
+            "id": 8132
+        },
+        {
+            "kanji": "う",
+            "kana": "u",
+            "meaning": "우",
+            "korean_pronunciation": "우",
+            "level": 11,
+            "id": 8133
+        },
+        {
+            "kanji": "え",
+            "kana": "e",
+            "meaning": "에",
+            "korean_pronunciation": "에",
+            "level": 11,
+            "id": 8134
+        },
+        {
+            "kanji": "お",
+            "kana": "o",
+            "meaning": "오",
+            "korean_pronunciation": "오",
+            "level": 11,
+            "id": 8135
+        },
+        {
+            "kanji": "か",
+            "kana": "ka",
+            "meaning": "카",
+            "korean_pronunciation": "카",
+            "level": 11,
+            "id": 8136
+        },
+        {
+            "kanji": "き",
+            "kana": "ki",
+            "meaning": "키",
+            "korean_pronunciation": "키",
+            "level": 11,
+            "id": 8137
+        },
+        {
+            "kanji": "く",
+            "kana": "ku",
+            "meaning": "쿠",
+            "korean_pronunciation": "쿠",
+            "level": 11,
+            "id": 8138
+        },
+        {
+            "kanji": "け",
+            "kana": "ke",
+            "meaning": "케",
+            "korean_pronunciation": "케",
+            "level": 11,
+            "id": 8139
+        },
+        {
+            "kanji": "こ",
+            "kana": "ko",
+            "meaning": "코",
+            "korean_pronunciation": "코",
+            "level": 11,
+            "id": 8140
+        },
+        {
+            "kanji": "さ",
+            "kana": "sa",
+            "meaning": "사",
+            "korean_pronunciation": "사",
+            "level": 11,
+            "id": 8141
+        },
+        {
+            "kanji": "し",
+            "kana": "shi",
+            "meaning": "시",
+            "korean_pronunciation": "시",
+            "level": 11,
+            "id": 8142
+        },
+        {
+            "kanji": "す",
+            "kana": "su",
+            "meaning": "스",
+            "korean_pronunciation": "스",
+            "level": 11,
+            "id": 8143
+        },
+        {
+            "kanji": "せ",
+            "kana": "se",
+            "meaning": "세",
+            "korean_pronunciation": "세",
+            "level": 11,
+            "id": 8144
+        },
+        {
+            "kanji": "そ",
+            "kana": "so",
+            "meaning": "소",
+            "korean_pronunciation": "소",
+            "level": 11,
+            "id": 8145
+        },
+        {
+            "kanji": "た",
+            "kana": "ta",
+            "meaning": "타",
+            "korean_pronunciation": "타",
+            "level": 11,
+            "id": 8146
+        },
+        {
+            "kanji": "ち",
+            "kana": "chi",
+            "meaning": "치",
+            "korean_pronunciation": "치",
+            "level": 11,
+            "id": 8147
+        },
+        {
+            "kanji": "つ",
+            "kana": "tsu",
+            "meaning": "츠",
+            "korean_pronunciation": "츠",
+            "level": 11,
+            "id": 8148
+        },
+        {
+            "kanji": "て",
+            "kana": "te",
+            "meaning": "테",
+            "korean_pronunciation": "테",
+            "level": 11,
+            "id": 8149
+        },
+        {
+            "kanji": "と",
+            "kana": "to",
+            "meaning": "토",
+            "korean_pronunciation": "토",
+            "level": 11,
+            "id": 8150
+        },
+        {
+            "kanji": "な",
+            "kana": "na",
+            "meaning": "나",
+            "korean_pronunciation": "나",
+            "level": 11,
+            "id": 8151
+        },
+        {
+            "kanji": "に",
+            "kana": "ni",
+            "meaning": "니",
+            "korean_pronunciation": "니",
+            "level": 11,
+            "id": 8152
+        },
+        {
+            "kanji": "ぬ",
+            "kana": "nu",
+            "meaning": "누",
+            "korean_pronunciation": "누",
+            "level": 11,
+            "id": 8153
+        },
+        {
+            "kanji": "ね",
+            "kana": "ne",
+            "meaning": "네",
+            "korean_pronunciation": "네",
+            "level": 11,
+            "id": 8154
+        },
+        {
+            "kanji": "の",
+            "kana": "no",
+            "meaning": "노",
+            "korean_pronunciation": "노",
+            "level": 11,
+            "id": 8155
+        },
+        {
+            "kanji": "は",
+            "kana": "ha",
+            "meaning": "하",
+            "korean_pronunciation": "하",
+            "level": 11,
+            "id": 8156
+        },
+        {
+            "kanji": "ひ",
+            "kana": "hi",
+            "meaning": "히",
+            "korean_pronunciation": "히",
+            "level": 11,
+            "id": 8157
+        },
+        {
+            "kanji": "ふ",
+            "kana": "fu",
+            "meaning": "후",
+            "korean_pronunciation": "후",
+            "level": 11,
+            "id": 8158
+        },
+        {
+            "kanji": "へ",
+            "kana": "he",
+            "meaning": "헤",
+            "korean_pronunciation": "헤",
+            "level": 11,
+            "id": 8159
+        },
+        {
+            "kanji": "ほ",
+            "kana": "ho",
+            "meaning": "호",
+            "korean_pronunciation": "호",
+            "level": 11,
+            "id": 8160
+        },
+        {
+            "kanji": "ま",
+            "kana": "ma",
+            "meaning": "마",
+            "korean_pronunciation": "마",
+            "level": 11,
+            "id": 8161
+        },
+        {
+            "kanji": "み",
+            "kana": "mi",
+            "meaning": "미",
+            "korean_pronunciation": "미",
+            "level": 11,
+            "id": 8162
+        },
+        {
+            "kanji": "む",
+            "kana": "mu",
+            "meaning": "무",
+            "korean_pronunciation": "무",
+            "level": 11,
+            "id": 8163
+        },
+        {
+            "kanji": "め",
+            "kana": "me",
+            "meaning": "메",
+            "korean_pronunciation": "메",
+            "level": 11,
+            "id": 8164
+        },
+        {
+            "kanji": "も",
+            "kana": "mo",
+            "meaning": "모",
+            "korean_pronunciation": "모",
+            "level": 11,
+            "id": 8165
+        },
+        {
+            "kanji": "や",
+            "kana": "ya",
+            "meaning": "야",
+            "korean_pronunciation": "야",
+            "level": 11,
+            "id": 8166
+        },
+        {
+            "kanji": "ゆ",
+            "kana": "yu",
+            "meaning": "유",
+            "korean_pronunciation": "유",
+            "level": 11,
+            "id": 8167
+        },
+        {
+            "kanji": "よ",
+            "kana": "yo",
+            "meaning": "요",
+            "korean_pronunciation": "요",
+            "level": 11,
+            "id": 8168
+        },
+        {
+            "kanji": "ら",
+            "kana": "ra",
+            "meaning": "라",
+            "korean_pronunciation": "라",
+            "level": 11,
+            "id": 8169
+        },
+        {
+            "kanji": "り",
+            "kana": "ri",
+            "meaning": "리",
+            "korean_pronunciation": "리",
+            "level": 11,
+            "id": 8170
+        },
+        {
+            "kanji": "る",
+            "kana": "ru",
+            "meaning": "루",
+            "korean_pronunciation": "루",
+            "level": 11,
+            "id": 8171
+        },
+        {
+            "kanji": "れ",
+            "kana": "re",
+            "meaning": "레",
+            "korean_pronunciation": "레",
+            "level": 11,
+            "id": 8172
+        },
+        {
+            "kanji": "ろ",
+            "kana": "ro",
+            "meaning": "로",
+            "korean_pronunciation": "로",
+            "level": 11,
+            "id": 8173
+        },
+        {
+            "kanji": "わ",
+            "kana": "wa",
+            "meaning": "와",
+            "korean_pronunciation": "와",
+            "level": 11,
+            "id": 8174
+        },
+        {
+            "kanji": "を",
+            "kana": "wo",
+            "meaning": "오(를)",
+            "korean_pronunciation": "오",
+            "level": 11,
+            "id": 8175
+        },
+        {
+            "kanji": "ん",
+            "kana": "n",
+            "meaning": "응(받침)",
+            "korean_pronunciation": "응",
+            "level": 11,
+            "id": 8176
+        }
+    ]
+}

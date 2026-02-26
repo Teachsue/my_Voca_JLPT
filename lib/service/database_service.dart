@@ -25,40 +25,52 @@ class DatabaseService {
   static Future<void> loadJsonToHive(int level) async {
     var box = Hive.box<Word>(boxName);
 
-    // 해당 레벨의 단어 개수를 확인 (문자열 변환 후 비교하여 타입 불일치 방지)
+    // 해당 레벨의 단어 개수를 확인
     int existingCount = box.values.where((w) => w.level.toString() == level.toString()).length;
-    if (existingCount > 100) {
-      print("✅ N$level 데이터가 이미 존재합니다. (개수: $existingCount)");
+    
+    // 히라가나/가타카나는 개수가 적으므로 체크 기준 완화 (기본 46자 이상이면 로드된 것으로 간주)
+    int threshold = (level >= 11) ? 40 : 100;
+    
+    if (existingCount >= threshold) {
+      print("✅ Level $level 데이터가 이미 존재합니다. (개수: $existingCount)");
       return;
     }
 
-    print("⏳ N$level 데이터를 로드 중...");
+    print("⏳ Level $level 데이터를 로드 중...");
     try {
+      String fileName;
+      if (level == 11) {
+        fileName = 'hiragana.json';
+      } else if (level == 12) {
+        fileName = 'katakana.json';
+      } else {
+        fileName = 'n$level.json';
+      }
+
       final String response = await rootBundle.loadString(
-        'assets/data/n$level.json',
+        'assets/data/$fileName',
       );
       final Map<String, dynamic> data = json.decode(response);
       List<dynamic> vocabulary = data['vocabulary'];
 
       Map<String, Word> wordMap = {};
       for (var item in vocabulary) {
-        // JSON 데이터의 level 필드를 무시하고 호출 시 인자로 받은 level을 강제 적용
         final word = Word.fromJson(item);
         final fixedWord = Word(
           id: word.id,
           kanji: word.kanji,
           kana: word.kana,
           meaning: word.meaning,
-          level: level, // 여기서 level 강제 지정
+          level: level,
           koreanPronunciation: word.koreanPronunciation,
         );
         wordMap['${level}_${fixedWord.id}'] = fixedWord;
       }
       
       await box.putAll(wordMap);
-      print("✅ N$level 로드 완료! (총 ${wordMap.length}단어)");
+      print("✅ Level $level 로드 완료! (총 ${wordMap.length}단어)");
     } catch (e) {
-      print("❌ 데이터 로드 에러 (N$level): $e");
+      print("❌ 데이터 로드 에러 (Level $level): $e");
     }
   }
 

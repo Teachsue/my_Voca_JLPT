@@ -72,6 +72,8 @@ flutter:
     - assets/data/n3.json
     - assets/data/n4.json
     - assets/data/n5.json
+    - assets/data/hiragana.json
+    - assets/data/katakana.json
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

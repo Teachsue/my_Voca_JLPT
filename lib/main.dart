@@ -24,9 +24,13 @@ void main() async {
 
   // 2. 초기 데이터 로드 (이미 있으면 건너뜀)
   Future.microtask(() async {
+    // JLPT N1~N5 로드
     for (int i = 1; i <= 5; i++) {
       await DatabaseService.loadJsonToHive(i);
     }
+    // 히라가나(11), 가타카나(12) 로드
+    await DatabaseService.loadJsonToHive(11);
+    await DatabaseService.loadJsonToHive(12);
   });
 }
 

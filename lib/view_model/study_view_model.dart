@@ -51,7 +51,9 @@ class StudyViewModel extends ChangeNotifier {
     _clearSession();
     
     if (initialWords != null) {
-      _words = List<Word>.from(initialWords)..shuffle();
+      var shuffled = List<Word>.from(initialWords)..shuffle();
+      int count = (questionCount != null && questionCount < shuffled.length) ? questionCount : shuffled.length;
+      _words = shuffled.take(count).toList();
     } else {
       final allWords = DatabaseService.getWordsByLevel(level);
       allWords.shuffle();
