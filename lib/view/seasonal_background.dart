@@ -7,7 +7,16 @@ class SeasonalBackground extends StatelessWidget {
 
   const SeasonalBackground({super.key, required this.child});
 
-  Map<String, dynamic> _getSeasonalTheme(String? preferredTheme) {
+  Map<String, dynamic> _getSeasonalTheme(String? preferredTheme, bool isDarkMode) {
+    // 다크 모드일 때의 기본 색상 정의
+    if (isDarkMode) {
+      return {
+        'colors': [const Color(0xFF1A1C2C), const Color(0xFF2D3436)], // 심야 테마: 깊은 네이비
+        'icon': Icons.nights_stay_rounded,
+        'iconColor': Colors.white.withOpacity(0.05),
+      };
+    }
+
     int month = DateTime.now().month;
     String target = preferredTheme ?? 'auto';
     
@@ -49,12 +58,15 @@ class SeasonalBackground extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final sessionBox = Hive.box(DatabaseService.sessionBoxName);
+    
     return ValueListenableBuilder(
-      valueListenable: Hive.box(DatabaseService.sessionBoxName).listenable(keys: ['app_theme']),
+      valueListenable: sessionBox.listenable(keys: ['app_theme', 'dark_mode']),
       builder: (context, box, _) {
-        final theme = _getSeasonalTheme(box.get('app_theme'));
+        final bool isDarkMode = box.get('dark_mode', defaultValue: false);
+        final theme = _getSeasonalTheme(box.get('app_theme'), isDarkMode);
         
-        return Material( // Scaffold 대신 가벼운 Material 사용
+        return Material(
           child: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -70,7 +82,7 @@ class SeasonalBackground extends StatelessWidget {
                   right: -30,
                   child: Icon(theme['icon'], size: 250, color: theme['iconColor']),
                 ),
-                child, // 이 child가 앱의 전체 Navigator(모든 페이지)입니다.
+                child,
               ],
             ),
           ),

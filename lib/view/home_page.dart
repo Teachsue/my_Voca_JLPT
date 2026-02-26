@@ -29,9 +29,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final todayStr = DateFormat('yyyy-MM-dd').format(DateTime.now());
     final isCompletedKey = 'todays_words_completed_$todayStr';
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final Color textColor = isDarkMode ? Colors.white : Colors.black87;
+    final Color subTextColor = isDarkMode ? Colors.white70 : Colors.blueGrey;
 
     return Scaffold(
-      backgroundColor: Colors.transparent, // 배경 테마가 보이도록 투명 설정
+      backgroundColor: Colors.transparent,
       body: SafeArea(
         child: SingleChildScrollView(
           physics: const NeverScrollableScrollPhysics(),
@@ -40,25 +43,34 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // 1. 헤더 (설정 아이콘 톱니바퀴)
+                // 1. 헤더
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      'JLPT 단어 마스터',
-                      style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black87),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'JLPT 단어 마스터',
+                          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '매일매일 꾸준히 학습해요!',
+                          style: TextStyle(fontSize: 12, color: subTextColor, fontWeight: FontWeight.w500),
+                        ),
+                      ],
                     ),
                     Row(
                       children: [
                         _buildHeaderIcon(Icons.settings_rounded, () async {
                           await Navigator.push(context, MaterialPageRoute(builder: (context) => const StatisticsPage()));
                           _refresh();
-                        }),
+                        }, isDarkMode),
                         const SizedBox(width: 8),
                         _buildHeaderIcon(Icons.calendar_month_rounded, () async {
                           await Navigator.push(context, MaterialPageRoute(builder: (context) => const CalendarPage()));
                           _refresh();
-                        }),
+                        }, isDarkMode),
                       ],
                     ),
                   ],
@@ -96,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                         decoration: BoxDecoration(
                           gradient: LinearGradient(
                             colors: isCompleted
-                                ? [Colors.grey.shade400, Colors.grey.shade500]
+                                ? [Colors.grey.shade600, Colors.grey.shade700]
                                 : [const Color(0xFF5B86E5), const Color(0xFF36D1DC)],
                             begin: Alignment.topLeft,
                             end: Alignment.bottomRight,
@@ -104,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                           borderRadius: BorderRadius.circular(16),
                           boxShadow: [
                             BoxShadow(
-                              color: isCompleted ? Colors.black.withOpacity(0.05) : const Color(0xFF5B86E5).withOpacity(0.2),
+                              color: isCompleted ? Colors.black26 : const Color(0xFF5B86E5).withOpacity(0.3),
                               blurRadius: 8,
                               offset: const Offset(0, 4),
                             )
@@ -158,9 +170,9 @@ class _HomePageState extends State<HomePage> {
                         width: double.infinity,
                         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                         decoration: BoxDecoration(
-                          color: hasResult ? const Color(0xFFF0F7FF).withOpacity(0.7) : Colors.white.withOpacity(0.8),
+                          color: isDarkMode ? Colors.white.withOpacity(0.1) : (hasResult ? const Color(0xFFF0F7FF) : Colors.white),
                           borderRadius: BorderRadius.circular(12),
-                          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 6)],
+                          boxShadow: isDarkMode ? [] : [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 6)],
                         ),
                         child: Row(
                           children: [
@@ -191,9 +203,9 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    Expanded(child: _buildCategoryCard(context, '히라가나', '기초 1', Icons.font_download_rounded, Colors.teal, () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AlphabetPage(title: '히라가나', level: 11))))),
+                    Expanded(child: _buildCategoryCard(context, '히라가나', '기초 1', Icons.font_download_rounded, Colors.teal, () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AlphabetPage(title: '히라가나', level: 11))), isDarkMode)),
                     const SizedBox(width: 12),
-                    Expanded(child: _buildCategoryCard(context, '가타카나', '기초 2', Icons.translate_rounded, Colors.indigo, () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AlphabetPage(title: '가타카나', level: 12))))),
+                    Expanded(child: _buildCategoryCard(context, '가타카나', '기초 2', Icons.translate_rounded, Colors.indigo, () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AlphabetPage(title: '가타카나', level: 12))), isDarkMode)),
                   ],
                 ),
 
@@ -210,11 +222,11 @@ class _HomePageState extends State<HomePage> {
                   crossAxisSpacing: 10,
                   childAspectRatio: 1.3,
                   children: [
-                    _buildLevelCard(context, 'N5', '입문', Colors.green),
-                    _buildLevelCard(context, 'N4', '초급', Colors.lightGreen),
-                    _buildLevelCard(context, 'N3', '중급', Colors.blue),
-                    _buildLevelCard(context, 'N2', '상급', Colors.indigo),
-                    _buildLevelCard(context, 'N1', '전문', Colors.purple),
+                    _buildLevelCard(context, 'N5', '입문', Colors.green, isDarkMode),
+                    _buildLevelCard(context, 'N4', '초급', Colors.lightGreen, isDarkMode),
+                    _buildLevelCard(context, 'N3', '중급', Colors.blue, isDarkMode),
+                    _buildLevelCard(context, 'N2', '상급', Colors.indigo, isDarkMode),
+                    _buildLevelCard(context, 'N1', '전문', Colors.purple, isDarkMode),
                   ],
                 ),
 
@@ -225,9 +237,9 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 6),
                 Row(
                   children: [
-                    Expanded(child: _buildCategoryCard(context, '북마크', '중요', Icons.star_rounded, Colors.amber, () => Navigator.push(context, MaterialPageRoute(builder: (context) => const BookmarkPage())))),
+                    Expanded(child: _buildCategoryCard(context, '북마크', '중요', Icons.star_rounded, Colors.amber, () => Navigator.push(context, MaterialPageRoute(builder: (context) => const BookmarkPage())), isDarkMode)),
                     const SizedBox(width: 12),
-                    Expanded(child: _buildCategoryCard(context, '오답노트', '틀린단어', Icons.error_outline_rounded, Colors.redAccent, () => Navigator.push(context, MaterialPageRoute(builder: (context) => const WrongAnswerPage())))),
+                    Expanded(child: _buildCategoryCard(context, '오답노트', '틀린단어', Icons.error_outline_rounded, Colors.redAccent, () => Navigator.push(context, MaterialPageRoute(builder: (context) => const WrongAnswerPage())), isDarkMode)),
                   ],
                 ),
               ],
@@ -238,50 +250,54 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildHeaderIcon(IconData icon, VoidCallback onTap) {
+  Widget _buildHeaderIcon(IconData icon, VoidCallback onTap, bool isDarkMode) {
     return Container(
       width: 40, height: 40,
-      decoration: BoxDecoration(color: Colors.white.withOpacity(0.8), shape: BoxShape.circle, boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 4)]),
+      decoration: BoxDecoration(
+        color: isDarkMode ? Colors.white.withOpacity(0.1) : Colors.white.withOpacity(0.8), 
+        shape: BoxShape.circle, 
+        boxShadow: isDarkMode ? [] : [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 4)]
+      ),
       child: IconButton(icon: Icon(icon, color: const Color(0xFF5B86E5), size: 20), onPressed: onTap, padding: EdgeInsets.zero),
     );
   }
 
-  Widget _buildLevelCard(BuildContext context, String level, String desc, Color color) {
+  Widget _buildLevelCard(BuildContext context, String level, String desc, Color color, bool isDarkMode) {
     return GestureDetector(
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => LevelSummaryPage(level: level))),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.85),
+          color: isDarkMode ? Colors.white.withOpacity(0.1) : Colors.white.withOpacity(0.85),
           borderRadius: BorderRadius.circular(14),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 6)],
+          boxShadow: isDarkMode ? [] : [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 6)],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(level, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w900, color: color)),
-            Text(desc, style: TextStyle(fontSize: 11, color: Colors.grey[600], fontWeight: FontWeight.w600)),
+            Text(desc, style: TextStyle(fontSize: 11, color: isDarkMode ? Colors.white60 : Colors.grey[600], fontWeight: FontWeight.w600)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildCategoryCard(BuildContext context, String title, String subtitle, IconData icon, Color color, VoidCallback onTap) {
+  Widget _buildCategoryCard(BuildContext context, String title, String subtitle, IconData icon, Color color, VoidCallback onTap, bool isDarkMode) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8),
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.85),
+          color: isDarkMode ? Colors.white.withOpacity(0.1) : Colors.white.withOpacity(0.85),
           borderRadius: BorderRadius.circular(16),
-          boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8)],
+          boxShadow: isDarkMode ? [] : [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 8)],
         ),
         child: Column(
           children: [
             Icon(icon, color: color, size: 24),
             const SizedBox(height: 4),
             Text(title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold)),
-            Text(subtitle, style: TextStyle(fontSize: 11, color: Colors.grey[600])),
+            Text(subtitle, style: TextStyle(fontSize: 11, color: isDarkMode ? Colors.white60 : Colors.grey[600])),
           ],
         ),
       ),
