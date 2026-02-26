@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'dart:math';
 import '../model/word.dart';
 import '../service/database_service.dart';
 
+enum LevelTestType { kanjiToMeaning, meaningToKanji, meaningToKana }
+
 class LevelTestViewModel extends ChangeNotifier {
   List<Word> _questions = [];
+  List<LevelTestType> _testTypes = [];
   int _currentIndex = 0;
   bool _isFinished = false;
 
-  // 레벨별 맞은 개수 추적
   final Map<int, int> _correctCountsPerLevel = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0};
   int _totalCorrect = 0;
 
@@ -17,10 +20,8 @@ class LevelTestViewModel extends ChangeNotifier {
   List<String> _currentOptions = [];
 
   // Getters
-  Word? get currentWord =>
-      (_questions.isNotEmpty && _currentIndex < _questions.length)
-      ? _questions[_currentIndex]
-      : null;
+  Word? get currentWord => (_questions.isNotEmpty && _currentIndex < _questions.length) ? _questions[_currentIndex] : null;
+  LevelTestType? get currentType => (_testTypes.isNotEmpty && _currentIndex < _testTypes.length) ? _testTypes[_currentIndex] : null;
   int get currentIndex => _currentIndex;
   int get totalQuestions => _questions.length;
   bool get isFinished => _isFinished;
@@ -35,14 +36,18 @@ class LevelTestViewModel extends ChangeNotifier {
     _totalCorrect = 0;
     _correctCountsPerLevel.updateAll((key, value) => 0);
 
-    // 단어 추출: N1(5), N2(5), N3(5), N4(5), N5(10)
+    // 단어 추출
     _questions.addAll(_getRandomWords(1, 5));
     _questions.addAll(_getRandomWords(2, 5));
     _questions.addAll(_getRandomWords(3, 5));
     _questions.addAll(_getRandomWords(4, 5));
     _questions.addAll(_getRandomWords(5, 10));
 
-    _questions.shuffle(); // 전체 문제 섞기
+    _questions.shuffle();
+    
+    // 문제 유형 랜덤 생성
+    _testTypes = List.generate(_questions.length, (_) => LevelTestType.values[Random().nextInt(LevelTestType.values.length)]);
+    
     _generateOptions();
     notifyListeners();
   }
@@ -54,16 +59,31 @@ class LevelTestViewModel extends ChangeNotifier {
   }
 
   void _generateOptions() {
-    if (currentWord == null) return;
-    final correct = currentWord!.meaning;
+    if (currentWord == null || currentType == null) return;
+    
+    String correct;
+    switch (currentType!) {
+      case LevelTestType.kanjiToMeaning: correct = currentWord!.meaning; break;
+      case LevelTestType.meaningToKanji: correct = currentWord!.kanji; break;
+      case LevelTestType.meaningToKana: correct = currentWord!.kana; break;
+    }
+
     final allWords = DatabaseService.getWordsByLevel(currentWord!.level);
-    final distractors = allWords
-        .where((w) => w.meaning != correct)
-        .map((w) => w.meaning)
-        .toSet()
-        .toList();
-    distractors.shuffle();
-    _currentOptions = [correct, ...distractors.take(3)];
+    Set<String> distractors = {};
+    
+    var pool = List<Word>.from(allWords)..shuffle();
+    for (var w in pool) {
+      if (distractors.length >= 3) break;
+      String val;
+      switch (currentType!) {
+        case LevelTestType.kanjiToMeaning: val = w.meaning; break;
+        case LevelTestType.meaningToKanji: val = w.kanji; break;
+        case LevelTestType.meaningToKana: val = w.kana; break;
+      }
+      if (val != correct) distractors.add(val);
+    }
+
+    _currentOptions = [correct, ...distractors];
     _currentOptions.shuffle();
   }
 
@@ -72,10 +92,16 @@ class LevelTestViewModel extends ChangeNotifier {
     _isAnswered = true;
     _selectedAnswer = answer;
 
-    if (answer == currentWord!.meaning) {
+    String correct;
+    switch (currentType!) {
+      case LevelTestType.kanjiToMeaning: correct = currentWord!.meaning; break;
+      case LevelTestType.meaningToKanji: correct = currentWord!.kanji; break;
+      case LevelTestType.meaningToKana: correct = currentWord!.kana; break;
+    }
+
+    if (answer == correct) {
       _totalCorrect++;
-      _correctCountsPerLevel[currentWord!.level] =
-          (_correctCountsPerLevel[currentWord!.level] ?? 0) + 1;
+      _correctCountsPerLevel[currentWord!.level] = (_correctCountsPerLevel[currentWord!.level] ?? 0) + 1;
     }
     notifyListeners();
   }
@@ -94,24 +120,10 @@ class LevelTestViewModel extends ChangeNotifier {
   }
 
   String _calculateResult() {
-    final n1 = _correctCountsPerLevel[1] ?? 0;
-    final n2 = _correctCountsPerLevel[2] ?? 0;
-    final n3 = _correctCountsPerLevel[3] ?? 0;
-    final n4 = _correctCountsPerLevel[4] ?? 0;
-    final n5 = _correctCountsPerLevel[5] ?? 0;
-
-    if (n1 >= 3 &&
-        n2 >= 4 &&
-        n3 >= 4 &&
-        n4 >= 4 &&
-        n5 >= 8 &&
-        _totalCorrect >= 23)
-      return 'N1';
-    if (n2 >= 3 && n3 >= 3 && n4 >= 4 && n5 >= 7 && _totalCorrect >= 20)
-      return 'N2';
-    if (n3 >= 3 && n4 >= 3 && n5 >= 6 || _totalCorrect >= 15) return 'N3';
-    if (n4 >= 3 && n5 >= 6 || _totalCorrect >= 10) return 'N4';
-
+    if (_totalCorrect >= 25) return 'N1';
+    if (_totalCorrect >= 20) return 'N2';
+    if (_totalCorrect >= 15) return 'N3';
+    if (_totalCorrect >= 10) return 'N4';
     return 'N5';
   }
 

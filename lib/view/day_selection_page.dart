@@ -40,10 +40,33 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
     _allDayChunks = chunks;
   }
 
+  // 계절 및 모드에 따른 배너 색상을 가져오는 함수
+  List<Color> _getBannerColors(bool isDarkMode) {
+    final sessionBox = Hive.box(DatabaseService.sessionBoxName);
+    final String appTheme = sessionBox.get('app_theme', defaultValue: 'auto');
+    if (isDarkMode) return [const Color(0xFF3F4E4F), const Color(0xFF2C3333)];
+    int month = DateTime.now().month;
+    String target = appTheme;
+    if (target == 'auto') {
+      if (month >= 3 && month <= 5) target = 'spring';
+      else if (month >= 6 && month <= 8) target = 'summer';
+      else if (month >= 9 && month <= 11) target = 'autumn';
+      else target = 'winter';
+    }
+    switch (target) {
+      case 'spring': return [const Color(0xFFFFB7C5), const Color(0xFFF08080)];
+      case 'summer': return [const Color(0xFF4FC3F7), const Color(0xFF1976D2)];
+      case 'autumn': return [const Color(0xFFFBC02D), const Color(0xFFE64A19)];
+      case 'winter':
+      default: return [const Color(0xFF90A4AE), const Color(0xFF455A64)];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final Color textColor = isDarkMode ? Colors.white : Colors.black87;
+    final List<Color> bannerColors = _getBannerColors(isDarkMode);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -87,7 +110,7 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
               return Column(
                 children: [
                   if (!_isSearching && lastDay > 0 && _searchQuery.isEmpty)
-                    Padding(padding: const EdgeInsets.fromLTRB(20, 10, 20, 0), child: _buildResumeCard(context, lastDay, isDarkMode)),
+                    Padding(padding: const EdgeInsets.fromLTRB(20, 10, 20, 0), child: _buildResumeCard(context, lastDay, isDarkMode, bannerColors)),
                   Expanded(
                     child: GridView.builder(
                       padding: const EdgeInsets.fromLTRB(20, 20, 20, 60),
@@ -108,15 +131,15 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
     );
   }
 
-  Widget _buildResumeCard(BuildContext context, int lastDay, bool isDarkMode) {
+  Widget _buildResumeCard(BuildContext context, int lastDay, bool isDarkMode, List<Color> bannerColors) {
     return GestureDetector(
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => WordListPage(level: widget.level, initialDayIndex: lastDay - 1, allDayChunks: _allDayChunks))),
       child: Container(
         width: double.infinity, padding: const EdgeInsets.all(20),
         decoration: BoxDecoration(
-          gradient: const LinearGradient(colors: [Color(0xFF5B86E5), Color(0xFF36D1DC)], begin: Alignment.topLeft, end: Alignment.bottomRight),
+          gradient: LinearGradient(colors: bannerColors, begin: Alignment.topLeft, end: Alignment.bottomRight),
           borderRadius: BorderRadius.circular(20),
-          boxShadow: isDarkMode ? [] : [BoxShadow(color: const Color(0xFF5B86E5).withOpacity(0.3), blurRadius: 10, offset: const Offset(0, 4))],
+          boxShadow: isDarkMode ? [] : [BoxShadow(color: bannerColors[0].withOpacity(0.3), blurRadius: 10, offset: const Offset(0, 4))],
         ),
         child: Row(children: [Container(padding: const EdgeInsets.all(12), decoration: BoxDecoration(color: Colors.white.withOpacity(0.2), shape: BoxShape.circle), child: const Icon(Icons.history_rounded, color: Colors.white, size: 28)), const SizedBox(width: 16), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [const Text('이어서 학습하기', style: TextStyle(color: Colors.white, fontSize: 14, fontWeight: FontWeight.w500)), const SizedBox(height: 2), Text('DAY $lastDay', style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold))])), const Icon(Icons.arrow_forward_ios_rounded, color: Colors.white, size: 20)]),
       ),

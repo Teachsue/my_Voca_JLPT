@@ -7,64 +7,111 @@ class LevelTestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final Color textColor = isDarkMode ? Colors.white : Colors.black87;
+
     return ChangeNotifierProvider(
       create: (context) => LevelTestViewModel()..initTest(),
       child: Scaffold(
-        backgroundColor: const Color(0xFFF8FAFC),
+        backgroundColor: Colors.transparent, // 배경 테마 투과
         appBar: AppBar(
-          title: const Text('실력 맞춤 테스트', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
+          title: Text('실력 진단 테스트', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: textColor)),
+          backgroundColor: Colors.transparent,
+          foregroundColor: textColor,
           elevation: 0,
           centerTitle: true,
         ),
         body: Consumer<LevelTestViewModel>(
           builder: (context, viewModel, child) {
-            if (viewModel.isFinished) return _buildResultView(context, viewModel);
+            if (viewModel.isFinished) return _buildResultView(context, viewModel, isDarkMode);
             if (viewModel.currentWord == null) return const Center(child: CircularProgressIndicator(color: Color(0xFF5B86E5)));
-            return _buildQuizView(context, viewModel);
+            return _buildQuizView(context, viewModel, isDarkMode);
           },
         ),
       ),
     );
   }
 
-  Widget _buildResultView(BuildContext context, LevelTestViewModel viewModel) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.analytics_rounded, size: 80, color: Color(0xFF5B86E5)),
-            const SizedBox(height: 24),
-            const Text('테스트 완료!', style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold)),
-            const SizedBox(height: 12),
-            Text('총 30문제 중 ${viewModel.totalCorrect}문제를 맞혔습니다.', style: TextStyle(fontSize: 17, color: Colors.grey[600])),
-            const SizedBox(height: 8),
-            Text('추천 학습 레벨: ${viewModel.recommendedLevel}', style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Color(0xFF5B86E5))),
-            const SizedBox(height: 48),
-            SizedBox(
-              width: double.infinity,
-              height: 55,
-              child: ElevatedButton(
-                onPressed: () => Navigator.pop(context),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF5B86E5),
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                  elevation: 0,
-                ),
-                child: const Text('완료', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              ),
+  Widget _buildResultView(BuildContext context, LevelTestViewModel viewModel, bool isDarkMode) {
+    final Color textColor = isDarkMode ? Colors.white : Colors.black87;
+    
+    return Container(
+      width: double.infinity,
+      color: Colors.transparent, // 배경 테마 보장
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 30),
+            decoration: BoxDecoration(
+              color: isDarkMode ? Colors.white.withOpacity(0.1) : Colors.white.withOpacity(0.9),
+              borderRadius: BorderRadius.circular(32),
+              boxShadow: isDarkMode ? [] : [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 20, offset: const Offset(0, 10))],
             ),
-          ],
-        ),
+            child: Column(
+              children: [
+                const Text('🎉', style: TextStyle(fontSize: 50)),
+                const SizedBox(height: 16),
+                Text('진단 완료!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: textColor)),
+                const SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildResultStat('정답 수', '${viewModel.totalCorrect}', Colors.green),
+                    _buildResultStat('정답률', '${((viewModel.totalCorrect / 30) * 100).toInt()}%', Colors.orange),
+                  ],
+                ),
+                const SizedBox(height: 40),
+                const Divider(),
+                const SizedBox(height: 30),
+                Text('당신에게 딱 맞는 레벨은', style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white60 : Colors.grey[600])),
+                const SizedBox(height: 8),
+                Text(
+                  viewModel.recommendedLevel,
+                  style: const TextStyle(fontSize: 64, fontWeight: FontWeight.w900, color: Color(0xFF5B86E5), letterSpacing: -2),
+                ),
+                const SizedBox(height: 8),
+                Text('과정을 추천합니다!', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor)),
+              ],
+            ),
+          ),
+          const SizedBox(height: 40),
+          SizedBox(
+            width: double.infinity,
+            height: 60,
+            child: ElevatedButton(
+              onPressed: () => Navigator.pop(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF5B86E5),
+                foregroundColor: Colors.white,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                elevation: 0,
+              ),
+              child: const Text('나의 맞춤 레벨로 시작하기', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  Widget _buildQuizView(BuildContext context, LevelTestViewModel viewModel) {
+  Widget _buildResultStat(String label, String value, Color color) {
+    return Column(
+      children: [
+        Text(label, style: const TextStyle(fontSize: 13, color: Colors.grey, fontWeight: FontWeight.w500)),
+        const SizedBox(height: 4),
+        Text(value, style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: color)),
+      ],
+    );
+  }
+
+  Widget _buildQuizView(BuildContext context, LevelTestViewModel viewModel, bool isDarkMode) {
+    final Color textColor = isDarkMode ? Colors.white : const Color(0xFF2D3142);
+    final word = viewModel.currentWord!;
+    final type = viewModel.currentType!;
+
     return Column(
       children: [
         Padding(
@@ -74,8 +121,8 @@ class LevelTestPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('${viewModel.currentIndex + 1} / ${viewModel.totalQuestions}', style: TextStyle(color: Colors.grey[600], fontWeight: FontWeight.bold)),
-                  const Text('레벨 테스트', style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold)),
+                  Text('${viewModel.currentIndex + 1} / ${viewModel.totalQuestions}', style: TextStyle(color: isDarkMode ? Colors.white38 : Colors.grey[600], fontWeight: FontWeight.bold)),
+                  const Text('레벨 판정 중...', style: TextStyle(color: Colors.orange, fontWeight: FontWeight.bold, fontSize: 13)),
                 ],
               ),
               const SizedBox(height: 8),
@@ -84,7 +131,7 @@ class LevelTestPage extends StatelessWidget {
                 child: LinearProgressIndicator(
                   value: (viewModel.currentIndex + 1) / viewModel.totalQuestions,
                   minHeight: 6,
-                  backgroundColor: Colors.grey[200],
+                  backgroundColor: isDarkMode ? Colors.white10 : Colors.grey[200],
                   valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF5B86E5)),
                 ),
               ),
@@ -98,24 +145,56 @@ class LevelTestPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 10),
+                // 고정된 높이의 문제 카드 (위치 흔들림 방지 및 오버플로우 해결)
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 48, horizontal: 20),
+                  height: 260, // 높이를 220에서 260으로 상향하여 공간 확보
+                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20), // 상하 패딩 최적화
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: isDarkMode ? Colors.white.withOpacity(0.1) : Colors.white,
                     borderRadius: BorderRadius.circular(24),
-                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 15, offset: const Offset(0, 8))],
+                    boxShadow: isDarkMode ? [] : [BoxShadow(color: Colors.black.withOpacity(0.02), blurRadius: 15, offset: const Offset(0, 8))],
                   ),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center, // 중앙 정렬로 일관된 위치 유지
                     children: [
-                      Text(viewModel.isAnswered ? viewModel.currentWord!.kana : ' ', style: TextStyle(fontSize: 18, color: Colors.grey[500], letterSpacing: 1.5)),
+                      Text(
+                        type == LevelTestType.kanjiToMeaning ? '단어의 뜻을 고르세요' : '단어에 맞는 표현을 고르세요',
+                        style: TextStyle(fontSize: 13, color: Colors.blueGrey.withOpacity(0.6), fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(height: 15),
+                      // 발음 정보를 항상 상단에 표시 (모든 문제 유형 공통)
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        decoration: BoxDecoration(color: const Color(0xFF5B86E5).withOpacity(0.1), borderRadius: BorderRadius.circular(10)),
+                        child: Text('[ ${word.koreanPronunciation} ]', style: const TextStyle(fontSize: 16, color: Color(0xFF5B86E5), fontWeight: FontWeight.w600)),
+                      ),
+                      const SizedBox(height: 15),
+                      if (type == LevelTestType.kanjiToMeaning) ...[
+                        FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(word.kanji, style: TextStyle(fontSize: 52, fontWeight: FontWeight.bold, color: textColor)),
+                        ),
+                      ] else ...[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Text(
+                            word.meaning, 
+                            textAlign: TextAlign.center, 
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: textColor),
+                          ),
+                        ),
+                      ],
                       const SizedBox(height: 8),
-                      Text(viewModel.currentWord!.kanji, style: const TextStyle(fontSize: 52, fontWeight: FontWeight.bold, color: Color(0xFF2D3142))),
+                      Text(viewModel.isAnswered ? word.kana : ' ', style: TextStyle(fontSize: 18, color: isDarkMode ? Colors.white38 : Colors.grey[400], letterSpacing: 1.5)),
                     ],
                   ),
                 ),
                 const SizedBox(height: 24),
-                ...viewModel.currentOptions.map((option) => _buildOptionButton(viewModel, option)),
-                const SizedBox(height: 100),
+                // 선택지 버튼들 (항상 같은 위치에서 시작)
+                ...viewModel.currentOptions.map((option) => _buildOptionButton(viewModel, option, isDarkMode)),
+                const SizedBox(height: 40),
               ],
             ),
           ),
@@ -144,26 +223,33 @@ class LevelTestPage extends StatelessWidget {
     );
   }
 
-  Widget _buildOptionButton(LevelTestViewModel viewModel, String option) {
-    bool isCorrect = option == viewModel.currentWord!.meaning;
+  Widget _buildOptionButton(LevelTestViewModel viewModel, String option, bool isDarkMode) {
+    String correct;
+    switch (viewModel.currentType!) {
+      case LevelTestType.kanjiToMeaning: correct = viewModel.currentWord!.meaning; break;
+      case LevelTestType.meaningToKanji: correct = viewModel.currentWord!.kanji; break;
+      case LevelTestType.meaningToKana: correct = viewModel.currentWord!.kana; break;
+    }
+
+    bool isCorrect = option == correct;
     bool isSelected = option == viewModel.selectedAnswer;
     bool isAnswered = viewModel.isAnswered;
 
-    Color backgroundColor = Colors.white;
-    Color borderColor = Colors.grey[200]!;
-    Color textColor = Colors.black87;
+    Color backgroundColor = isDarkMode ? Colors.white.withOpacity(0.05) : Colors.white;
+    Color borderColor = isDarkMode ? Colors.white10 : Colors.grey[200]!;
+    Color textColor = isDarkMode ? Colors.white : Colors.black87;
 
     if (isAnswered) {
       if (isCorrect) {
-        backgroundColor = Colors.green[50]!;
+        backgroundColor = isDarkMode ? Colors.green.withOpacity(0.2) : Colors.green[50]!;
         borderColor = Colors.green;
-        textColor = Colors.green[700]!;
+        textColor = isDarkMode ? Colors.greenAccent : Colors.green[700]!;
       } else if (isSelected) {
-        backgroundColor = Colors.red[50]!;
+        backgroundColor = isDarkMode ? Colors.red.withOpacity(0.2) : Colors.red[50]!;
         borderColor = Colors.red;
-        textColor = Colors.red[700]!;
+        textColor = isDarkMode ? Colors.redAccent : Colors.red[700]!;
       } else {
-        textColor = Colors.grey[400]!;
+        textColor = isDarkMode ? Colors.white24 : Colors.grey[400]!;
       }
     }
 

@@ -49,6 +49,28 @@ class _WordListPageState extends State<WordListPage> {
     super.dispose();
   }
 
+  // 계절 및 모드에 따른 강조 색상을 가져오는 함수
+  Color _getThemeColor(bool isDarkMode) {
+    final sessionBox = Hive.box(DatabaseService.sessionBoxName);
+    final String appTheme = sessionBox.get('app_theme', defaultValue: 'auto');
+    if (isDarkMode) return const Color(0xFF5B86E5);
+    int month = DateTime.now().month;
+    String target = appTheme;
+    if (target == 'auto') {
+      if (month >= 3 && month <= 5) target = 'spring';
+      else if (month >= 6 && month <= 8) target = 'summer';
+      else if (month >= 9 && month <= 11) target = 'autumn';
+      else target = 'winter';
+    }
+    switch (target) {
+      case 'spring': return const Color(0xFFF08080);
+      case 'summer': return const Color(0xFF1976D2);
+      case 'autumn': return const Color(0xFFE64A19);
+      case 'winter':
+      default: return const Color(0xFF455A64);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final todayStr = DateFormat('yyyy-MM-dd').format(DateTime.now());
@@ -56,6 +78,7 @@ class _WordListPageState extends State<WordListPage> {
         Hive.box(DatabaseService.sessionBoxName).get('todays_words_completed_$todayStr', defaultValue: false);
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final Color textColor = isDarkMode ? Colors.white : Colors.black87;
+    final Color themeColor = _getThemeColor(isDarkMode);
 
     return Scaffold(
       backgroundColor: Colors.transparent,
@@ -92,22 +115,17 @@ class _WordListPageState extends State<WordListPage> {
             padding: const EdgeInsets.fromLTRB(24, 10, 24, 24),
             itemCount: currentWords.length + (isCompleted ? 1 : 0),
             itemBuilder: (context, index) {
-              if (isCompleted && index == 0) {
-                return Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: _buildReviewBanner(isDarkMode),
-                );
-              }
+              if (isCompleted && index == 0) return Padding(padding: const EdgeInsets.only(bottom: 20), child: _buildReviewBanner(isDarkMode));
               final wordIndex = isCompleted ? index - 1 : index;
               return Padding(
                 padding: const EdgeInsets.only(bottom: 12),
-                child: _buildWordCard(currentWords[wordIndex], wordIndex, isCompleted, isDarkMode),
+                child: _buildWordCard(currentWords[wordIndex], wordIndex, isCompleted, isDarkMode, themeColor),
               );
             },
           );
         },
       ),
-      bottomNavigationBar: _buildBottomButton(isCompleted, isDarkMode),
+      bottomNavigationBar: _buildBottomButton(isCompleted, isDarkMode, themeColor),
     );
   }
 
@@ -134,7 +152,7 @@ class _WordListPageState extends State<WordListPage> {
     );
   }
 
-  Widget _buildWordCard(Word word, int index, bool isCompleted, bool isDarkMode) {
+  Widget _buildWordCard(Word word, int index, bool isCompleted, bool isDarkMode, Color themeColor) {
     final Color textColor = isDarkMode ? Colors.white : Colors.black87;
     final Color subTextColor = isDarkMode ? Colors.white60 : Colors.grey[600]!;
 
@@ -184,11 +202,10 @@ class _WordListPageState extends State<WordListPage> {
     );
   }
 
-  Widget _buildBottomButton(bool isCompleted, bool isDarkMode) {
+  Widget _buildBottomButton(bool isCompleted, bool isDarkMode, Color themeColor) {
     final currentWords = widget.allDayChunks[_currentDayIndex];
     return Container(
       padding: EdgeInsets.fromLTRB(24, 12, 24, MediaQuery.of(context).padding.bottom + 15),
-      decoration: BoxDecoration(color: Colors.transparent),
       child: SizedBox(
         width: double.infinity, height: 56,
         child: ElevatedButton.icon(
@@ -199,10 +216,10 @@ class _WordListPageState extends State<WordListPage> {
           icon: Icon(isCompleted ? Icons.check_circle_rounded : Icons.quiz_rounded),
           label: Text(isCompleted ? '복습 완료! ✅' : '퀴즈 풀기', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           style: ElevatedButton.styleFrom(
-            backgroundColor: isCompleted ? Colors.lightGreen : const Color(0xFF5B86E5),
+            backgroundColor: isCompleted ? Colors.lightGreen : themeColor, // 테마 색상 적용
             foregroundColor: Colors.white,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-            elevation: 0,
+            elevation: isDarkMode ? 0 : 4,
           ),
         ),
       ),
