@@ -31,9 +31,10 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
 
     if (allWords.isEmpty) return;
 
-    // 단어들을 ID 순으로 정렬하여 일관성 유지 (shuffle 대신 sort 사용)
-    allWords.sort((a, b) => a.id.compareTo(b.id));
+    // 1. 전체 단어를 먼저 랜덤하게 섞음 (한국어 발음 기준 학습을 위해)
+    allWords.shuffle(); 
 
+    // 2. 섞인 상태에서 20개씩 DAY 분할
     final List<List<Word>> chunks = [];
     for (int i = 0; i < allWords.length; i += 20) {
       int end = (i + 20 < allWords.length) ? i + 20 : allWords.length;
