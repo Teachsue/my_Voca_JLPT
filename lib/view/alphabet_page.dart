@@ -57,10 +57,11 @@ class _AlphabetPageState extends State<AlphabetPage> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: const Icon(Icons.quiz_rounded, color: Color(0xFF5B86E5)),
+            icon: const Icon(Icons.fact_check_rounded, color: Color(0xFF5B86E5), size: 28), // 아이콘 변경 및 크기 확대
             onPressed: () => _showQuizConfigDialog(),
             tooltip: '전체 퀴즈',
           ),
+          const SizedBox(width: 8),
         ],
       ),
       body: _allWords.isEmpty
