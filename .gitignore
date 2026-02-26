@@ -51,6 +51,8 @@ assets/data/n2.json
 assets/data/n3.json
 assets/data/n4.json
 assets/data/n5.json
+assets/data/hiragana.json
+assets/data/katakana.json
 
 assets/data/n*.json
 JLPT_요구사항명세서.docx
