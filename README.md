@@ -57,7 +57,7 @@
 | <img src="screenshots/home.png" width="200"> | <img src="screenshots/list.png" width="200"> | <img src="screenshots/quiz.png" width="200"> |
 
 | 오답노트 | 실력 테스트 | 따라 쓰기 |
-| :---: | :---: | :---: | :---: |
+| :---: | :---: | :---: |
 | <img src="screenshots/wrong.png" width="200"> | <img src="screenshots/test.png" width="200"> | <img src="screenshots/draw.png" width="200"> |
 
 ---
