@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:signature/signature.dart';
 import '../model/word.dart';
 import '../service/database_service.dart';
 import 'quiz_page.dart';
@@ -108,7 +108,7 @@ class _AlphabetPageState extends State<AlphabetPage> {
           ),
           const SizedBox(height: 10),
           Text(
-            '1. 한 행(5글자)씩 소리 내어 읽어보세요.\n2. 글자의 모양과 발음을 연결하며 눈에 익힙니다.\n3. 각 행 옆의 퀴즈 버튼으로 방금 배운 글자를 확인하세요.',
+            '1. 한 행(5글자)씩 소리 내어 읽어보세요.\n2. 글자를 클릭하여 직접 따라 그려보세요! ✍️\n3. 모양과 발음을 연결하며 눈에 익힙니다.\n4. 각 행 옆의 퀴즈 버튼으로 실력을 확인하세요.',
             style: TextStyle(fontSize: 13, color: isDarkMode ? Colors.white60 : Colors.blueGrey, height: 1.6),
           ),
         ],
@@ -154,43 +154,163 @@ class _AlphabetPageState extends State<AlphabetPage> {
     final Color textColor = isDarkMode ? Colors.white : const Color(0xFF2D3142);
     final Color subColor = isDarkMode ? Colors.white70 : const Color(0xFF5B86E5);
 
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-      decoration: BoxDecoration(
-        color: isDarkMode ? Colors.white.withOpacity(0.12) : Colors.white,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: isDarkMode ? [] : [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8, offset: const Offset(0, 2))],
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Expanded(
-            flex: 3,
-            child: Center(
-              child: FittedBox(
-                child: Text(
-                  word.kanji,
-                  style: TextStyle(fontSize: 34, fontWeight: FontWeight.w900, color: textColor),
+    return GestureDetector(
+      onTap: () => _showDrawingDialog(word),
+      child: Container(
+        margin: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+        decoration: BoxDecoration(
+          color: isDarkMode ? Colors.white.withOpacity(0.12) : Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: isDarkMode ? [] : [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 8, offset: const Offset(0, 2))],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Expanded(
+              flex: 3,
+              child: Center(
+                child: FittedBox(
+                  child: Text(
+                    word.kanji,
+                    style: TextStyle(fontSize: 34, fontWeight: FontWeight.w900, color: textColor),
+                  ),
                 ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Column(
+            Expanded(
+              flex: 2,
+              child: Column(
+                children: [
+                  Text(
+                    word.meaning,
+                    style: TextStyle(fontSize: 13, color: subColor, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                    word.kana.toUpperCase(),
+                    style: TextStyle(fontSize: 9, color: isDarkMode ? Colors.white38 : Colors.grey[400], fontWeight: FontWeight.w600),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showDrawingDialog(Word word) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final SignatureController controller = SignatureController(
+      penStrokeWidth: 10, // 두께를 10으로 키워 붓 느낌 강조
+      penColor: isDarkMode ? Colors.white : Colors.black87,
+      exportBackgroundColor: Colors.transparent,
+    );
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: isDarkMode ? const Color(0xFF2D3436) : Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+        contentPadding: const EdgeInsets.all(20),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  word.meaning,
-                  style: TextStyle(fontSize: 13, color: subColor, fontWeight: FontWeight.bold),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(word.meaning, style: const TextStyle(fontSize: 14, color: Colors.grey, fontWeight: FontWeight.bold)),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(word.kanji, style: TextStyle(fontSize: 32, fontWeight: FontWeight.w900, color: isDarkMode ? Colors.white : Colors.black87)),
+                        const SizedBox(width: 8),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 4),
+                          child: Text('획 순서 따라쓰기', style: TextStyle(fontSize: 12, color: isDarkMode ? Colors.white38 : Colors.grey[400])),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                Text(
-                  word.kana.toUpperCase(),
-                  style: TextStyle(fontSize: 9, color: isDarkMode ? Colors.white38 : Colors.grey[400], fontWeight: FontWeight.w600),
+                IconButton(
+                  onPressed: () => controller.clear(),
+                  icon: const Icon(Icons.refresh_rounded, color: Colors.orange, size: 28),
                 ),
               ],
             ),
-          ),
-        ],
+            const SizedBox(height: 15),
+            // 획 순서 가이드 영역 (데이터가 없을 경우를 대비한 가이드 텍스트)
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+              decoration: BoxDecoration(
+                color: Colors.orange.withOpacity(0.05),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                children: [
+                  const Icon(Icons.info_outline_rounded, size: 14, color: Colors.orange),
+                  const SizedBox(width: 6),
+                  Expanded(
+                    child: Text(
+                      '위에서 아래로, 왼쪽에서 오른쪽으로 써보세요.',
+                      style: TextStyle(fontSize: 11, color: isDarkMode ? Colors.orangeAccent.withOpacity(0.7) : Colors.orange[700]),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 15),
+            Container(
+              width: 250,
+              height: 250,
+              decoration: BoxDecoration(
+                color: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.grey[50],
+                borderRadius: BorderRadius.circular(16),
+                border: Border.all(color: isDarkMode ? Colors.white10 : Colors.grey[200]!, width: 2),
+              ),
+              child: Stack(
+                children: [
+                  Center(
+                    child: Text(
+                      word.kanji,
+                      style: TextStyle(
+                        fontSize: 180, // 가이드 글자 크기 확대
+                        fontWeight: FontWeight.w100, // 획 순서가 잘 보이도록 얇게 설정
+                        color: isDarkMode ? Colors.white.withOpacity(0.08) : Colors.black.withOpacity(0.05),
+                      ),
+                    ),
+                  ),
+                  Signature(
+                    controller: controller,
+                    width: 250,
+                    height: 250,
+                    backgroundColor: Colors.transparent,
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            SizedBox(
+              width: double.infinity,
+              height: 52,
+              child: ElevatedButton(
+                onPressed: () {
+                  controller.dispose();
+                  Navigator.pop(context);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF5B86E5),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                ),
+                child: const Text('닫기', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
