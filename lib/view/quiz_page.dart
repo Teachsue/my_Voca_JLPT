@@ -224,7 +224,7 @@ class _QuizPageState extends State<QuizPage> {
                         Text(word.kanji, style: TextStyle(fontSize: 44, fontWeight: FontWeight.bold, color: textColor)),
                         const SizedBox(height: 8),
                         Opacity(
-                          opacity: (word.level >= 1 && word.level <= 3 && !viewModel.isAnswered) ? 0.0 : 1.0,
+                          opacity: (widget.day != 0 && word.level >= 1 && word.level <= 3 && !viewModel.isAnswered) ? 0.0 : 1.0,
                           child: Text('[ ${word.koreanPronunciation} ]', style: TextStyle(fontSize: 16, color: viewModel.isAnswered ? const Color(0xFF5B86E5) : (isDarkMode ? Colors.white24 : Colors.blueGrey.withOpacity(0.6)))),
                         ),
                       ] else ...[
@@ -234,7 +234,7 @@ class _QuizPageState extends State<QuizPage> {
                         const SizedBox(height: 8),
                         if (viewModel.isAnswered) Text('${word.kanji} (${word.kana}) [${word.koreanPronunciation}]', style: const TextStyle(fontSize: 16, color: Color(0xFF5B86E5), fontWeight: FontWeight.w600))
                         else Opacity(
-                          opacity: (word.level >= 1 && word.level <= 3) ? 0.0 : 1.0,
+                          opacity: (widget.day != 0 && word.level >= 1 && word.level <= 3) ? 0.0 : 1.0,
                           child: Text('[ ${word.koreanPronunciation} ]', style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white10 : Colors.blueGrey.withOpacity(0.4))),
                         ),
                       ],

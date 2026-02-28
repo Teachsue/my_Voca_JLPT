@@ -33,10 +33,6 @@ class _WordListPageState extends State<WordListPage> {
     _pageController = PageController(initialPage: widget.initialDayIndex);
     _isTodaysWords = widget.level == '오늘의 단어' || widget.level == '오늘의 단어 복습';
 
-    for (var chunk in widget.allDayChunks) {
-      chunk.shuffle(); 
-    }
-
     if (!_isTodaysWords) {
       final sessionBox = Hive.box(DatabaseService.sessionBoxName);
       sessionBox.put('last_day_${widget.level}', _currentDayIndex + 1);
@@ -179,15 +175,34 @@ class _WordListPageState extends State<WordListPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.end,
+                      crossAxisAlignment: WrapCrossAlignment.center,
                       spacing: 8,
+                      runSpacing: 4,
                       children: [
-                        Text(word.kanji, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor)),
-                        Text(word.kana, style: TextStyle(fontSize: 13, color: isDarkMode ? Colors.white38 : Colors.grey[400])),
+                        Text(
+                          word.kanji,
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor),
+                        ),
+                        Text(
+                          word.kana,
+                          style: TextStyle(fontSize: 13, color: isDarkMode ? Colors.white38 : Colors.grey[400]),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 4),
-                    Text(word.meaning, style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white70 : Colors.grey[700])),
+                    Text(
+                      '[ ${word.koreanPronunciation} ]',
+                      style: TextStyle(
+                        fontSize: 12,
+                        color: isDarkMode ? const Color(0xFF5B86E5).withOpacity(0.7) : const Color(0xFF5B86E5).withOpacity(0.6),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      word.meaning,
+                      style: TextStyle(fontSize: 15, color: isDarkMode ? Colors.white70 : Colors.grey[700]),
+                    ),
                   ],
                 ),
               ),
