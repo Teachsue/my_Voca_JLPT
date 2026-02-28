@@ -78,11 +78,23 @@ class WrongAnswerPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Wrap(
-                                  crossAxisAlignment: WrapCrossAlignment.end,
+                                  crossAxisAlignment: WrapCrossAlignment.center,
                                   spacing: 8,
                                   children: [
                                     Text(word.kanji, style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor)),
                                     Text(word.kana, style: TextStyle(fontSize: 13, color: isDarkMode ? Colors.white38 : Colors.grey[400])),
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                      decoration: BoxDecoration(
+                                        color: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.grey[100],
+                                        borderRadius: BorderRadius.circular(6),
+                                        border: Border.all(color: isDarkMode ? Colors.white10 : Colors.grey[300]!, width: 0.5),
+                                      ),
+                                      child: Text(
+                                        word.level == 11 ? '히라가나' : (word.level == 12 ? '가타카나' : 'N${word.level}'),
+                                        style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white54 : Colors.grey[600]),
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 4),
