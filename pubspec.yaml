@@ -68,6 +68,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/icon.png
     - assets/data/n1.json
     - assets/data/n2.json
     - assets/data/n3.json

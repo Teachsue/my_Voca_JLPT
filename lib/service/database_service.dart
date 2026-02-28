@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../model/word.dart';
@@ -32,11 +33,11 @@ class DatabaseService {
     int threshold = (level >= 11) ? 40 : 100;
     
     if (existingCount >= threshold) {
-      print("✅ Level $level 데이터가 이미 존재합니다. (개수: $existingCount)");
+      debugPrint("✅ Level $level 데이터가 이미 존재합니다. (개수: $existingCount)");
       return;
     }
 
-    print("⏳ Level $level 데이터를 로드 중...");
+    debugPrint("⏳ Level $level 데이터를 로드 중...");
     try {
       String fileName;
       if (level == 11) {
@@ -47,31 +48,41 @@ class DatabaseService {
         fileName = 'n$level.json';
       }
 
-      final String response = await rootBundle.loadString(
-        'assets/data/$fileName',
-      );
-      final Map<String, dynamic> data = json.decode(response);
-      List<dynamic> vocabulary = data['vocabulary'];
-
-      Map<String, Word> wordMap = {};
-      for (var item in vocabulary) {
-        final word = Word.fromJson(item);
-        final fixedWord = Word(
-          id: word.id,
-          kanji: word.kanji,
-          kana: word.kana,
-          meaning: word.meaning,
-          level: level,
-          koreanPronunciation: word.koreanPronunciation,
-        );
-        wordMap['${level}_${fixedWord.id}'] = fixedWord;
-      }
+      final String response = await rootBundle.loadString('assets/data/$fileName');
+      
+      // 무거운 연산을 별도 Isolate에서 수행 (메인 스레드 프리징 방지)
+      final Map<String, Word> wordMap = await compute(_parseWords, {'jsonString': response, 'level': level});
       
       await box.putAll(wordMap);
-      print("✅ Level $level 로드 완료! (총 ${wordMap.length}단어)");
+      debugPrint("✅ Level $level 로드 완료! (총 ${wordMap.length}단어)");
     } catch (e) {
-      print("❌ 데이터 로드 에러 (Level $level): $e");
+      debugPrint("❌ 데이터 로드 에러 (Level $level): $e");
     }
+  }
+
+  // Isolate에서 실행될 파싱 함수
+  static Map<String, Word> _parseWords(Map<String, dynamic> params) {
+    final String jsonString = params['jsonString'];
+    final int level = params['level'];
+    
+    final Map<String, dynamic> data = json.decode(jsonString);
+    final List<dynamic> vocabulary = data['vocabulary'];
+
+    Map<String, Word> wordMap = {};
+    for (var item in vocabulary) {
+      // JSON 데이터를 Word 객체로 변환
+      final word = Word.fromJson(item);
+      final fixedWord = Word(
+        id: word.id,
+        kanji: word.kanji,
+        kana: word.kana,
+        meaning: word.meaning,
+        level: level,
+        koreanPronunciation: word.koreanPronunciation,
+      );
+      wordMap['${level}_${fixedWord.id}'] = fixedWord;
+    }
+    return wordMap;
   }
 
   static bool needsInitialLoading() {
