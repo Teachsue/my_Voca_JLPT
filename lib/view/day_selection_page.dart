@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import '../model/word.dart';
@@ -29,7 +30,12 @@ class _DaySelectionPageState extends State<DaySelectionPage> {
     final int levelInt = int.parse(widget.level.replaceAll(RegExp(r'[^0-9]'), ''));
     final List<Word> allWords = DatabaseService.getWordsByLevel(levelInt);
     if (allWords.isEmpty) return;
-    allWords.shuffle(); 
+    
+    // 1. 먼저 ID 순으로 정렬하여 베이스 순서를 고정
+    allWords.sort((a, b) => a.id.compareTo(b.id)); 
+    // 2. 고정된 시드(42)를 사용하여 결정론적 셔플 (항상 동일한 랜덤 순서 생성)
+    allWords.shuffle(Random(42)); 
+    
     final List<List<Word>> chunks = [];
     for (int i = 0; i < allWords.length; i += 20) {
       int end = (i + 20 < allWords.length) ? i + 20 : allWords.length;
