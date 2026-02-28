@@ -134,7 +134,55 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
-        Padding(padding: const EdgeInsets.fromLTRB(24, 10, 24, 30), child: SizedBox(width: double.infinity, height: 55, child: ElevatedButton(onPressed: isPerfect ? () => Navigator.pop(context) : () => viewModel.restart(), style: ElevatedButton.styleFrom(backgroundColor: isPerfect ? const Color(0xFF5B86E5) : Colors.orange, foregroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16))), child: Text(isPerfect ? '학습 완료' : '다시 도전하기', style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold))))),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(24, 10, 24, 30),
+          child: isPerfect
+              ? SizedBox(
+                  width: double.infinity,
+                  height: 55,
+                  child: ElevatedButton(
+                    onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF5B86E5),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                    ),
+                    child: const Text('학습 완료', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  ),
+                )
+              : Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      width: double.infinity,
+                      height: 55,
+                      child: ElevatedButton(
+                        onPressed: () => viewModel.restart(),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.orange,
+                          foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        ),
+                        child: const Text('다시 도전하기', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 55,
+                      child: OutlinedButton(
+                        onPressed: () => Navigator.of(context).popUntil((route) => route.isFirst),
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Color(0xFF5B86E5), width: 2),
+                          foregroundColor: const Color(0xFF5B86E5),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                        ),
+                        child: const Text('홈으로 돌아가기', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                  ],
+                ),
+        ),
       ],
     );
   }
@@ -175,14 +223,20 @@ class _QuizPageState extends State<QuizPage> {
                         const SizedBox(height: 4),
                         Text(word.kanji, style: TextStyle(fontSize: 44, fontWeight: FontWeight.bold, color: textColor)),
                         const SizedBox(height: 8),
-                        Text('[ ${word.koreanPronunciation} ]', style: TextStyle(fontSize: 16, color: viewModel.isAnswered ? const Color(0xFF5B86E5) : (isDarkMode ? Colors.white24 : Colors.blueGrey.withOpacity(0.6)))),
+                        Opacity(
+                          opacity: (word.level >= 1 && word.level <= 3 && !viewModel.isAnswered) ? 0.0 : 1.0,
+                          child: Text('[ ${word.koreanPronunciation} ]', style: TextStyle(fontSize: 16, color: viewModel.isAnswered ? const Color(0xFF5B86E5) : (isDarkMode ? Colors.white24 : Colors.blueGrey.withOpacity(0.6)))),
+                        ),
                       ] else ...[
                         Text('다음 뜻에 맞는 단어는?', style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white38 : Colors.blueGrey)),
                         const SizedBox(height: 12),
                         Text(word.meaning, textAlign: TextAlign.center, style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: textColor)),
                         const SizedBox(height: 8),
                         if (viewModel.isAnswered) Text('${word.kanji} (${word.kana}) [${word.koreanPronunciation}]', style: const TextStyle(fontSize: 16, color: Color(0xFF5B86E5), fontWeight: FontWeight.w600))
-                        else Text('[ ${word.koreanPronunciation} ]', style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white10 : Colors.blueGrey.withOpacity(0.4))),
+                        else Opacity(
+                          opacity: (word.level >= 1 && word.level <= 3) ? 0.0 : 1.0,
+                          child: Text('[ ${word.koreanPronunciation} ]', style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.white10 : Colors.blueGrey.withOpacity(0.4))),
+                        ),
                       ],
                     ],
                   ),
