@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:signature/signature.dart';
 import '../model/word.dart';
 import '../service/database_service.dart';
@@ -32,6 +33,28 @@ class _AlphabetPageState extends State<AlphabetPage> {
     }
     _allWords.sort((a, b) => a.id.compareTo(b.id));
     if (mounted) setState(() {});
+  }
+
+  // 계절 및 모드에 따른 강조 색상을 가져오는 함수
+  Color _getThemeColor(bool isDarkMode) {
+    final sessionBox = Hive.box(DatabaseService.sessionBoxName);
+    final String appTheme = sessionBox.get('app_theme', defaultValue: 'auto');
+    if (isDarkMode) return const Color(0xFF5B86E5);
+    int month = DateTime.now().month;
+    String target = appTheme;
+    if (target == 'auto') {
+      if (month >= 3 && month <= 5) target = 'spring';
+      else if (month >= 6 && month <= 8) target = 'summer';
+      else if (month >= 9 && month <= 11) target = 'autumn';
+      else target = 'winter';
+    }
+    switch (target) {
+      case 'spring': return const Color(0xFFF08080);
+      case 'summer': return const Color(0xFF1976D2);
+      case 'autumn': return const Color(0xFFE64A19);
+      case 'winter':
+      default: return const Color(0xFF455A64);
+    }
   }
 
   List<List<Word>> _getGroupedWords() {
@@ -302,7 +325,7 @@ class _AlphabetPageState extends State<AlphabetPage> {
                   Navigator.pop(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF5B86E5),
+                  backgroundColor: _getThemeColor(isDarkMode),
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
                 ),
